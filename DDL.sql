@@ -130,12 +130,12 @@ GO
     
 -- Create Tbl_Member Table -------------------------------------------------------------
 IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Member' )	CREATE TABLE Tbl_Member (
-	MemberID			Int 			NOT NULL UNIQUE IDENTITY(1, 1),
+	MemberCode			Char(5)			NOT NULL UNIQUE,
 	KoreanName 			Varchar(20) 	NULL,
     EnglishName			Varchar(40)		NOT NULL,
     Sex					Char(1)			NOT NULL DEFAULT 'M', 	-- M: Male, F: Female
     EducationCode		Char(2)			NOT NULL,
-    HouseHolderID		Int				NOT NULL,				-- MemberID
+    HouseHolderCode		Char(5)			NOT NULL,				-- MemberCode
     Phone1Kind			Varchar(20)		NULL,
     Phone1No			Varchar(20)		NULL,
     Phone2Kind			Varchar(20)		NULL,
@@ -151,10 +151,10 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Member' )	CREA
     IsDeleted			Char(1)			NOT NULL DEFAULT 'N',	-- Y: Deleted
     Remark				Varchar(255)	NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT 	PK_Member 		PRIMARY KEY ( MemberID ),
+	CONSTRAINT 	PK_Member 		PRIMARY KEY ( MemberCode ),
     CONSTRAINT	FK_Education	FOREIGN KEY	( EducationCode )	REFERENCES	Tbl_Education ( EducationCode ),
-    CONSTRAINT	FK_HouseHolder	FOREIGN	KEY	( MemberID )		REFERENCES	Tbl_Member ( MemberID ),
-    CONSTRAINT	FK_Province		FOREIGN KEY	( ProvinceCode )	REFERENCES	Tbl_Province	( ProvinceCode ),
+    CONSTRAINT	FK_HouseHolder	FOREIGN	KEY	( HouseHolderCode )		REFERENCES	Tbl_Member ( MemberCode ),
+    CONSTRAINT	FK_Province		FOREIGN KEY	( ProvinceCode )	REFERENCES	Tbl_Province ( ProvinceCode ),
     CONSTRAINT	FK_Duty			FOREIGN KEY ( DutyCode )		REFERENCES	Tbl_Duty ( DutyCode )    
 )
 GO
@@ -165,18 +165,18 @@ AS
 BEGIN
   UPDATE Tbl_Member SET LastUpdate = GETDATE()
 	FROM Inserted i
-	WHERE Tbl_Member.MemberID = i.MemberID
+	WHERE Tbl_Member.MemberCode = i.MemberCode
 END
 GO
 
 -- Create Tbl_Dedicator Table ----------------------------------------------------------
 IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Dedicator' )	CREATE TABLE Tbl_Dedicator (
 	DedicatorYear		Char(4)			NOT NULL,
-	DedicatorCode		Int 			NOT NULL,
-	MemberID 			Int 			NOT NULL,
+	DedicatorCode		Char(3)			NOT NULL,
+	MemberCode 			Char(5)			NOT NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
 	CONSTRAINT 	PK_Dedicator	PRIMARY KEY ( DedicatorYear, DedicatorCode ),
-    CONSTRAINT	FK_MemberDedi	FOREIGN KEY ( MemberID )		REFERENCES	Tbl_Member ( MemberID )
+    CONSTRAINT	FK_MemberDedi	FOREIGN KEY ( MemberCode )		REFERENCES	Tbl_Member ( MemberCode )
 )
 GO
 
@@ -242,15 +242,15 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Total' )	CREAT
 	AccountYear			Char(4)			NOT NULL,
     AccountCode			Char(4)			NOT NULL,
     AccountMonth		Char(2)			NOT NULL,
-    MemberID			Int				NOT NULL,
+    MemberCode			Char(5)			NOT NULL,
 	CheckAmount			Float(53)		NOT NULL DEFAULT 0,
     CashAmount			Float(53)		NOT NULL DEFAULT 0,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT 	PK_Total	PRIMARY KEY ( AccountYear, AccountCode, AccountMonth, MemberID ),
+	CONSTRAINT 	PK_Total	PRIMARY KEY ( AccountYear, AccountCode, AccountMonth, MemberCode ),
     CONSTRAINT	FK_Account	FOREIGN KEY ( AccountYear, AccountCode )	
 							REFERENCES	Tbl_Account ( AccountYear, AccountCode ),
-	CONSTRAINT	FK_MemTotal	FOREIGN KEY ( MemberID )	REFERENCES	Tbl_Member ( MemberID ),
-    INDEX 		IX_MemTotal ( AccountYear, MemberID, AccountCode, AccountMonth )
+	CONSTRAINT	FK_MemTotal	FOREIGN KEY ( MemberCode )	REFERENCES	Tbl_Member ( MemberCode ),
+    INDEX 		IX_MemTotal ( AccountYear, MemberCode, AccountCode, AccountMonth )
 )
 GO
 
@@ -260,7 +260,7 @@ AS
   UPDATE Tbl_Total SET LastUpdate = GETDATE()
 	FROM Inserted i
 	WHERE Tbl_Total.AccountYear = i.AccountYear AND Tbl_Total.AccountCode = i.AccountCode
-		 AND Tbl_Total.AccountMonth = i.AccountMonth AND Tbl_Total.MemberID = i.MemberID
+		 AND Tbl_Total.AccountMonth = i.AccountMonth AND Tbl_Total.MemberCode = i.MemberCode
 GO
 
 -- Create Tbl_Slip Table ----------------------------------------------------------------
@@ -269,7 +269,7 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Slip' )	CREATE
     SlipMonth			Char(2)			NOT NULL,
     SlipDay				Char(2)			NOT NULL,
     SlipNo				Int				NOT NULL DEFAULT 1,
-    MemberID			Int				NOT NULL,
+    MemberCode			Char(5)				NOT NULL,
     Division			Char(1)			NOT NULL DEFAULT 'E',	-- [E]xpenditure, [I]ncome
     CheckNo				Int				NULL,
     CheckImage			VarBinary(MAX)	NULL,
@@ -279,7 +279,7 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Slip' )	CREATE
     Remark				Varchar(100)	NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
 	CONSTRAINT 	PK_Slip		PRIMARY KEY ( SlipYear, SlipMonth, SlipDay, SlipNo ),
-    CONSTRAINT	FK_Member	FOREIGN KEY ( MemberID )	REFERENCES	Tbl_Member ( MemberID )
+    CONSTRAINT	FK_Member	FOREIGN KEY ( MemberCode )	REFERENCES	Tbl_Member ( MemberCode )
 )
 GO
 
@@ -300,15 +300,15 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_SlipItem' )	CR
     SlipNo				Int				NOT NULL,
     SlipSeq				Int				NOT NULL DEFAULT 1,
     AccountCode			Char(4)			NOT NULL,
-    MemberID			Int				NOT NULL,
+    MemberCode			Char(5)			NOT NULL,
     Amount				Float(53)		NOT NULL DEFAULT 0,
     Remark				Varchar(70)		NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
 	CONSTRAINT 	PK_SlipItem	PRIMARY KEY ( SlipYear, SlipMonth, SlipDay, SlipNo, SlipSeq ),
     CONSTRAINT	FK_Slip		FOREIGN KEY ( SlipYear, SlipMonth, SlipDay, SlipNo )	
 							REFERENCES	Tbl_Slip ( SlipYear, SlipMonth, SlipDay, SlipNo ),
-    CONSTRAINT	FK_Total	FOREIGN KEY ( SlipYear, AccountCode, SlipMonth, MemberId )	
-							REFERENCES	Tbl_Total ( AccountYear, AccountCode, AccountMonth, MemberID )
+    CONSTRAINT	FK_Total	FOREIGN KEY ( SlipYear, AccountCode, SlipMonth, MemberCode )	
+							REFERENCES	Tbl_Total ( AccountYear, AccountCode, AccountMonth, MemberCode )
 )
 GO
 

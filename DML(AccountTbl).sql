@@ -3,7 +3,6 @@ GO
 
 INSERT INTO Tbl_Account ( AccountYear, AccountCode, LastYearCode, Division, AccountName, AccountNameKr, 
 	IsComputed, ParentCode, BookCode, Remark ) VALUES 
-    
 ( '2016', '1000', '1000', 'E', 'Remuneration', '교역자 및 직원 급여', 'Y', NULL, NULL, NULL ),
 ( '2016', '1010', '1010', 'E', 'Senior Pastor', '담임목사', 'Y', '1000', NULL, NULL ),
 ( '2016', '1011', '1011', 'E', 'Stipend', '사례비', 'N', '1010', NULL, NULL ),
@@ -191,6 +190,28 @@ INSERT INTO Tbl_Account ( AccountYear, AccountCode, LastYearCode, Division, Acco
 ( '2016', '6200', '6200', 'E', 'New Members', '새교우부', 'Y', '6000', NULL, NULL ),
 ( '2016', '6201', '6201', 'E', 'Welcomes New Members', '새교우환영', 'N', '6200', NULL, NULL ),
 ( '2016', '6202', '6202', 'E', 'Landing support & Bible study', '정착지원및 성경공부', 'N', '6200', NULL, NULL )
+GO
+
+INSERT INTO Tbl_Member ([MemberCode],[KoreanName],[EnglishName],[Sex],[EducationCode],[HouseHolderCode],[Phone1Kind],
+	[Phone1No],[Phone2Kind],[Phone2No],[Phone3Kind],[Phone3No],[Email],[PostalCode],[Address],[City],[ProvinceCode],
+	[DutyCode],[IsDeleted],[Remark]) VALUES
+('00001', '강석제', 'Sukjae Kang', 'M', '01', '00001', 'Mobile', '613-869-0271', 'Home', '', 'Work', '', 
+	'mksj67@gmail.com',	'K2J2V1', '113 Dunforest Terrace', 'Ottawa', 'ON', '01', 'N', ''),
+('00002', '박만녕', 'Manyoung Park', 'M', '01', '00002', 'Mobile', '613-413-2276', 'Home', '', 'Work', '', 
+	'pmyoung316@gmail.com',	'', '', 'Ottawa', 'ON', '02', 'N', ''),
+('00003', '김선경', 'Sunkyung Kim', 'M', '01', '00003', 'Mobile', '613-709-9191', 'Home', '', 'Work', '', 
+	'pkim0191@gmail.com',	'', '', 'Ottawa', 'ON', '02', 'N', ''),
+('00010', '김범수', 'Bumsoo Kim', 'M', '01', '00010', 'Mobile', '613-327-8536', 'Home', '613-843-8536', 'Work', '', 
+	'bkim113927@gmail.com',	'', '17 Dylanway', 'Ottawa', 'ON', '11', 'N', ''),
+('00011', '나정주', '', 'M', '01', '00011', 'Mobile', '613-599-0621', 'Home', '', 'Work', '', 
+	'jjna@msn.com',	'', '', 'Ottawa', 'ON', '11', 'N', ''),
+('00012', '지연순', '', 'F', '01', '00010', 'Mobile', '613-998-4609', 'Home', '', 'Work', '', '',
+	'', '17 Dylanway', 'Ottawa', 'ON', '99', 'N', ''),
+('00013', '김병선', 'Byungseon Kim', 'M', '01', '00013', 'Mobile', '613-220-7119', 'Home', '', 'Work', '', 
+	'sean@beginanew.life', 'K2E5S9', '54E Chesterton Dr.', 'Nepean', 'ON', '21', 'N', ''),
+('00014', '김미영', 'Meeyoung Kim', 'F', '01', '00013', 'Mobile', '613-422-2622', 'Home', '', 'Work', '', 
+	'grace2ivy@gmail.com', 'K2E5S9', '54E Chesterton Dr.', 'Nepean', 'ON', '99', 'N', '')
+
 GO
 
 
