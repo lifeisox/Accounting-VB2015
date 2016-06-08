@@ -194,7 +194,7 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Book' )	CREATE
 	BookCode			Char(4)			NOT NULL,	-- [9999] Cash Book
     BookName			Varchar(50)		NOT NULL,
     BookNameKr			Varchar(50)		NOT NULL,
-    ForwardAmount		Float(53)		NOT NULL DEFAULT 0,
+    ForwardAmount		Decimal(12, 2)	NOT NULL DEFAULT 0,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
 	CONSTRAINT 	PK_Book			PRIMARY KEY ( BookYear, BookCode )
 )
@@ -209,7 +209,7 @@ AS
 GO
 
 INSERT INTO Tbl_Book ( BookYear, BookCode, BookName, BookNameKr, ForwardAmount ) VALUES 
-	( '2016', '9999', 'Cash Book', '현금출납장', 0 );
+	( '2016', '0001', 'Cash Book', '현금출납장', 0 );
     
 -- Create Tbl_Account Table ------------------------------------------------------------
 IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Account' )	CREATE TABLE Tbl_Account (
@@ -219,6 +219,8 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Account' )	CRE
     Division			Char(1)			NOT NULL DEFAULT 'E',	-- [E]xpenditure, [I]ncome
     AccountName			Varchar(50)		NOT NULL,
     AccountNameKr		Varchar(50)		NOT NULL,
+	Budget				Decimal(12, 2)	NOT NULL DEFAULT 0,
+	Amount				Decimal(12, 2)	NOT NULL DEFAULT 0,
     IsComputed			Char(1)			NOT NULL DEFAULT 'N',	-- [Y]es, [N]o - Input Field
     ParentCode			Char(4)			NULL,	-- If this field exist, trigger computes automatically
     BookCode			Char(4)			NULL,	-- If this field no exist, there is not Book
@@ -229,7 +231,42 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Account' )	CRE
 )
 GO
 
-CREATE TRIGGER Tg_Account_Update ON Tbl_Account
+CREATE TRIGGER Tg_Account_All ON Tbl_Account
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+	DECLARE @accountYear Char(4), @accountCode Char(4), @parentCode Char(4) 
+	DECLARE @budget Decimal(12, 2), @amount Decimal(12, 2)
+	SET NOCOUNT ON;
+	IF EXISTS(SELECT * FROM DELETED)
+	BEGIN
+		SELECT @accountYear = d.AccountYear, @accountCode = d.AccountCode, @parentCode = d.ParentCode
+			FROM DELETED d;
+		IF @parentCode IS NOT NULL  AND @parentCode <> ''
+		BEGIN
+			SELECT @budget = SUM(Budget), @amount = SUM(Amount)
+				FROM Tbl_Account WHERE AccountYear = @accountYear AND ParentCode = @parentCode;
+			UPDATE Tbl_Account SET Budget = @budget, Amount = @amount
+			WHERE Tbl_Account.AccountYear = @accountYear AND Tbl_Account.AccountCode = @accountCode;
+		END
+	END
+
+	IF EXISTS(SELECT * FROM INSERTED)
+	BEGIN
+		SELECT @accountYear = i.AccountYear, @accountCode = i.AccountCode, @parentCode = i.ParentCode
+			FROM INSERTED i;
+		IF @parentCode IS NOT NULL AND @parentCode <> ''
+		BEGIN
+			SELECT @budget = SUM(Budget), @amount = SUM(Amount)
+				FROM Tbl_Account WHERE AccountYear = @accountYear AND ParentCode = @parentCode;
+			UPDATE Tbl_Account SET Budget = @budget, Amount = @amount
+			WHERE Tbl_Account.AccountYear = @accountYear AND Tbl_Account.AccountCode = @accountCode;
+		END
+	END
+END
+GO
+
+CREATE TRIGGER Tg_Account_UpdateLastUpdate ON Tbl_Account
 AFTER UPDATE 
 AS
   UPDATE Tbl_Account SET LastUpdate = GETDATE()
@@ -243,8 +280,8 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Total' )	CREAT
     AccountCode			Char(4)			NOT NULL,
     AccountMonth		Char(2)			NOT NULL,
     MemberCode			Char(5)			NOT NULL,
-	CheckAmount			Float(53)		NOT NULL DEFAULT 0,
-    CashAmount			Float(53)		NOT NULL DEFAULT 0,
+	CheckAmount			Decimal(12, 2)	NOT NULL DEFAULT 0,
+    CashAmount			Decimal(12, 2)	NOT NULL DEFAULT 0,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
 	CONSTRAINT 	PK_Total	PRIMARY KEY ( AccountYear, AccountCode, AccountMonth, MemberCode ),
     CONSTRAINT	FK_Account	FOREIGN KEY ( AccountYear, AccountCode )	
@@ -273,9 +310,9 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Slip' )	CREATE
     Division			Char(1)			NOT NULL DEFAULT 'E',	-- [E]xpenditure, [I]ncome
     CheckNo				Int				NULL,
     CheckImage			VarBinary(MAX)	NULL,
-    CheckAmount			Float(53)		NOT NULL DEFAULT 0,
+    CheckAmount			Decimal(12, 2)	NOT NULL DEFAULT 0,
     EncashedDate		Date			NULL,
-    CashAmount			Float(53)		NOT NULL DEFAULT 0,
+    CashAmount			Decimal(12, 2)	NOT NULL DEFAULT 0,
     Remark				Varchar(100)	NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
 	CONSTRAINT 	PK_Slip		PRIMARY KEY ( SlipYear, SlipMonth, SlipDay, SlipNo ),
@@ -301,7 +338,7 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_SlipItem' )	CR
     SlipSeq				Int				NOT NULL DEFAULT 1,
     AccountCode			Char(4)			NOT NULL,
     MemberCode			Char(5)			NOT NULL,
-    Amount				Float(53)		NOT NULL DEFAULT 0,
+    Amount				Decimal(12, 2)	NOT NULL DEFAULT 0,
     Remark				Varchar(70)		NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
 	CONSTRAINT 	PK_SlipItem	PRIMARY KEY ( SlipYear, SlipMonth, SlipDay, SlipNo, SlipSeq ),

@@ -2,7 +2,7 @@
 
 Public Class MemberForm
 
-    Private ivMaxQueryCount As Integer = 11
+    Private MaxQueryCount As Integer = 11
     Private Enum queryENUM
         READ_ALL
         READ
@@ -15,69 +15,69 @@ Public Class MemberForm
         READ_AVAILABLE_CODE 'Find the available minimum Code in the Table
         READ_POSTAL_CODE
     End Enum
-    Private ivSQL(ivMaxQueryCount) As String
+    Private _SQL(MaxQueryCount) As String
 
-    Private ivFirstSW As Boolean = True
-    Private ivAddSW As Boolean = False
-    Private ivUpdateSW As Boolean = False
-    Private ivChangedSW As Boolean = False
+    Private _FirstSW As Boolean = True
+    Private _AddSW As Boolean = False
+    Private _UpdateSW As Boolean = False
+    Private _ChangedSW As Boolean = False
 
-    Private ivConnection As SqlConnection = Nothing
+    Private _Conn As SqlConnection = Nothing
 
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Assign queries to use in this class
-        ivSQL(queryENUM.READ_ALL) =
+        _SQL(queryENUM.READ_ALL) =
             "SELECT MemberCode, IIF(KoreanName IS NULL OR KoreanName = '', EnglishName, " +
                 "IIF(EngLishName Is NULL Or EnglishName = '', KoreanName, CONCAT(KoreanName, '(', " +
                 "EnglishName, ')'))) AS ViewName " +
             "FROM Tbl_Member ORDER BY MemberCode"
-        ivSQL(queryENUM.READ) = "SELECT * FROM Tbl_Member WHERE MemberCode = @MemberCode"
-        ivSQL(queryENUM.INSERT) =
+        _SQL(queryENUM.READ) = "SELECT * FROM Tbl_Member WHERE MemberCode = @MemberCode"
+        _SQL(queryENUM.INSERT) =
             "INSERT INTO Tbl_Member ( [MemberCode], [KoreanName], [EnglishName], [Sex], [EducationCode], [HouseHolderCode], " +
                 "[Phone1Kind], [Phone1No], [Phone2Kind], [Phone2No], [Phone3Kind], [Phone3No], [Email], [PostalCode], [Address], " +
                 "[City], [ProvinceCode], [DutyCode], [Remark], [IsDeleted] ) " +
                 "VALUES ( @MemberCode, @KoreanName, @EnglishName, @Sex, @EducationCode, @HouseHolderCode, @Phone1Kind, @Phone1No, " +
                 "@Phone2Kind, @Phone2No, @Phone3Kind, @Phone3No, @Email, @PostalCode, @Address, @City, @ProvinceCode, " +
                 "@DutyCode, @Remark, @IsDeleted)"
-        ivSQL(queryENUM.UPDATE) =
+        _SQL(queryENUM.UPDATE) =
             "UPDATE Tbl_Member SET [KoreanName] = @KoreanName, [EnglishName] = @EnglishName, [Sex] = @Sex, " +
                 "[EducationCode] = @EducationCode, [HouseHolderCode] = @HouseHolderCode, [Phone1Kind] = @Phone1Kind, " +
                 "[Phone1No] = @Phone1No, [Phone2Kind] = @Phone2Kind, [Phone2No] = @Phone2No, [Phone3Kind] = @Phone3Kind, " +
                 "[Phone3No] = @Phone3No, [Email] = @Email, [PostalCode] = @PostalCode, [Address] = @Address, [City] = @City, " +
                 "[ProvinceCode] = @ProvinceCode, [DutyCode] = @DutyCode, [Remark] = @Remark, [IsDeleted] = @IsDeleted " +
                 "WHERE MemberCode = @MemberCode"
-        ivSQL(queryENUM.DELETE) = "DELETE FROM Tbl_Member WHERE MemberCode = @MemberCode"
-        ivSQL(queryENUM.READ_DUTY) = "SELECT DutyCode, DutyName FROM Tbl_Duty"
-        ivSQL(queryENUM.READ_EDUCATION) = "SELECT EducationCode, EducationName FROM Tbl_Education"
-        ivSQL(queryENUM.READ_PROVINCE) = "SELECT ProvinceCode, ProvinceName FROM Tbl_Province"
-        ivSQL(queryENUM.READ_AVAILABLE_CODE) =
+        _SQL(queryENUM.DELETE) = "DELETE FROM Tbl_Member WHERE MemberCode = @MemberCode"
+        _SQL(queryENUM.READ_DUTY) = "SELECT DutyCode, DutyName FROM Tbl_Duty"
+        _SQL(queryENUM.READ_EDUCATION) = "SELECT EducationCode, EducationName FROM Tbl_Education"
+        _SQL(queryENUM.READ_PROVINCE) = "SELECT ProvinceCode, ProvinceName FROM Tbl_Province"
+        _SQL(queryENUM.READ_AVAILABLE_CODE) =
             "SELECT MIN(MemberCode + 1) FROM Tbl_Member " +
                 "WHERE (MemberCode + 1) Not In (SELECT MemberCode FROM Tbl_Member)"
-        ivSQL(queryENUM.READ_POSTAL_CODE) = "SELECT * FROM Tbl_PostalArea WHERE PostalAreaCode = @PostalAreaCode"
+        _SQL(queryENUM.READ_POSTAL_CODE) = "SELECT * FROM Tbl_PostalArea WHERE PostalAreaCode = @PostalAreaCode"
 
         ' Add any initialization after the InitializeComponent() call.
-        ivConnection = New SqlConnection(My.Settings.DbConn)
-        ivConnection.Open()
+        _Conn = New SqlConnection(My.Settings.DbConn)
+        _Conn.Open()
 
     End Sub
 
     Protected Overrides Sub Finalize()
-        ivConnection.Close()
+        _Conn.Close()
         MyBase.Finalize()
     End Sub
 
-    Private Sub memberFM_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub MemberForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         checkChangedField()
     End Sub
 
-    Private Sub memberFM_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-        If ivFirstSW = True Then
+    Private Sub MemberForm_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        If _FirstSW = True Then
             fillComboData()
             fillGrid()
-            ivFirstSW = False
+            _FirstSW = False
         End If
     End Sub
 
@@ -95,16 +95,16 @@ Public Class MemberForm
                 createKeyField()
             Case "deleteTSB" : deleteCurrentRecord()
             Case "firstTSB"
-                naviDGV.CurrentCell = naviDGV(0, 0)
+                grdNavi.CurrentCell = grdNavi(0, 0)
             Case "previousTSB"
-                If naviDGV.CurrentRow.Index > 0 Then
-                    naviDGV.CurrentCell = naviDGV(0, naviDGV.CurrentRow.Index - 1)
+                If grdNavi.CurrentRow.Index > 0 Then
+                    grdNavi.CurrentCell = grdNavi(0, grdNavi.CurrentRow.Index - 1)
                 End If
             Case "nextTSB"
-                If naviDGV.CurrentRow.Index < naviDGV.RowCount - 1 Then
-                    naviDGV.CurrentCell = naviDGV(0, naviDGV.CurrentRow.Index + 1)
+                If grdNavi.CurrentRow.Index < grdNavi.RowCount - 1 Then
+                    grdNavi.CurrentCell = grdNavi(0, grdNavi.CurrentRow.Index + 1)
                 End If
-            Case "lastTSB" : naviDGV.CurrentCell = naviDGV(0, naviDGV.RowCount - 1)
+            Case "lastTSB" : grdNavi.CurrentCell = grdNavi(0, grdNavi.RowCount - 1)
             Case "refreshTSB" : fillGrid()
             Case "searchTSB" : searchName()
             Case "saveTSB" : saveCurrentRecord()
@@ -112,41 +112,43 @@ Public Class MemberForm
         End Select
     End Sub
 
-    Private Sub naviDGV_CurrentCellChanged(sender As Object, e As EventArgs) Handles naviDGV.CurrentCellChanged
+    Private Sub grdNavi_CurrentCellChanged(sender As Object, e As EventArgs) Handles grdNavi.CurrentCellChanged, grdNavi.CurrentCellChanged
         checkChangedField()
-        If naviDGV.SelectedRows.Count <> 1 Then Return
+        If grdNavi.SelectedRows.Count <> 1 Then Return
 
-        Dim index As Integer = naviDGV.SelectedRows(0).Index
-        If naviDGV.SelectedRows.Count = 1 And index <= naviDGV.Rows.Count - 1 And ivFirstSW = False Then
-            fillData(naviDGV.Rows(index).Cells("CodeCol").Value)
+        Dim index As Integer = grdNavi.SelectedRows(0).Index
+        If grdNavi.SelectedRows.Count = 1 And index <= grdNavi.Rows.Count - 1 And _FirstSW = False Then
+            fillData(grdNavi.Rows(index).Cells("CodeCol").Value)
         End If
     End Sub
 
-    Private Sub control_GotFocus(sender As Object, e As EventArgs) Handles koreanNameTB.GotFocus,
-        englishNameTB.GotFocus, phone1NoTB.GotFocus, phone2NoTB.GotFocus, phone3NoTB.GotFocus,
-        emailTB.GotFocus, cityTB.GotFocus, postalCodeTB.GotFocus
+    Private Sub control_GotFocus(sender As Object, e As EventArgs) Handles txtKoreanName.GotFocus,
+        txtEnglishName.GotFocus, txtPhone1No.GotFocus, txtPhone2No.GotFocus, txtPhone3No.GotFocus,
+        txtEmail.GotFocus, txtPostalCode.GotFocus, txtAddress.GotFocus, txtCity.GotFocus,
+        txtRemark.GotFocus
         sender.SelectAll()
     End Sub
 
-    Private Sub control_Changed(sender As Object, e As EventArgs) Handles koreanNameTB.TextChanged,
-        englishNameTB.TextChanged, educationCB.SelectedIndexChanged, maleRB.CheckedChanged, femaleRB.CheckedChanged,
-        phone1KindCB.SelectedIndexChanged, phone1NoTB.TextChanged, phone2KindCB.SelectedIndexChanged, phone2NoTB.TextChanged,
-        phone3KindCB.SelectedIndexChanged, phone3NoTB.TextChanged, emailTB.TextChanged, postalCodeTB.TextAlignChanged,
-        cityTB.TextChanged, provinceCB.SelectedIndexChanged, dutyCB.SelectedIndexChanged, isDeletedCB.CheckedChanged,
-        addressTB.TextChanged, remarkTB.TextChanged
+    Private Sub control_Changed(sender As Object, e As EventArgs) Handles txtKoreanName.TextChanged,
+        txtEnglishName.TextChanged, rdoMale.CheckedChanged, rdoFemale.CheckedChanged,
+        cboEducation.SelectedIndexChanged, txtHouseHolderCode.TextChanged, cboPhone1Kind.SelectedIndexChanged,
+        txtPhone1No.TextChanged, cboPhone2Kind.SelectedIndexChanged, txtPhone2No.TextChanged,
+        cboPhone3Kind.SelectedIndexChanged, txtPhone3No.TextChanged, txtEmail.TextChanged,
+        txtPostalCode.TextChanged, txtAddress.TextChanged, txtCity.TextChanged, cboProvince.SelectedIndexChanged,
+        cboDuty.SelectedIndexChanged, txtRemark.TextChanged, chkIsDeleted.CheckedChanged
 
-        If ivAddSW = True Or ivUpdateSW = True Then
-            ivChangedSW = True
+        If _AddSW = True Or _UpdateSW = True Then
+            _ChangedSW = True
             saveTSB.Enabled = True
         End If
     End Sub
 
-    Private Sub control_KeyDown(sender As Object, e As KeyEventArgs) Handles memberCodeTB.KeyDown,
-        koreanNameTB.KeyDown, englishNameTB.KeyDown, educationCB.KeyDown, postalCodeTB.KeyDown,
-        phone1KindCB.KeyDown, phone1NoTB.KeyDown, phone2KindCB.KeyDown, phone2NoTB.KeyDown,
-        phone3KindCB.KeyDown, phone3NoTB.KeyDown, emailTB.KeyDown,
-        cityTB.KeyDown, provinceCB.KeyDown, dutyCB.KeyDown, isDeletedCB.KeyDown
-        ' maleRB.KeyDown, femaleRB.KeyDown, findBN.KeyDown, addressTB.KeyDown, remarkTB.KeyDown 
+    Private Sub control_KeyDown(sender As Object, e As KeyEventArgs) Handles txtMemberCode.KeyDown,
+        txtKoreanName.KeyDown, txtEnglishName.KeyDown, cboEducation.KeyDown, cboPhone1Kind.KeyDown,
+        txtPhone1No.KeyDown, cboPhone2Kind.KeyDown, txtPhone2No.KeyDown, cboPhone3Kind.KeyDown,
+        txtPhone3No.KeyDown, txtPostalCode.KeyDown, txtAddress.KeyDown, txtCity.KeyDown,
+        cboProvince.KeyDown, cboDuty.KeyDown, txtRemark.KeyDown
+
         Dim nextControl As Control
         If e.KeyCode = Keys.Enter Then
             nextControl = GetNextControl(sender, True)
@@ -158,62 +160,61 @@ Public Class MemberForm
         End If
     End Sub
 
-    Private Sub memberCodeTB_Validating(sender As Object, e As CancelEventArgs) Handles memberCodeTB.Validating
-        If ivAddSW = False Then Exit Sub
+    Private Sub txtMemberCode_Validating(sender As Object, e As CancelEventArgs) Handles txtMemberCode.Validating
+        If _AddSW = False Then Exit Sub
 
-        If memberCodeTB.Text.Length = 5 Then
-            Dim command As New SqlCommand(ivSQL(queryENUM.READ), ivConnection)
+        If txtMemberCode.Text.Length = 5 Then
+            Dim command As New SqlCommand(_SQL(queryENUM.READ), _Conn)
             command.Parameters.Add("@MemberCode", SqlDbType.Char)
-            command.Parameters("@MemberCode").Value = memberCodeTB.Text
+            command.Parameters("@MemberCode").Value = txtMemberCode.Text
             Dim reader As SqlDataReader = command.ExecuteReader()
             If reader.HasRows Then
                 MessageBox.Show("The code has already used. Use an another code!",
                 "Duplicated code", MessageBoxButtons.OK)
-                memberCodeTB.Focus()
+                txtMemberCode.Focus()
                 e.Cancel = True
             Else
-                houseHolderCodeTB.Text = memberCodeTB.Text
-                houseHolderNameLL.Text = "Principal"
+                txtHouseHolderCode.Text = txtMemberCode.Text
+                lblHouseHolderName.Text = "Principal"
             End If
             reader.Close()
         Else
             MessageBox.Show("The length Of the code should be 5. Re-enter!",
                 "Wrong code", MessageBoxButtons.OK)
-            memberCodeTB.Focus()
+            txtMemberCode.Focus()
             e.Cancel = True
         End If
     End Sub
 
-    Private Sub postalCodeTB_Validating(sender As Object, e As CancelEventArgs) Handles postalCodeTB.Validating
+    Private Sub postalCodeTB_Validating(sender As Object, e As CancelEventArgs) Handles txtPostalCode.Validating
         postalAreaLL.Text = ""
-        If postalCodeTB.Text.Length = 6 Then
-            Dim areaCode As String = postalCodeTB.Text.Substring(0, 3)
-            Dim command As New SqlCommand(ivSQL(queryENUM.READ_POSTAL_CODE), ivConnection)
+        If txtPostalCode.Text.Length = 6 Then
+            Dim areaCode As String = txtPostalCode.Text.Substring(0, 3)
+            Dim command As New SqlCommand(_SQL(queryENUM.READ_POSTAL_CODE), _Conn)
             command.Parameters.Add("@PostalAreaCode", SqlDbType.Char)
             command.Parameters("@PostalAreaCode").Value = areaCode
             Dim reader As SqlDataReader = command.ExecuteReader()
             If reader.HasRows And reader.Read() = True Then
                 postalAreaLL.Text = reader("PlaceName")
-                provinceCB.SelectedValue = reader("ProvinceCode")
+                cboProvince.SelectedValue = reader("ProvinceCode")
             End If
             reader.Close()
-        ElseIf postalCodeTB.Text.Length <> 0 Then
-
+        ElseIf txtPostalCode.Text.Length <> 0 Then
             MessageBox.Show("The wrong postal code has been used. Use an another code!",
                 "Wrong postal code", MessageBoxButtons.OK)
-            postalCodeTB.Focus()
+            txtPostalCode.Focus()
             e.Cancel = True
         End If
     End Sub
 
-    Private Sub findBN_Click(sender As Object, e As EventArgs) Handles findBN.Click
+    Private Sub btnFindHouseHolder_Click(sender As Object, e As EventArgs) Handles btnFindHouseHolder.Click
         Dim findMemberForm As FindMemberForm = New FindMemberForm()
         Dim result As DialogResult = findMemberForm.ShowDialog()
         If result = vbOK Then
-            ivChangedSW = True
-            houseHolderCodeTB.Text = findMemberForm.memberCode
-            houseHolderNameLL.Text = readHouseHolder(houseHolderCodeTB.Text)
-            phone1KindCB.Focus()
+            _ChangedSW = True
+            txtHouseHolderCode.Text = findMemberForm.memberCode
+            lblHouseHolderName.Text = readHouseHolder(txtHouseHolderCode.Text)
+            cboPhone1Kind.Focus()
         End If
     End Sub
 
@@ -221,27 +222,24 @@ Public Class MemberForm
         Dim findMemberForm As FindMemberForm = New FindMemberForm()
         Dim result As DialogResult = findMemberForm.ShowDialog()
         If result = vbOK Then
-            For i As Integer = 0 To naviDGV.RowCount - 1
-                If findMemberForm.memberCode = naviDGV(0, i).Value Then
-                    naviDGV.CurrentCell = naviDGV(0, i)
+            For i As Integer = 0 To grdNavi.RowCount - 1
+                If findMemberForm.memberCode = grdNavi(0, i).Value Then
+                    grdNavi.CurrentCell = grdNavi(0, i)
                 End If
             Next
-            ivChangedSW = True
-            houseHolderCodeTB.Text = findMemberForm.memberCode
-            phone1KindCB.Focus()
         End If
     End Sub
 
     Private Sub checkChangedField()
-        If (ivAddSW = True Or ivUpdateSW = True) And ivChangedSW = True Then
+        If (_AddSW = True Or _UpdateSW = True) And _ChangedSW = True Then
             Dim result As DialogResult = MessageBox.Show("There are some changed data. Save it?",
                 "Confirmation To save", MessageBoxButtons.YesNo)
             If result = vbYes Then
                 saveCurrentRecord()
             Else
-                ivAddSW = False
-                ivUpdateSW = False
-                ivChangedSW = False
+                _AddSW = False
+                _UpdateSW = False
+                _ChangedSW = False
             End If
         End If
     End Sub
@@ -259,45 +257,45 @@ Public Class MemberForm
 
         Me.Cursor = Cursors.WaitCursor
 
-        educationCB.DataSource = GetEducationItems()
-        educationCB.DisplayMember = "Name"
-        educationCB.ValueMember = "Code"
+        cboEducation.DataSource = GetEducationItems()
+        cboEducation.DisplayMember = "Name"
+        cboEducation.ValueMember = "Code"
 
-        dutyCB.DataSource = GetDutyItems()
-        dutyCB.DisplayMember = "Name"
-        dutyCB.ValueMember = "Code"
+        cboDuty.DataSource = GetDutyItems()
+        cboDuty.DisplayMember = "Name"
+        cboDuty.ValueMember = "Code"
 
-        provinceCB.DataSource = GetProvinceItems()
-        provinceCB.DisplayMember = "Name"
-        provinceCB.ValueMember = "Code"
+        cboProvince.DataSource = GetProvinceItems()
+        cboProvince.DisplayMember = "Name"
+        cboProvince.ValueMember = "Code"
 
         For index As Integer = 0 To phoneKind.Length - 1 Step 1
-            phone1KindCB.Items.Add(phoneKind(index))
-            phone2KindCB.Items.Add(phoneKind(index))
-            phone3KindCB.Items.Add(phoneKind(index))
+            cboPhone1Kind.Items.Add(phoneKind(index))
+            cboPhone2Kind.Items.Add(phoneKind(index))
+            cboPhone3Kind.Items.Add(phoneKind(index))
         Next
-        phone1KindCB.SelectedIndex = 0
-        phone2KindCB.SelectedIndex = 0
-        phone3KindCB.SelectedIndex = 0
+        cboPhone1Kind.SelectedIndex = 0
+        cboPhone2Kind.SelectedIndex = 0
+        cboPhone3Kind.SelectedIndex = 0
 
         Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub fillGrid()
-        Dim command As New SqlCommand(ivSQL(queryENUM.READ_ALL), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.READ_ALL), _Conn)
 
         Me.Cursor = Cursors.WaitCursor
 
-        naviDGV.RowCount = 0
+        grdNavi.RowCount = 0
 
         Dim reader As SqlDataReader = command.ExecuteReader()
         If reader.HasRows Then
             While reader.Read()
-                naviDGV.Rows.Add(reader.Item("MemberCode"), reader.Item("ViewName"))
+                grdNavi.Rows.Add(reader.Item("MemberCode"), reader.Item("ViewName"))
             End While
             reader.Close()
-            naviDGV.CurrentCell = naviDGV(0, naviDGV.Rows.Count - 1)
-            fillData(naviDGV.CurrentCell.Value)
+            grdNavi.CurrentCell = grdNavi(0, grdNavi.Rows.Count - 1)
+            fillData(grdNavi.CurrentCell.Value)
             enableAllToolStripButton(True)
             saveTSB.Enabled = False
         Else
@@ -310,80 +308,80 @@ Public Class MemberForm
     End Sub
 
     Private Sub fillData(ByVal code As String)
-        Dim command As New SqlCommand(ivSQL(queryENUM.READ), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.READ), _Conn)
         command.Parameters.Add("@MemberCode", SqlDbType.Char)
         command.Parameters("@MemberCode").Value = code
         Dim reader As SqlDataReader = command.ExecuteReader()
 
         If reader.HasRows Then
             reader.Read()
-            memberCodeTB.Text = reader("MemberCode")
-            memberCodeTB.BackColor = SystemColors.InactiveCaption
-            memberCodeTB.ReadOnly = True
-            koreanNameTB.Text = IIf(String.IsNullOrEmpty(reader("KoreanName")), "", reader("KoreanName"))
-            englishNameTB.Text = IIf(String.IsNullOrEmpty(reader("EnglishName")), "", reader("EnglishName"))
-            If reader("Sex") = "M" Then maleRB.Checked = True Else femaleRB.Checked = True
-            educationCB.SelectedValue = reader("EducationCode")
-            houseHolderCodeTB.Text = IIf(String.IsNullOrEmpty(reader("HouseHolderCode")), "", reader("HouseHolderCode"))
-            phone1KindCB.SelectedItem = reader("Phone1Kind")
-            phone1NoTB.Text = IIf(String.IsNullOrEmpty(reader("Phone1No")), "", reader("Phone1No"))
-            phone2KindCB.SelectedItem = reader("Phone2Kind")
-            phone2NoTB.Text = IIf(String.IsNullOrEmpty(reader("Phone2No")), "", reader("Phone2No"))
-            phone3KindCB.SelectedItem = reader("Phone3Kind")
-            phone3NoTB.Text = IIf(String.IsNullOrEmpty(reader("Phone3No")), "", reader("Phone3No"))
-            emailTB.Text = IIf(String.IsNullOrEmpty(reader("Email")), "", reader("Email"))
-            postalCodeTB.Text = IIf(String.IsNullOrEmpty(reader("PostalCode")), "", reader("PostalCode"))
-            addressTB.Text = IIf(String.IsNullOrEmpty(reader("Address")), "", reader("Address"))
-            cityTB.Text = IIf(String.IsNullOrEmpty(reader("City")), "", reader("City"))
-            provinceCB.SelectedValue = reader("ProvinceCode")
-            dutyCB.SelectedValue = reader("DutyCode")
-            remarkTB.Text = IIf(String.IsNullOrEmpty(reader("Remark")), "", reader("Remark"))
-            isDeletedCB.Checked = IIf(reader("isDeleted") = "Y", True, False)
+            txtMemberCode.Text = reader("MemberCode")
+            txtMemberCode.BackColor = SystemColors.InactiveCaption
+            txtMemberCode.ReadOnly = True
+            txtKoreanName.Text = IIf(IsDBNull(reader("KoreanName")), "", reader("KoreanName"))
+            txtEnglishName.Text = IIf(IsDBNull(reader("EnglishName")), "", reader("EnglishName"))
+            If reader("Sex") = "M" Then rdoMale.Checked = True Else rdoFemale.Checked = True
+            cboEducation.SelectedValue = reader("EducationCode")
+            txtHouseHolderCode.Text = IIf(IsDBNull(reader("HouseHolderCode")), "", reader("HouseHolderCode"))
+            cboPhone1Kind.SelectedItem = reader("Phone1Kind")
+            txtPhone1No.Text = IIf(IsDBNull(reader("Phone1No")), "", reader("Phone1No"))
+            cboPhone2Kind.SelectedItem = reader("Phone2Kind")
+            txtPhone2No.Text = IIf(IsDBNull(reader("Phone2No")), "", reader("Phone2No"))
+            cboPhone3Kind.SelectedItem = reader("Phone3Kind")
+            txtPhone3No.Text = IIf(IsDBNull(reader("Phone3No")), "", reader("Phone3No"))
+            txtEmail.Text = IIf(IsDBNull(reader("Email")), "", reader("Email"))
+            txtPostalCode.Text = IIf(IsDBNull(reader("PostalCode")), "", reader("PostalCode"))
+            txtAddress.Text = IIf(IsDBNull(reader("Address")), "", reader("Address"))
+            txtCity.Text = IIf(IsDBNull(reader("City")), "", reader("City"))
+            cboProvince.SelectedValue = reader("ProvinceCode")
+            cboDuty.SelectedValue = reader("DutyCode")
+            txtRemark.Text = IIf(IsDBNull(reader("Remark")), "", reader("Remark"))
+            chkIsDeleted.Checked = IIf(reader("isDeleted") = "Y", True, False)
             reader.Close()
-            houseHolderNameLL.Text = readHouseHolder(houseHolderCodeTB.Text)
-            postalAreaLL.Text = readPostalArea(postalCodeTB.Text)
+            lblHouseHolderName.Text = readHouseHolder(txtHouseHolderCode.Text)
+            postalAreaLL.Text = readPostalArea(txtPostalCode.Text)
         Else
             reader.Close()
         End If
 
-        ivUpdateSW = True
-        ivChangedSW = False
-        ivAddSW = False
+        _UpdateSW = True
+        _ChangedSW = False
+        _AddSW = False
 
         newTSB.Enabled = True
         saveTSB.Enabled = False
         deleteTSB.Enabled = True
 
-        koreanNameTB.Focus()
+        txtKoreanName.Focus()
 
     End Sub
 
     Private Sub clearAllFields()
-        memberCodeTB.Text = ""
-        koreanNameTB.Text = ""
-        englishNameTB.Text = ""
-        maleRB.Checked = True
-        educationCB.SelectedIndex = 0
-        houseHolderCodeTB.Text = ""
-        houseHolderNameLL.Text = ""
-        phone1KindCB.SelectedItem = "Mobile"
-        phone1NoTB.Text = ""
-        phone2KindCB.SelectedItem = "Home"
-        phone2NoTB.Text = ""
-        phone3KindCB.SelectedItem = "Work"
-        phone3NoTB.Text = ""
-        emailTB.Text = ""
-        postalCodeTB.Text = ""
+        txtMemberCode.Text = ""
+        txtKoreanName.Text = ""
+        txtEnglishName.Text = ""
+        rdoMale.Checked = True
+        cboEducation.SelectedIndex = 0
+        txtHouseHolderCode.Text = ""
+        lblHouseHolderName.Text = ""
+        cboPhone1Kind.SelectedItem = "Mobile"
+        txtPhone1No.Text = ""
+        cboPhone2Kind.SelectedItem = "Home"
+        txtPhone2No.Text = ""
+        cboPhone3Kind.SelectedItem = "Work"
+        txtPhone3No.Text = ""
+        txtEmail.Text = ""
+        txtPostalCode.Text = ""
         postalAreaLL.Text = ""
-        addressTB.Text = ""
-        cityTB.Text = "Ottawa"
-        provinceCB.SelectedValue = "ON"
-        dutyCB.SelectedValue = "99"
-        remarkTB.Text = ""
-        isDeletedCB.Checked = False
+        txtAddress.Text = ""
+        txtCity.Text = "Ottawa"
+        cboProvince.SelectedValue = "ON"
+        cboDuty.SelectedValue = "99"
+        txtRemark.Text = ""
+        chkIsDeleted.Checked = False
 
-        ivAddSW = True
-        ivChangedSW = False
+        _AddSW = True
+        _ChangedSW = False
 
         newTSB.Enabled = False
         saveTSB.Enabled = False
@@ -393,7 +391,7 @@ Public Class MemberForm
     Private Sub createKeyField()
         Dim tmpCode As Int32 = 0
 
-        Dim command As New SqlCommand(ivSQL(queryENUM.READ_AVAILABLE_CODE), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.READ_AVAILABLE_CODE), _Conn)
         Try
             tmpCode = Convert.ToInt32(command.ExecuteScalar())
         Catch ex As Exception
@@ -403,38 +401,38 @@ Public Class MemberForm
                 MessageBox.Show("A member can't be inserted anymore!", "Full data", MessageBoxButtons.OK)
                 Close()
             Else
-                memberCodeTB.Text = tmpCode.ToString("00000")
-                memberCodeTB.ReadOnly = False
-                memberCodeTB.BackColor = SystemColors.Window
-                memberCodeTB.Focus()
+                txtMemberCode.Text = tmpCode.ToString("00000")
+                txtMemberCode.ReadOnly = False
+                txtMemberCode.BackColor = SystemColors.Window
+                txtMemberCode.Focus()
             End If
         End Try
     End Sub
 
     Private Sub saveCurrentRecord()
-        If ivAddSW = True Then
-            Dim command As New SqlCommand(ivSQL(queryENUM.INSERT), ivConnection)
+        If _AddSW = True Then
+            Dim command As New SqlCommand(_SQL(queryENUM.INSERT), _Conn)
             parameterMove(command)
-            ivAddSW = False
-            ivChangedSW = False
+            _AddSW = False
+            _ChangedSW = False
 
             newTSB.Enabled = True
             deleteTSB.Enabled = True
             saveTSB.Enabled = False
 
-            naviDGV.Rows.Add(memberCodeTB.Text, koreanNameTB.Text)
-            naviDGV.CurrentCell = naviDGV(0, naviDGV.Rows.Count - 1)
+            grdNavi.Rows.Add(txtMemberCode.Text, txtKoreanName.Text)
+            grdNavi.CurrentCell = grdNavi(0, grdNavi.Rows.Count - 1)
         Else
-            Dim command As New SqlCommand(ivSQL(queryENUM.UPDATE), ivConnection)
+            Dim command As New SqlCommand(_SQL(queryENUM.UPDATE), _Conn)
             parameterMove(command)
-            ivUpdateSW = True
-            ivChangedSW = False
+            _UpdateSW = True
+            _ChangedSW = False
 
             newTSB.Enabled = True
             deleteTSB.Enabled = True
             saveTSB.Enabled = False
 
-            naviDGV(1, naviDGV.CurrentRow.Index).Value = koreanNameTB.Text
+            grdNavi(1, grdNavi.CurrentRow.Index).Value = txtKoreanName.Text
         End If
     End Sub
 
@@ -460,26 +458,26 @@ Public Class MemberForm
         command.Parameters.Add("@Remark", SqlDbType.VarChar)
         command.Parameters.Add("@IsDeleted", SqlDbType.Char)
 
-        command.Parameters("@MemberCode").Value = memberCodeTB.Text
-        command.Parameters("@KoreanName").Value = koreanNameTB.Text
-        command.Parameters("@EnglishName").Value = englishNameTB.Text
-        command.Parameters("@Sex").Value = IIf(femaleRB.Checked = True, "F", "M")
-        command.Parameters("@EducationCode").Value = educationCB.SelectedValue
-        command.Parameters("@HouseHolderCode").Value = houseHolderCodeTB.Text
-        command.Parameters("@Phone1Kind").Value = phone1KindCB.Text
-        command.Parameters("@Phone1No").Value = phone1NoTB.Text
-        command.Parameters("@Phone2Kind").Value = phone2KindCB.Text
-        command.Parameters("@Phone2No").Value = phone2NoTB.Text
-        command.Parameters("@Phone3Kind").Value = phone3KindCB.Text
-        command.Parameters("@Phone3No").Value = phone3NoTB.Text
-        command.Parameters("@Email").Value = emailTB.Text
-        command.Parameters("@PostalCode").Value = postalCodeTB.Text
-        command.Parameters("@Address").Value = addressTB.Text
-        command.Parameters("@City").Value = cityTB.Text
-        command.Parameters("@ProvinceCode").Value = provinceCB.SelectedValue
-        command.Parameters("@DutyCode").Value = dutyCB.SelectedValue
-        command.Parameters("@Remark").Value = remarkTB.Text
-        command.Parameters("@IsDeleted").Value = IIf(isDeletedCB.Checked = True, "Y", "N")
+        command.Parameters("@MemberCode").Value = txtMemberCode.Text
+        command.Parameters("@KoreanName").Value = txtKoreanName.Text
+        command.Parameters("@EnglishName").Value = txtEnglishName.Text
+        command.Parameters("@Sex").Value = IIf(rdoFemale.Checked = True, "F", "M")
+        command.Parameters("@EducationCode").Value = cboEducation.SelectedValue
+        command.Parameters("@HouseHolderCode").Value = txtHouseHolderCode.Text
+        command.Parameters("@Phone1Kind").Value = cboPhone1Kind.Text
+        command.Parameters("@Phone1No").Value = txtPhone1No.Text
+        command.Parameters("@Phone2Kind").Value = cboPhone2Kind.Text
+        command.Parameters("@Phone2No").Value = txtPhone2No.Text
+        command.Parameters("@Phone3Kind").Value = cboPhone3Kind.Text
+        command.Parameters("@Phone3No").Value = txtPhone3No.Text
+        command.Parameters("@Email").Value = txtEmail.Text
+        command.Parameters("@PostalCode").Value = txtPostalCode.Text
+        command.Parameters("@Address").Value = txtAddress.Text
+        command.Parameters("@City").Value = txtCity.Text
+        command.Parameters("@ProvinceCode").Value = cboProvince.SelectedValue
+        command.Parameters("@DutyCode").Value = cboDuty.SelectedValue
+        command.Parameters("@Remark").Value = txtRemark.Text
+        command.Parameters("@IsDeleted").Value = IIf(chkIsDeleted.Checked = True, "Y", "N")
 
         command.ExecuteNonQuery()
     End Sub
@@ -489,34 +487,34 @@ Public Class MemberForm
                 "Confirmation to delete", MessageBoxButtons.YesNo)
         If result = vbNo Then Exit Sub
 
-        Dim command As New SqlCommand(ivSQL(queryENUM.DELETE), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.DELETE), _Conn)
         command.Parameters.Add("@MemberCode", SqlDbType.Char)
-        command.Parameters("@MemberCode").Value = memberCodeTB.Text
+        command.Parameters("@MemberCode").Value = txtMemberCode.Text
 
         command.ExecuteNonQuery()
 
-        Dim saveCurrentRow = naviDGV.CurrentRow.Index
-        naviDGV.Rows.RemoveAt(saveCurrentRow)
-        If naviDGV.RowCount < 1 Then
+        Dim saveCurrentRow = grdNavi.CurrentRow.Index
+        grdNavi.Rows.RemoveAt(saveCurrentRow)
+        If grdNavi.RowCount < 1 Then
             clearAllFields()
-            ivAddSW = False
-            ivUpdateSW = False
+            _AddSW = False
+            _UpdateSW = False
             enableAllToolStripButton(False)
             newTSB.Enabled = True
-        ElseIf saveCurrentRow > naviDGV.RowCount - 1 Then
-            naviDGV.CurrentCell = naviDGV(0, naviDGV.RowCount - 1)
-            fillData(naviDGV.CurrentCell.Value)
+        ElseIf saveCurrentRow > grdNavi.RowCount - 1 Then
+            grdNavi.CurrentCell = grdNavi(0, grdNavi.RowCount - 1)
+            fillData(grdNavi.CurrentCell.Value)
         Else
-            naviDGV.CurrentCell = naviDGV(0, saveCurrentRow)
-            fillData(naviDGV.CurrentCell.Value)
+            grdNavi.CurrentCell = grdNavi(0, saveCurrentRow)
+            fillData(grdNavi.CurrentCell.Value)
         End If
 
     End Sub
 
     Private Function readHouseHolder(ByVal memberCode As String) As String
-        If memberCode = memberCodeTB.Text Then Return "Principal"
+        If memberCode = txtMemberCode.Text Then Return "Principal"
 
-        Dim command As New SqlCommand(ivSQL(queryENUM.READ), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.READ), _Conn)
         command.Parameters.Add("@MemberCode", SqlDbType.Char)
         command.Parameters("@MemberCode").Value = memberCode
         Dim rd As SqlDataReader = command.ExecuteReader()
@@ -539,7 +537,7 @@ Public Class MemberForm
 
         If postalCode.Length = 6 Then
             Dim areaCode As String = postalCode.Substring(0, 3)
-            Dim command As New SqlCommand(ivSQL(queryENUM.READ_POSTAL_CODE), ivConnection)
+            Dim command As New SqlCommand(_SQL(queryENUM.READ_POSTAL_CODE), _Conn)
             command.Parameters.Add("@PostalAreaCode", SqlDbType.Char)
             command.Parameters("@PostalAreaCode").Value = areaCode
             Dim reader As SqlDataReader = command.ExecuteReader()
@@ -553,7 +551,7 @@ Public Class MemberForm
 
     Function GetEducationItems() As List(Of ItemStructure)
         Dim items = New List(Of ItemStructure)
-        Dim command As New SqlCommand(ivSQL(queryENUM.READ_EDUCATION), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.READ_EDUCATION), _Conn)
 
         Dim reader As SqlDataReader = command.ExecuteReader()
         If reader.HasRows Then
@@ -572,7 +570,7 @@ Public Class MemberForm
 
     Function GetDutyItems() As List(Of ItemStructure)
         Dim items = New List(Of ItemStructure)
-        Dim command As New SqlCommand(ivSQL(queryENUM.READ_DUTY), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.READ_DUTY), _Conn)
 
         Dim reader As SqlDataReader = command.ExecuteReader()
         If reader.HasRows Then
@@ -591,7 +589,7 @@ Public Class MemberForm
 
     Function GetProvinceItems() As List(Of ItemStructure)
         Dim items = New List(Of ItemStructure)
-        Dim command As New SqlCommand(ivSQL(queryENUM.READ_PROVINCE), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.READ_PROVINCE), _Conn)
 
         Dim reader As SqlDataReader = command.ExecuteReader()
         If reader.HasRows Then

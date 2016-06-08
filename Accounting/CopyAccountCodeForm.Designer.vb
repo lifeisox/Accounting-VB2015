@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class CopyDedicatorForm
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class CopyAccountCodeForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,13 +20,13 @@ Partial Class CopyDedicatorForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyDedicatorForm))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyAccountCodeForm))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.cboTo = New System.Windows.Forms.ComboBox()
@@ -93,13 +93,13 @@ Partial Class CopyDedicatorForm
         '
         Me.cboTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cboTo.DropDownHeight = 100
+        Me.cboTo.DropDownHeight = 1
         Me.cboTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTo.FormattingEnabled = True
         Me.cboTo.IntegralHeight = False
         Me.cboTo.ItemHeight = 15
         Me.cboTo.Location = New System.Drawing.Point(28, 110)
-        Me.cboTo.MaxDropDownItems = 10
+        Me.cboTo.MaxDropDownItems = 1
         Me.cboTo.MinimumSize = New System.Drawing.Size(150, 0)
         Me.cboTo.Name = "cboTo"
         Me.cboTo.Size = New System.Drawing.Size(150, 23)
@@ -316,7 +316,7 @@ Partial Class CopyDedicatorForm
         Me.ToName.ReadOnly = True
         Me.ToName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
-        'CopyDedicatorForm
+        'CopyAccountCodeForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -327,7 +327,7 @@ Partial Class CopyDedicatorForm
         Me.Controls.Add(Me.SplitContainer1)
         Me.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "CopyDedicatorForm"
+        Me.Name = "CopyAccountCodeForm"
         Me.Text = "Duplicate Dedicator Code"
         Me.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)

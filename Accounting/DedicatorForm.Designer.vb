@@ -28,53 +28,53 @@ Partial Class DedicatorForm
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DedicatorForm))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.entryPnl = New System.Windows.Forms.Panel()
-        Me.confirmBtn = New System.Windows.Forms.Button()
-        Me.nameLbl = New System.Windows.Forms.Label()
-        Me.codeLbl = New System.Windows.Forms.Label()
+        Me.btnConfirm = New System.Windows.Forms.Button()
+        Me.lblName = New System.Windows.Forms.Label()
+        Me.lblCode = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.dedicatorTxt = New System.Windows.Forms.MaskedTextBox()
+        Me.txtDedicator = New System.Windows.Forms.MaskedTextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.removeBtn = New System.Windows.Forms.Button()
-        Me.insertBtn = New System.Windows.Forms.Button()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.btnInsert = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.yearCbo = New System.Windows.Forms.ComboBox()
+        Me.cboYear = New System.Windows.Forms.ComboBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.dedicatorGrd = New System.Windows.Forms.DataGridView()
+        Me.grdDedicator = New System.Windows.Forms.DataGridView()
         Me.DedicatorCodeCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DedicatorNameCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MemberCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.memberGrd = New System.Windows.Forms.DataGridView()
+        Me.grdMember = New System.Windows.Forms.DataGridView()
         Me.MemberCodeCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MemberNameCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.closeBtn = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.entryPnl.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        CType(Me.dedicatorGrd, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdDedicator, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer2.Panel1.SuspendLayout()
         Me.SplitContainer2.Panel2.SuspendLayout()
         Me.SplitContainer2.SuspendLayout()
-        CType(Me.memberGrd, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdMember, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.AutoSize = True
-        Me.Panel1.Controls.Add(Me.closeBtn)
+        Me.Panel1.Controls.Add(Me.btnClose)
         Me.Panel1.Controls.Add(Me.entryPnl)
-        Me.Panel1.Controls.Add(Me.removeBtn)
-        Me.Panel1.Controls.Add(Me.insertBtn)
+        Me.Panel1.Controls.Add(Me.btnRemove)
+        Me.Panel1.Controls.Add(Me.btnInsert)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.yearCbo)
+        Me.Panel1.Controls.Add(Me.cboYear)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(240, 0)
         Me.Panel1.Name = "Panel1"
@@ -82,17 +82,32 @@ Partial Class DedicatorForm
         Me.Panel1.Size = New System.Drawing.Size(239, 399)
         Me.Panel1.TabIndex = 6
         '
+        'btnClose
+        '
+        Me.btnClose.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.Image = Global.Accounting.My.Resources.Resources.closeImg
+        Me.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnClose.Location = New System.Drawing.Point(49, 357)
+        Me.btnClose.MinimumSize = New System.Drawing.Size(150, 30)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(150, 30)
+        Me.btnClose.TabIndex = 4
+        Me.btnClose.Text = "Close"
+        Me.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
         'entryPnl
         '
         Me.entryPnl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.entryPnl.BackColor = System.Drawing.SystemColors.GrayText
-        Me.entryPnl.Controls.Add(Me.confirmBtn)
-        Me.entryPnl.Controls.Add(Me.nameLbl)
-        Me.entryPnl.Controls.Add(Me.codeLbl)
+        Me.entryPnl.Controls.Add(Me.btnConfirm)
+        Me.entryPnl.Controls.Add(Me.lblName)
+        Me.entryPnl.Controls.Add(Me.lblCode)
         Me.entryPnl.Controls.Add(Me.Label4)
         Me.entryPnl.Controls.Add(Me.Label3)
-        Me.entryPnl.Controls.Add(Me.dedicatorTxt)
+        Me.entryPnl.Controls.Add(Me.txtDedicator)
         Me.entryPnl.Controls.Add(Me.Label2)
         Me.entryPnl.Location = New System.Drawing.Point(15, 92)
         Me.entryPnl.Margin = New System.Windows.Forms.Padding(10, 10, 10, 3)
@@ -102,39 +117,39 @@ Partial Class DedicatorForm
         Me.entryPnl.TabIndex = 8
         Me.entryPnl.Visible = False
         '
-        'confirmBtn
+        'btnConfirm
         '
-        Me.confirmBtn.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.btnConfirm.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.confirmBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.confirmBtn.Location = New System.Drawing.Point(64, 120)
-        Me.confirmBtn.MinimumSize = New System.Drawing.Size(80, 25)
-        Me.confirmBtn.Name = "confirmBtn"
-        Me.confirmBtn.Size = New System.Drawing.Size(80, 25)
-        Me.confirmBtn.TabIndex = 9
-        Me.confirmBtn.Text = "OK"
-        Me.confirmBtn.UseVisualStyleBackColor = True
+        Me.btnConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnConfirm.Location = New System.Drawing.Point(64, 120)
+        Me.btnConfirm.MinimumSize = New System.Drawing.Size(80, 25)
+        Me.btnConfirm.Name = "btnConfirm"
+        Me.btnConfirm.Size = New System.Drawing.Size(80, 25)
+        Me.btnConfirm.TabIndex = 9
+        Me.btnConfirm.Text = "OK"
+        Me.btnConfirm.UseVisualStyleBackColor = True
         '
-        'nameLbl
+        'lblName
         '
-        Me.nameLbl.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.nameLbl.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.nameLbl.Location = New System.Drawing.Point(57, 62)
-        Me.nameLbl.Name = "nameLbl"
-        Me.nameLbl.Size = New System.Drawing.Size(136, 38)
-        Me.nameLbl.TabIndex = 8
-        Me.nameLbl.Text = "Name Label"
+        Me.lblName.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblName.ForeColor = System.Drawing.SystemColors.HighlightText
+        Me.lblName.Location = New System.Drawing.Point(57, 62)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(136, 38)
+        Me.lblName.TabIndex = 8
+        Me.lblName.Text = "Name Label"
         '
-        'codeLbl
+        'lblCode
         '
-        Me.codeLbl.AutoSize = True
-        Me.codeLbl.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.codeLbl.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.codeLbl.Location = New System.Drawing.Point(57, 45)
-        Me.codeLbl.Name = "codeLbl"
-        Me.codeLbl.Size = New System.Drawing.Size(77, 15)
-        Me.codeLbl.TabIndex = 7
-        Me.codeLbl.Text = "Code Label"
+        Me.lblCode.AutoSize = True
+        Me.lblCode.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCode.ForeColor = System.Drawing.SystemColors.HighlightText
+        Me.lblCode.Location = New System.Drawing.Point(57, 45)
+        Me.lblCode.Name = "lblCode"
+        Me.lblCode.Size = New System.Drawing.Size(77, 15)
+        Me.lblCode.TabIndex = 7
+        Me.lblCode.Text = "Code Label"
         '
         'Label4
         '
@@ -156,15 +171,15 @@ Partial Class DedicatorForm
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "Code:"
         '
-        'dedicatorTxt
+        'txtDedicator
         '
-        Me.dedicatorTxt.Location = New System.Drawing.Point(128, 12)
-        Me.dedicatorTxt.Mask = "000"
-        Me.dedicatorTxt.Name = "dedicatorTxt"
-        Me.dedicatorTxt.ResetOnSpace = False
-        Me.dedicatorTxt.Size = New System.Drawing.Size(39, 23)
-        Me.dedicatorTxt.TabIndex = 1
-        Me.dedicatorTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtDedicator.Location = New System.Drawing.Point(128, 12)
+        Me.txtDedicator.Mask = "000"
+        Me.txtDedicator.Name = "txtDedicator"
+        Me.txtDedicator.ResetOnSpace = False
+        Me.txtDedicator.Size = New System.Drawing.Size(39, 23)
+        Me.txtDedicator.TabIndex = 1
+        Me.txtDedicator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label2
         '
@@ -176,35 +191,35 @@ Partial Class DedicatorForm
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Dedicator Code"
         '
-        'removeBtn
+        'btnRemove
         '
-        Me.removeBtn.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.btnRemove.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.removeBtn.Image = Global.Accounting.My.Resources.Resources.removeImg
-        Me.removeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.removeBtn.Location = New System.Drawing.Point(49, 310)
-        Me.removeBtn.MinimumSize = New System.Drawing.Size(150, 30)
-        Me.removeBtn.Name = "removeBtn"
-        Me.removeBtn.Size = New System.Drawing.Size(150, 30)
-        Me.removeBtn.TabIndex = 3
-        Me.removeBtn.Text = "Remove Dedicator"
-        Me.removeBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.removeBtn.UseVisualStyleBackColor = True
+        Me.btnRemove.Image = Global.Accounting.My.Resources.Resources.removeImg
+        Me.btnRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRemove.Location = New System.Drawing.Point(49, 310)
+        Me.btnRemove.MinimumSize = New System.Drawing.Size(150, 30)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(150, 30)
+        Me.btnRemove.TabIndex = 3
+        Me.btnRemove.Text = "Remove Dedicator"
+        Me.btnRemove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnRemove.UseVisualStyleBackColor = True
         '
-        'insertBtn
+        'btnInsert
         '
-        Me.insertBtn.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.btnInsert.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.insertBtn.Image = Global.Accounting.My.Resources.Resources.moveLeftImg
-        Me.insertBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.insertBtn.Location = New System.Drawing.Point(49, 274)
-        Me.insertBtn.MinimumSize = New System.Drawing.Size(150, 30)
-        Me.insertBtn.Name = "insertBtn"
-        Me.insertBtn.Size = New System.Drawing.Size(150, 30)
-        Me.insertBtn.TabIndex = 2
-        Me.insertBtn.Text = "To Dedicator"
-        Me.insertBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.insertBtn.UseVisualStyleBackColor = True
+        Me.btnInsert.Image = Global.Accounting.My.Resources.Resources.moveLeftImg
+        Me.btnInsert.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnInsert.Location = New System.Drawing.Point(49, 274)
+        Me.btnInsert.MinimumSize = New System.Drawing.Size(150, 30)
+        Me.btnInsert.Name = "btnInsert"
+        Me.btnInsert.Size = New System.Drawing.Size(150, 30)
+        Me.btnInsert.TabIndex = 2
+        Me.btnInsert.Text = "To Dedicator"
+        Me.btnInsert.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnInsert.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -218,21 +233,21 @@ Partial Class DedicatorForm
         Me.Label1.Text = "Offering Year"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'yearCbo
+        'cboYear
         '
-        Me.yearCbo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.cboYear.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.yearCbo.DropDownHeight = 100
-        Me.yearCbo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.yearCbo.FormattingEnabled = True
-        Me.yearCbo.IntegralHeight = False
-        Me.yearCbo.ItemHeight = 15
-        Me.yearCbo.Location = New System.Drawing.Point(49, 51)
-        Me.yearCbo.MaxDropDownItems = 10
-        Me.yearCbo.MinimumSize = New System.Drawing.Size(150, 0)
-        Me.yearCbo.Name = "yearCbo"
-        Me.yearCbo.Size = New System.Drawing.Size(150, 23)
-        Me.yearCbo.TabIndex = 0
+        Me.cboYear.DropDownHeight = 100
+        Me.cboYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboYear.FormattingEnabled = True
+        Me.cboYear.IntegralHeight = False
+        Me.cboYear.ItemHeight = 15
+        Me.cboYear.Location = New System.Drawing.Point(49, 51)
+        Me.cboYear.MaxDropDownItems = 10
+        Me.cboYear.MinimumSize = New System.Drawing.Size(150, 0)
+        Me.cboYear.Name = "cboYear"
+        Me.cboYear.Size = New System.Drawing.Size(150, 23)
+        Me.cboYear.TabIndex = 0
         '
         'SplitContainer1
         '
@@ -249,7 +264,7 @@ Partial Class DedicatorForm
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.dedicatorGrd)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.grdDedicator)
         Me.SplitContainer1.Size = New System.Drawing.Size(240, 399)
         Me.SplitContainer1.SplitterDistance = 28
         Me.SplitContainer1.SplitterWidth = 1
@@ -267,27 +282,27 @@ Partial Class DedicatorForm
         Me.Label5.Text = "Dedicator"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'dedicatorGrd
+        'grdDedicator
         '
-        Me.dedicatorGrd.AllowUserToAddRows = False
-        Me.dedicatorGrd.AllowUserToDeleteRows = False
-        Me.dedicatorGrd.AllowUserToResizeColumns = False
-        Me.dedicatorGrd.AllowUserToResizeRows = False
-        Me.dedicatorGrd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dedicatorGrd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DedicatorCodeCol, Me.DedicatorNameCol, Me.MemberCode})
-        Me.dedicatorGrd.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dedicatorGrd.Location = New System.Drawing.Point(0, 0)
-        Me.dedicatorGrd.Margin = New System.Windows.Forms.Padding(5, 2, 5, 2)
-        Me.dedicatorGrd.MultiSelect = False
-        Me.dedicatorGrd.Name = "dedicatorGrd"
-        Me.dedicatorGrd.ReadOnly = True
-        Me.dedicatorGrd.RowHeadersVisible = False
-        Me.dedicatorGrd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.dedicatorGrd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dedicatorGrd.ShowEditingIcon = False
-        Me.dedicatorGrd.Size = New System.Drawing.Size(240, 370)
-        Me.dedicatorGrd.TabIndex = 90
-        Me.dedicatorGrd.TabStop = False
+        Me.grdDedicator.AllowUserToAddRows = False
+        Me.grdDedicator.AllowUserToDeleteRows = False
+        Me.grdDedicator.AllowUserToResizeColumns = False
+        Me.grdDedicator.AllowUserToResizeRows = False
+        Me.grdDedicator.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDedicator.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DedicatorCodeCol, Me.DedicatorNameCol, Me.MemberCode})
+        Me.grdDedicator.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grdDedicator.Location = New System.Drawing.Point(0, 0)
+        Me.grdDedicator.Margin = New System.Windows.Forms.Padding(5, 2, 5, 2)
+        Me.grdDedicator.MultiSelect = False
+        Me.grdDedicator.Name = "grdDedicator"
+        Me.grdDedicator.ReadOnly = True
+        Me.grdDedicator.RowHeadersVisible = False
+        Me.grdDedicator.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.grdDedicator.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDedicator.ShowEditingIcon = False
+        Me.grdDedicator.Size = New System.Drawing.Size(240, 370)
+        Me.grdDedicator.TabIndex = 90
+        Me.grdDedicator.TabStop = False
         '
         'DedicatorCodeCol
         '
@@ -336,7 +351,7 @@ Partial Class DedicatorForm
         '
         'SplitContainer2.Panel2
         '
-        Me.SplitContainer2.Panel2.Controls.Add(Me.memberGrd)
+        Me.SplitContainer2.Panel2.Controls.Add(Me.grdMember)
         Me.SplitContainer2.Size = New System.Drawing.Size(240, 399)
         Me.SplitContainer2.SplitterDistance = 28
         Me.SplitContainer2.SplitterWidth = 1
@@ -354,27 +369,27 @@ Partial Class DedicatorForm
         Me.Label6.Text = "Member"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'memberGrd
+        'grdMember
         '
-        Me.memberGrd.AllowUserToAddRows = False
-        Me.memberGrd.AllowUserToDeleteRows = False
-        Me.memberGrd.AllowUserToResizeColumns = False
-        Me.memberGrd.AllowUserToResizeRows = False
-        Me.memberGrd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.memberGrd.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MemberCodeCol, Me.MemberNameCol})
-        Me.memberGrd.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.memberGrd.Location = New System.Drawing.Point(0, 0)
-        Me.memberGrd.Margin = New System.Windows.Forms.Padding(5, 2, 5, 2)
-        Me.memberGrd.MultiSelect = False
-        Me.memberGrd.Name = "memberGrd"
-        Me.memberGrd.ReadOnly = True
-        Me.memberGrd.RowHeadersVisible = False
-        Me.memberGrd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.memberGrd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.memberGrd.ShowEditingIcon = False
-        Me.memberGrd.Size = New System.Drawing.Size(240, 370)
-        Me.memberGrd.TabIndex = 90
-        Me.memberGrd.TabStop = False
+        Me.grdMember.AllowUserToAddRows = False
+        Me.grdMember.AllowUserToDeleteRows = False
+        Me.grdMember.AllowUserToResizeColumns = False
+        Me.grdMember.AllowUserToResizeRows = False
+        Me.grdMember.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdMember.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MemberCodeCol, Me.MemberNameCol})
+        Me.grdMember.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grdMember.Location = New System.Drawing.Point(0, 0)
+        Me.grdMember.Margin = New System.Windows.Forms.Padding(5, 2, 5, 2)
+        Me.grdMember.MultiSelect = False
+        Me.grdMember.Name = "grdMember"
+        Me.grdMember.ReadOnly = True
+        Me.grdMember.RowHeadersVisible = False
+        Me.grdMember.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.grdMember.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdMember.ShowEditingIcon = False
+        Me.grdMember.Size = New System.Drawing.Size(240, 370)
+        Me.grdMember.TabIndex = 90
+        Me.grdMember.TabStop = False
         '
         'MemberCodeCol
         '
@@ -400,24 +415,9 @@ Partial Class DedicatorForm
         Me.MemberNameCol.ReadOnly = True
         Me.MemberNameCol.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
-        'closeBtn
-        '
-        Me.closeBtn.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.closeBtn.Image = Global.Accounting.My.Resources.Resources.closeImg
-        Me.closeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.closeBtn.Location = New System.Drawing.Point(49, 357)
-        Me.closeBtn.MinimumSize = New System.Drawing.Size(150, 30)
-        Me.closeBtn.Name = "closeBtn"
-        Me.closeBtn.Size = New System.Drawing.Size(150, 30)
-        Me.closeBtn.TabIndex = 4
-        Me.closeBtn.Text = "Close"
-        Me.closeBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.closeBtn.UseVisualStyleBackColor = True
-        '
         'DedicatorForm
         '
-        Me.AcceptButton = Me.confirmBtn
+        Me.AcceptButton = Me.btnConfirm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(719, 399)
@@ -435,39 +435,39 @@ Partial Class DedicatorForm
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        CType(Me.dedicatorGrd, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdDedicator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.Panel1.ResumeLayout(False)
         Me.SplitContainer2.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.ResumeLayout(False)
-        CType(Me.memberGrd, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdMember, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents Panel1 As Panel
     Friend WithEvents entryPnl As Panel
-    Friend WithEvents removeBtn As Button
-    Friend WithEvents insertBtn As Button
+    Friend WithEvents btnRemove As Button
+    Friend WithEvents btnInsert As Button
     Private WithEvents Label1 As Label
-    Friend WithEvents yearCbo As ComboBox
+    Friend WithEvents cboYear As ComboBox
     Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents dedicatorGrd As DataGridView
+    Friend WithEvents grdDedicator As DataGridView
     Private WithEvents Label5 As Label
     Friend WithEvents SplitContainer2 As SplitContainer
     Private WithEvents Label6 As Label
-    Friend WithEvents memberGrd As DataGridView
-    Private WithEvents nameLbl As Label
-    Private WithEvents codeLbl As Label
+    Friend WithEvents grdMember As DataGridView
+    Private WithEvents lblName As Label
+    Private WithEvents lblCode As Label
     Private WithEvents Label4 As Label
     Private WithEvents Label3 As Label
-    Friend WithEvents dedicatorTxt As MaskedTextBox
+    Friend WithEvents txtDedicator As MaskedTextBox
     Private WithEvents Label2 As Label
-    Friend WithEvents confirmBtn As Button
+    Friend WithEvents btnConfirm As Button
     Friend WithEvents DedicatorCodeCol As DataGridViewTextBoxColumn
     Friend WithEvents DedicatorNameCol As DataGridViewTextBoxColumn
     Friend WithEvents MemberCode As DataGridViewTextBoxColumn
     Friend WithEvents MemberCodeCol As DataGridViewTextBoxColumn
     Friend WithEvents MemberNameCol As DataGridViewTextBoxColumn
-    Friend WithEvents closeBtn As Button
+    Friend WithEvents btnClose As Button
 End Class

@@ -24,34 +24,36 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.menuMS = New System.Windows.Forms.MenuStrip()
-        Me.basicTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.dutyCodeTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.educationCodeTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuBasic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDutyCode = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEducationCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.memberTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.assignDedicatorCodeTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuMember = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuAssignDedicatorCode = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDuplicateDedicatorCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.accountCodeTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.booksTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuAccountCode = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDuplicateAccountCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.budgetEntryTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuBookCode = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuAssignAccountCodeToABook = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuBudgetEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.exitTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.dailyWorksTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.offeringsTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.expensesTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDailyWorks = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOfferings = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuExpenses = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.bankDepositReportTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.reportsTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.memberListTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.duplicateDedicatorCodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.duplicateAccountCodeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuBankDepositReport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReports = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuMemberList = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuMS.SuspendLayout()
         Me.SuspendLayout()
         '
         'menuMS
         '
-        Me.menuMS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.basicTSMI, Me.dailyWorksTSMI, Me.reportsTSMI})
+        Me.menuMS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuBasic, Me.mnuDailyWorks, Me.mnuReports})
         Me.menuMS.Location = New System.Drawing.Point(0, 0)
         Me.menuMS.Name = "menuMS"
         Me.menuMS.Padding = New System.Windows.Forms.Padding(7, 3, 0, 3)
@@ -59,137 +61,148 @@ Partial Class MainForm
         Me.menuMS.TabIndex = 1
         Me.menuMS.Text = "MenuStrip1"
         '
-        'basicTSMI
+        'mnuBasic
         '
-        Me.basicTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.dutyCodeTSMI, Me.educationCodeTSMI, Me.ToolStripMenuItem1, Me.memberTSMI, Me.assignDedicatorCodeTSMI, Me.duplicateDedicatorCodeToolStripMenuItem, Me.ToolStripMenuItem2, Me.accountCodeTSMI, Me.duplicateAccountCodeToolStripMenuItem, Me.ToolStripMenuItem3, Me.booksTSMI, Me.budgetEntryTSMI, Me.ToolStripMenuItem5, Me.exitTSMI})
-        Me.basicTSMI.Name = "basicTSMI"
-        Me.basicTSMI.Size = New System.Drawing.Size(46, 19)
-        Me.basicTSMI.Text = "Basic"
+        Me.mnuBasic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDutyCode, Me.mnuEducationCode, Me.ToolStripMenuItem1, Me.mnuMember, Me.mnuAssignDedicatorCode, Me.mnuDuplicateDedicatorCode, Me.ToolStripMenuItem2, Me.mnuAccountCode, Me.mnuDuplicateAccountCode, Me.ToolStripMenuItem3, Me.mnuBookCode, Me.mnuAssignAccountCodeToABook, Me.ToolStripMenuItem6, Me.mnuBudgetEntry, Me.ToolStripMenuItem5, Me.mnuExit})
+        Me.mnuBasic.Name = "mnuBasic"
+        Me.mnuBasic.Size = New System.Drawing.Size(46, 19)
+        Me.mnuBasic.Text = "Basic"
         '
-        'dutyCodeTSMI
+        'mnuDutyCode
         '
-        Me.dutyCodeTSMI.Name = "dutyCodeTSMI"
-        Me.dutyCodeTSMI.Size = New System.Drawing.Size(209, 22)
-        Me.dutyCodeTSMI.Text = "Duty Code"
+        Me.mnuDutyCode.Name = "mnuDutyCode"
+        Me.mnuDutyCode.Size = New System.Drawing.Size(241, 22)
+        Me.mnuDutyCode.Text = "Duty Code"
         '
-        'educationCodeTSMI
+        'mnuEducationCode
         '
-        Me.educationCodeTSMI.Name = "educationCodeTSMI"
-        Me.educationCodeTSMI.Size = New System.Drawing.Size(209, 22)
-        Me.educationCodeTSMI.Text = "Education Code"
+        Me.mnuEducationCode.Name = "mnuEducationCode"
+        Me.mnuEducationCode.Size = New System.Drawing.Size(241, 22)
+        Me.mnuEducationCode.Text = "Education Code"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(206, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(238, 6)
         '
-        'memberTSMI
+        'mnuMember
         '
-        Me.memberTSMI.Name = "memberTSMI"
-        Me.memberTSMI.Size = New System.Drawing.Size(209, 22)
-        Me.memberTSMI.Text = "Member Code"
+        Me.mnuMember.Name = "mnuMember"
+        Me.mnuMember.Size = New System.Drawing.Size(241, 22)
+        Me.mnuMember.Text = "Member Code"
         '
-        'assignDedicatorCodeTSMI
+        'mnuAssignDedicatorCode
         '
-        Me.assignDedicatorCodeTSMI.Name = "assignDedicatorCodeTSMI"
-        Me.assignDedicatorCodeTSMI.Size = New System.Drawing.Size(209, 22)
-        Me.assignDedicatorCodeTSMI.Text = "Assign Dedicator Code"
+        Me.mnuAssignDedicatorCode.Name = "mnuAssignDedicatorCode"
+        Me.mnuAssignDedicatorCode.Size = New System.Drawing.Size(241, 22)
+        Me.mnuAssignDedicatorCode.Text = "Assign Dedicator Code"
+        '
+        'mnuDuplicateDedicatorCode
+        '
+        Me.mnuDuplicateDedicatorCode.Name = "mnuDuplicateDedicatorCode"
+        Me.mnuDuplicateDedicatorCode.Size = New System.Drawing.Size(241, 22)
+        Me.mnuDuplicateDedicatorCode.Text = "Duplicate Dedicator Code"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(206, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(238, 6)
         '
-        'accountCodeTSMI
+        'mnuAccountCode
         '
-        Me.accountCodeTSMI.Name = "accountCodeTSMI"
-        Me.accountCodeTSMI.Size = New System.Drawing.Size(209, 22)
-        Me.accountCodeTSMI.Text = "Account Code"
+        Me.mnuAccountCode.Name = "mnuAccountCode"
+        Me.mnuAccountCode.Size = New System.Drawing.Size(241, 22)
+        Me.mnuAccountCode.Text = "Account Code"
         '
-        'booksTSMI
+        'mnuDuplicateAccountCode
         '
-        Me.booksTSMI.Name = "booksTSMI"
-        Me.booksTSMI.Size = New System.Drawing.Size(209, 22)
-        Me.booksTSMI.Text = "Books"
+        Me.mnuDuplicateAccountCode.Name = "mnuDuplicateAccountCode"
+        Me.mnuDuplicateAccountCode.Size = New System.Drawing.Size(241, 22)
+        Me.mnuDuplicateAccountCode.Text = "Duplicate Account Code"
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(206, 6)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(238, 6)
         '
-        'budgetEntryTSMI
+        'mnuBookCode
         '
-        Me.budgetEntryTSMI.Name = "budgetEntryTSMI"
-        Me.budgetEntryTSMI.Size = New System.Drawing.Size(209, 22)
-        Me.budgetEntryTSMI.Text = "Budget Entry"
+        Me.mnuBookCode.Name = "mnuBookCode"
+        Me.mnuBookCode.Size = New System.Drawing.Size(241, 22)
+        Me.mnuBookCode.Text = "Book Code"
+        '
+        'mnuAssignAccountCodeToABook
+        '
+        Me.mnuAssignAccountCodeToABook.Name = "mnuAssignAccountCodeToABook"
+        Me.mnuAssignAccountCodeToABook.Size = New System.Drawing.Size(241, 22)
+        Me.mnuAssignAccountCodeToABook.Text = "Assign Account Code to a Book"
+        '
+        'ToolStripMenuItem6
+        '
+        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(238, 6)
+        '
+        'mnuBudgetEntry
+        '
+        Me.mnuBudgetEntry.Name = "mnuBudgetEntry"
+        Me.mnuBudgetEntry.Size = New System.Drawing.Size(241, 22)
+        Me.mnuBudgetEntry.Text = "Budget Entry"
         '
         'ToolStripMenuItem5
         '
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(206, 6)
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(238, 6)
         '
-        'exitTSMI
+        'mnuExit
         '
-        Me.exitTSMI.Image = CType(resources.GetObject("exitTSMI.Image"), System.Drawing.Image)
-        Me.exitTSMI.Name = "exitTSMI"
-        Me.exitTSMI.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.exitTSMI.Size = New System.Drawing.Size(209, 22)
-        Me.exitTSMI.Text = "Exit"
+        Me.mnuExit.Image = CType(resources.GetObject("mnuExit.Image"), System.Drawing.Image)
+        Me.mnuExit.Name = "mnuExit"
+        Me.mnuExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
+        Me.mnuExit.Size = New System.Drawing.Size(241, 22)
+        Me.mnuExit.Text = "Exit"
         '
-        'dailyWorksTSMI
+        'mnuDailyWorks
         '
-        Me.dailyWorksTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.offeringsTSMI, Me.expensesTSMI, Me.ToolStripMenuItem4, Me.bankDepositReportTSMI})
-        Me.dailyWorksTSMI.Name = "dailyWorksTSMI"
-        Me.dailyWorksTSMI.Size = New System.Drawing.Size(81, 19)
-        Me.dailyWorksTSMI.Text = "Daily Works"
+        Me.mnuDailyWorks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOfferings, Me.mnuExpenses, Me.ToolStripMenuItem4, Me.mnuBankDepositReport})
+        Me.mnuDailyWorks.Name = "mnuDailyWorks"
+        Me.mnuDailyWorks.Size = New System.Drawing.Size(81, 19)
+        Me.mnuDailyWorks.Text = "Daily Works"
         '
-        'offeringsTSMI
+        'mnuOfferings
         '
-        Me.offeringsTSMI.Name = "offeringsTSMI"
-        Me.offeringsTSMI.Size = New System.Drawing.Size(181, 22)
-        Me.offeringsTSMI.Text = "Offerings"
+        Me.mnuOfferings.Name = "mnuOfferings"
+        Me.mnuOfferings.Size = New System.Drawing.Size(181, 22)
+        Me.mnuOfferings.Text = "Offerings"
         '
-        'expensesTSMI
+        'mnuExpenses
         '
-        Me.expensesTSMI.Name = "expensesTSMI"
-        Me.expensesTSMI.Size = New System.Drawing.Size(181, 22)
-        Me.expensesTSMI.Text = "Expenses"
+        Me.mnuExpenses.Name = "mnuExpenses"
+        Me.mnuExpenses.Size = New System.Drawing.Size(181, 22)
+        Me.mnuExpenses.Text = "Expenses"
         '
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
         Me.ToolStripMenuItem4.Size = New System.Drawing.Size(178, 6)
         '
-        'bankDepositReportTSMI
+        'mnuBankDepositReport
         '
-        Me.bankDepositReportTSMI.Name = "bankDepositReportTSMI"
-        Me.bankDepositReportTSMI.Size = New System.Drawing.Size(181, 22)
-        Me.bankDepositReportTSMI.Text = "Bank Deposit Report"
+        Me.mnuBankDepositReport.Name = "mnuBankDepositReport"
+        Me.mnuBankDepositReport.Size = New System.Drawing.Size(181, 22)
+        Me.mnuBankDepositReport.Text = "Bank Deposit Report"
         '
-        'reportsTSMI
+        'mnuReports
         '
-        Me.reportsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.memberListTSMI})
-        Me.reportsTSMI.Name = "reportsTSMI"
-        Me.reportsTSMI.Size = New System.Drawing.Size(59, 19)
-        Me.reportsTSMI.Text = "Reports"
+        Me.mnuReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuMemberList})
+        Me.mnuReports.Name = "mnuReports"
+        Me.mnuReports.Size = New System.Drawing.Size(59, 19)
+        Me.mnuReports.Text = "Reports"
         '
-        'memberListTSMI
+        'mnuMemberList
         '
-        Me.memberListTSMI.Name = "memberListTSMI"
-        Me.memberListTSMI.Size = New System.Drawing.Size(140, 22)
-        Me.memberListTSMI.Text = "Member List"
-        '
-        'duplicateDedicatorCodeToolStripMenuItem
-        '
-        Me.duplicateDedicatorCodeToolStripMenuItem.Name = "duplicateDedicatorCodeToolStripMenuItem"
-        Me.duplicateDedicatorCodeToolStripMenuItem.Size = New System.Drawing.Size(209, 22)
-        Me.duplicateDedicatorCodeToolStripMenuItem.Text = "Duplicate Dedicator Code"
-        '
-        'duplicateAccountCodeToolStripMenuItem
-        '
-        Me.duplicateAccountCodeToolStripMenuItem.Name = "duplicateAccountCodeToolStripMenuItem"
-        Me.duplicateAccountCodeToolStripMenuItem.Size = New System.Drawing.Size(209, 22)
-        Me.duplicateAccountCodeToolStripMenuItem.Text = "Duplicate Account Code"
+        Me.mnuMemberList.Name = "mnuMemberList"
+        Me.mnuMemberList.Size = New System.Drawing.Size(140, 22)
+        Me.mnuMemberList.Text = "Member List"
         '
         'MainForm
         '
@@ -212,26 +225,28 @@ Partial Class MainForm
     End Sub
 
     Friend WithEvents menuMS As MenuStrip
-    Friend WithEvents basicTSMI As ToolStripMenuItem
-    Friend WithEvents dutyCodeTSMI As ToolStripMenuItem
-    Friend WithEvents educationCodeTSMI As ToolStripMenuItem
+    Friend WithEvents mnuBasic As ToolStripMenuItem
+    Friend WithEvents mnuDutyCode As ToolStripMenuItem
+    Friend WithEvents mnuEducationCode As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
-    Friend WithEvents memberTSMI As ToolStripMenuItem
-    Friend WithEvents assignDedicatorCodeTSMI As ToolStripMenuItem
+    Friend WithEvents mnuMember As ToolStripMenuItem
+    Friend WithEvents mnuAssignDedicatorCode As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
-    Friend WithEvents accountCodeTSMI As ToolStripMenuItem
-    Friend WithEvents booksTSMI As ToolStripMenuItem
+    Friend WithEvents mnuAccountCode As ToolStripMenuItem
+    Friend WithEvents mnuBookCode As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
-    Friend WithEvents budgetEntryTSMI As ToolStripMenuItem
+    Friend WithEvents mnuBudgetEntry As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem5 As ToolStripSeparator
-    Friend WithEvents exitTSMI As ToolStripMenuItem
-    Friend WithEvents dailyWorksTSMI As ToolStripMenuItem
-    Friend WithEvents offeringsTSMI As ToolStripMenuItem
-    Friend WithEvents expensesTSMI As ToolStripMenuItem
+    Friend WithEvents mnuExit As ToolStripMenuItem
+    Friend WithEvents mnuDailyWorks As ToolStripMenuItem
+    Friend WithEvents mnuOfferings As ToolStripMenuItem
+    Friend WithEvents mnuExpenses As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As ToolStripSeparator
-    Friend WithEvents bankDepositReportTSMI As ToolStripMenuItem
-    Friend WithEvents reportsTSMI As ToolStripMenuItem
-    Friend WithEvents memberListTSMI As ToolStripMenuItem
-    Friend WithEvents duplicateDedicatorCodeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents duplicateAccountCodeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuBankDepositReport As ToolStripMenuItem
+    Friend WithEvents mnuReports As ToolStripMenuItem
+    Friend WithEvents mnuMemberList As ToolStripMenuItem
+    Friend WithEvents mnuDuplicateDedicatorCode As ToolStripMenuItem
+    Friend WithEvents mnuDuplicateAccountCode As ToolStripMenuItem
+    Friend WithEvents mnuAssignAccountCodeToABook As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem6 As ToolStripSeparator
 End Class

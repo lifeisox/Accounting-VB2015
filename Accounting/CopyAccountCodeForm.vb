@@ -1,9 +1,9 @@
 ﻿Imports System.ComponentModel
 
-Public Class CopyDedicatorForm
+Public Class CopyAccountCodeForm
     Private Const MaxQueryCount As Integer = 3
     Private Enum queryENUM
-        READ_ALL_DEDICATOR
+        READ_ALL_ACCOUNT
         INSERT
         DELETE
     End Enum
@@ -17,20 +17,20 @@ Public Class CopyDedicatorForm
         InitializeComponent()
 
         ' Assign queries to use in this class
-        _sql(queryENUM.READ_ALL_DEDICATOR) =
-            "SELECT DedicatorCode, IIF(KoreanName IS NULL OR KoreanName = '', EnglishName, 
-                IIf(EngLishName Is NULL Or EnglishName = '', KoreanName, CONCAT(KoreanName, '(', 
-                EnglishName, ')'))) AS ViewName, Tbl_Dedicator.MemberCode 
-            FROM Tbl_Dedicator, Tbl_Member 
-            WHERE Tbl_Member.MemberCode = Tbl_Dedicator.MemberCode AND DedicatorYear = @Year 
-            Order By DedicatorCode"
+        _sql(queryENUM.READ_ALL_ACCOUNT) =
+            "SELECT AccountCode, AccountName AS ViewName 
+                FROM Tbl_Account 
+                WHERE AccountYear = @Year 
+                ORDER BY AccountCode"
 
         _sql(queryENUM.INSERT) =
-            "INSERT INTO Tbl_Dedicator ( DedicatorYear, DedicatorCode, MemberCode ) 
-	            SELECT @To, DedicatorCode, MemberCode 
-	            FROM Tbl_Dedicator WHERE DedicatorYear = @From"
+            "INSERT INTO Tbl_Account ( [AccountYear], [AccountCode], [LastYearCode], [Division], 
+                [AccountName], [AccountNameKr], [IsComputed], [ParentCode], [BookCode], [Remark] ) 
+	            SELECT @To, [AccountCode], [Accountcode], [Division], [AccountName], [AccountNameKr], 
+                    [IsComputed], [ParentCode], [BookCode], [Remark] 
+	            FROM Tbl_Account WHERE AccountYear = @From"
         _sql(queryENUM.DELETE) =
-            "DELETE FROM Tbl_Dedicator WHERE DedicatorYear = @Year"
+            "DELETE FROM Tbl_Account WHERE AccountYear = @Year"
 
         ' Add any initialization after the InitializeComponent() call.
         _connection = New SqlConnection(My.Settings.DbConn)
@@ -38,11 +38,11 @@ Public Class CopyDedicatorForm
 
     End Sub
 
-    Private Sub CopyDedicatorForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub CopyAccountCodeForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         _connection.Close()
     End Sub
 
-    Private Sub CopyDedicatorForm_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+    Private Sub CopyAccountCodeForm_Activated(sender As Object, e As EventArgs) Handles Me.Activated
         If _FirstSW = True Then
             fillComboData()
             cboFrom.SelectedItem = Year(Now()).ToString
@@ -61,17 +61,18 @@ Public Class CopyDedicatorForm
 
     Private Sub cboFrom_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFrom.SelectedValueChanged
         Dim fromYear As String = cboFrom.SelectedItem
+        Dim toYear As String = (Convert.ToInt32(fromYear) + 1).ToString("0000")
 
         lblFrom.Text = fromYear
 
         grdFrom.RowCount = 0
-        Dim cmd As New SqlCommand(_sql(queryENUM.READ_ALL_DEDICATOR), _connection)
+        Dim cmd As New SqlCommand(_sql(queryENUM.READ_ALL_ACCOUNT), _connection)
         cmd.Parameters.Add("@Year", SqlDbType.Char)
-        cmd.Parameters("@Year").Value = cboFrom.SelectedItem
+        cmd.Parameters("@Year").Value = fromYear
         Dim rdr As SqlDataReader = cmd.ExecuteReader()
         If rdr.HasRows Then
             While rdr.Read()
-                grdFrom.Rows.Add(rdr("DedicatorCode"), rdr("ViewName"))
+                grdFrom.Rows.Add(rdr("AccountCode"), rdr("ViewName"))
             End While
             rdr.Close()
             btnExecute.Enabled = True
@@ -79,6 +80,7 @@ Public Class CopyDedicatorForm
             rdr.Close()
             btnExecute.Enabled = False
         End If
+        cboTo.SelectedItem = toYear
     End Sub
 
     Private Sub cboTo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboTo.SelectedValueChanged
@@ -123,13 +125,13 @@ Public Class CopyDedicatorForm
         lblTo.Text = toYear
 
         grdTo.RowCount = 0
-        Dim cmd As New SqlCommand(_sql(queryENUM.READ_ALL_DEDICATOR), _connection)
+        Dim cmd As New SqlCommand(_sql(queryENUM.READ_ALL_ACCOUNT), _connection)
         cmd.Parameters.Add("@Year", SqlDbType.Char)
         cmd.Parameters("@Year").Value = toYear
         Dim rdr As SqlDataReader = cmd.ExecuteReader()
         If rdr.HasRows Then
             While rdr.Read()
-                grdTo.Rows.Add(rdr("DedicatorCode"), rdr("ViewName"))
+                grdTo.Rows.Add(rdr("AccountCode"), rdr("ViewName"))
             End While
             rdr.Close()
         Else

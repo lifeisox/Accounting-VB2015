@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class EducationCodeForm
+Partial Class BookCodeForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -20,20 +20,27 @@ Partial Class EducationCodeForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EducationCodeForm))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BookCodeForm))
         Me.SplitContainer = New System.Windows.Forms.SplitContainer()
         Me.grdNavi = New System.Windows.Forms.DataGridView()
-        Me.CodeCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtName = New System.Windows.Forms.TextBox()
-        Me.txtCode = New System.Windows.Forms.MaskedTextBox()
+        Me.BookCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BookName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtForwardAmount = New System.Windows.Forms.NumericUpDown()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtBookNameKr = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtBookYear = New System.Windows.Forms.MaskedTextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.postalAreaLL = New System.Windows.Forms.Label()
+        Me.txtBookCode = New System.Windows.Forms.MaskedTextBox()
+        Me.txtBookName = New System.Windows.Forms.TextBox()
         Me.menuTS = New System.Windows.Forms.ToolStrip()
         Me.newTSB = New System.Windows.Forms.ToolStripButton()
         Me.deleteTSB = New System.Windows.Forms.ToolStripButton()
@@ -48,12 +55,14 @@ Partial Class EducationCodeForm
         Me.closeTSB = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.saveTSB = New System.Windows.Forms.ToolStripButton()
+        Me.cboYear = New System.Windows.Forms.ToolStripComboBox()
         Me.formTT = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.SplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer.Panel1.SuspendLayout()
         Me.SplitContainer.Panel2.SuspendLayout()
         Me.SplitContainer.SuspendLayout()
         CType(Me.grdNavi, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtForwardAmount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuTS.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -73,12 +82,19 @@ Partial Class EducationCodeForm
         'SplitContainer.Panel2
         '
         Me.SplitContainer.Panel2.BackColor = System.Drawing.SystemColors.Window
-        Me.SplitContainer.Panel2.Controls.Add(Me.txtName)
-        Me.SplitContainer.Panel2.Controls.Add(Me.txtCode)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtForwardAmount)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label2)
-        Me.SplitContainer.Panel2.Controls.Add(Me.Label1)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtBookNameKr)
+        Me.SplitContainer.Panel2.Controls.Add(Me.Label10)
+        Me.SplitContainer.Panel2.Controls.Add(Me.Label4)
+        Me.SplitContainer.Panel2.Controls.Add(Me.Label15)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtBookYear)
+        Me.SplitContainer.Panel2.Controls.Add(Me.Label14)
+        Me.SplitContainer.Panel2.Controls.Add(Me.postalAreaLL)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtBookCode)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtBookName)
         Me.SplitContainer.Panel2.Controls.Add(Me.menuTS)
-        Me.SplitContainer.Size = New System.Drawing.Size(732, 404)
+        Me.SplitContainer.Size = New System.Drawing.Size(731, 287)
         Me.SplitContainer.SplitterDistance = 236
         Me.SplitContainer.TabIndex = 0
         '
@@ -89,7 +105,7 @@ Partial Class EducationCodeForm
         Me.grdNavi.AllowUserToResizeColumns = False
         Me.grdNavi.AllowUserToResizeRows = False
         Me.grdNavi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdNavi.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodeCol, Me.NameCol})
+        Me.grdNavi.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.BookCode, Me.BookName})
         Me.grdNavi.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdNavi.Location = New System.Drawing.Point(0, 0)
         Me.grdNavi.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
@@ -100,82 +116,159 @@ Partial Class EducationCodeForm
         Me.grdNavi.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.grdNavi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdNavi.ShowEditingIcon = False
-        Me.grdNavi.Size = New System.Drawing.Size(236, 404)
+        Me.grdNavi.Size = New System.Drawing.Size(236, 287)
         Me.grdNavi.TabIndex = 3
         '
-        'CodeCol
+        'BookCode
         '
+        Me.BookCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.CodeCol.DefaultCellStyle = DataGridViewCellStyle1
-        Me.CodeCol.HeaderText = "Code"
-        Me.CodeCol.MaxInputLength = 2
-        Me.CodeCol.Name = "CodeCol"
-        Me.CodeCol.ReadOnly = True
-        Me.CodeCol.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CodeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CodeCol.Width = 50
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BookCode.DefaultCellStyle = DataGridViewCellStyle1
+        Me.BookCode.HeaderText = "Code"
+        Me.BookCode.MaxInputLength = 5
+        Me.BookCode.Name = "BookCode"
+        Me.BookCode.ReadOnly = True
+        Me.BookCode.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.BookCode.Width = 50
         '
-        'NameCol
+        'BookName
         '
-        Me.NameCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.NameCol.DefaultCellStyle = DataGridViewCellStyle2
-        Me.NameCol.HeaderText = "Education"
-        Me.NameCol.MaxInputLength = 30
-        Me.NameCol.Name = "NameCol"
-        Me.NameCol.ReadOnly = True
-        Me.NameCol.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.BookName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(2, 0, 0, 0)
+        Me.BookName.DefaultCellStyle = DataGridViewCellStyle2
+        Me.BookName.HeaderText = "Name"
+        Me.BookName.MaxInputLength = 30
+        Me.BookName.Name = "BookName"
+        Me.BookName.ReadOnly = True
+        Me.BookName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
-        'txtName
+        'txtForwardAmount
         '
-        Me.txtName.Location = New System.Drawing.Point(87, 100)
-        Me.txtName.MaxLength = 30
-        Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(259, 23)
-        Me.txtName.TabIndex = 1
-        Me.txtName.WordWrap = False
-        '
-        'txtCode
-        '
-        Me.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtCode.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
-        Me.txtCode.Location = New System.Drawing.Point(87, 59)
-        Me.txtCode.Mask = "00"
-        Me.txtCode.Name = "txtCode"
-        Me.txtCode.ResetOnSpace = False
-        Me.txtCode.Size = New System.Drawing.Size(31, 23)
-        Me.txtCode.TabIndex = 0
-        Me.txtCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.formTT.SetToolTip(Me.txtCode, "Only can use numeric two digits")
+        Me.txtForwardAmount.DecimalPlaces = 2
+        Me.txtForwardAmount.Location = New System.Drawing.Point(197, 219)
+        Me.txtForwardAmount.Maximum = New Decimal(New Integer() {1215752192, 23, 0, 0})
+        Me.txtForwardAmount.Name = "txtForwardAmount"
+        Me.txtForwardAmount.Size = New System.Drawing.Size(129, 23)
+        Me.txtForwardAmount.TabIndex = 3
+        Me.txtForwardAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtForwardAmount.ThousandsSeparator = True
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(38, 103)
+        Me.Label2.Location = New System.Drawing.Point(5, 219)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(42, 15)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Name:"
+        Me.Label2.Size = New System.Drawing.Size(185, 23)
+        Me.Label2.TabIndex = 109
+        Me.Label2.Text = "Forward Amount:"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label1
+        'txtBookNameKr
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(38, 62)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(42, 15)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Code:"
+        Me.txtBookNameKr.ImeMode = System.Windows.Forms.ImeMode.Hangul
+        Me.txtBookNameKr.Location = New System.Drawing.Point(197, 167)
+        Me.txtBookNameKr.MaxLength = 50
+        Me.txtBookNameKr.Name = "txtBookNameKr"
+        Me.txtBookNameKr.Size = New System.Drawing.Size(252, 23)
+        Me.txtBookNameKr.TabIndex = 2
+        Me.txtBookNameKr.WordWrap = False
+        '
+        'Label10
+        '
+        Me.Label10.Location = New System.Drawing.Point(5, 167)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(185, 23)
+        Me.Label10.TabIndex = 106
+        Me.Label10.Text = "Book Name (Korean):"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label4
+        '
+        Me.Label4.Location = New System.Drawing.Point(5, 136)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(185, 23)
+        Me.Label4.TabIndex = 105
+        Me.Label4.Text = "Book Name (English):"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label15
+        '
+        Me.Label15.Location = New System.Drawing.Point(5, 85)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(185, 23)
+        Me.Label15.TabIndex = 102
+        Me.Label15.Text = "Book Code:"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtBookYear
+        '
+        Me.txtBookYear.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtBookYear.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
+        Me.txtBookYear.Location = New System.Drawing.Point(197, 54)
+        Me.txtBookYear.Mask = "0000"
+        Me.txtBookYear.Name = "txtBookYear"
+        Me.txtBookYear.ReadOnly = True
+        Me.txtBookYear.ResetOnSpace = False
+        Me.txtBookYear.Size = New System.Drawing.Size(41, 23)
+        Me.txtBookYear.TabIndex = 99
+        Me.txtBookYear.TabStop = False
+        Me.txtBookYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label14
+        '
+        Me.Label14.Location = New System.Drawing.Point(5, 54)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(185, 23)
+        Me.Label14.TabIndex = 101
+        Me.Label14.Text = "Year:"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'postalAreaLL
+        '
+        Me.postalAreaLL.AutoSize = True
+        Me.postalAreaLL.Location = New System.Drawing.Point(459, 122)
+        Me.postalAreaLL.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.postalAreaLL.Name = "postalAreaLL"
+        Me.postalAreaLL.Size = New System.Drawing.Size(0, 15)
+        Me.postalAreaLL.TabIndex = 99
+        Me.postalAreaLL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtBookCode
+        '
+        Me.txtBookCode.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
+        Me.txtBookCode.Location = New System.Drawing.Point(197, 85)
+        Me.txtBookCode.Mask = "0000"
+        Me.txtBookCode.Name = "txtBookCode"
+        Me.txtBookCode.ResetOnSpace = False
+        Me.txtBookCode.Size = New System.Drawing.Size(41, 23)
+        Me.txtBookCode.TabIndex = 0
+        Me.txtBookCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtBookName
+        '
+        Me.txtBookName.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtBookName.Location = New System.Drawing.Point(197, 136)
+        Me.txtBookName.MaxLength = 50
+        Me.txtBookName.Name = "txtBookName"
+        Me.txtBookName.Size = New System.Drawing.Size(252, 23)
+        Me.txtBookName.TabIndex = 1
+        Me.txtBookName.WordWrap = False
         '
         'menuTS
         '
-        Me.menuTS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.newTSB, Me.deleteTSB, Me.ToolStripSeparator1, Me.firstTSB, Me.previousTSB, Me.nextTSB, Me.lastTSB, Me.ToolStripSeparator2, Me.refreshTSB, Me.ToolStripSeparator3, Me.closeTSB, Me.ToolStripSeparator4, Me.saveTSB})
+        Me.menuTS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.newTSB, Me.deleteTSB, Me.ToolStripSeparator1, Me.firstTSB, Me.previousTSB, Me.nextTSB, Me.lastTSB, Me.ToolStripSeparator2, Me.refreshTSB, Me.ToolStripSeparator3, Me.closeTSB, Me.ToolStripSeparator4, Me.saveTSB, Me.cboYear})
         Me.menuTS.Location = New System.Drawing.Point(0, 0)
         Me.menuTS.Name = "menuTS"
         Me.menuTS.Padding = New System.Windows.Forms.Padding(0, 2, 1, 2)
-        Me.menuTS.Size = New System.Drawing.Size(492, 27)
-        Me.menuTS.TabIndex = 0
+        Me.menuTS.Size = New System.Drawing.Size(491, 27)
+        Me.menuTS.TabIndex = 30
         Me.menuTS.Text = "ToolStrip"
         '
         'newTSB
@@ -290,23 +383,32 @@ Partial Class EducationCodeForm
         Me.saveTSB.Text = "Save"
         Me.saveTSB.ToolTipText = "Save Current Record"
         '
-        'EducationCodeForm
+        'cboYear
+        '
+        Me.cboYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboYear.DropDownWidth = 75
+        Me.cboYear.MaxDropDownItems = 10
+        Me.cboYear.Name = "cboYear"
+        Me.cboYear.Size = New System.Drawing.Size(75, 23)
+        '
+        'BookCodeForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(732, 404)
+        Me.ClientSize = New System.Drawing.Size(731, 287)
         Me.Controls.Add(Me.SplitContainer)
         Me.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.Name = "EducationCodeForm"
-        Me.Text = "Managing Education Code"
+        Me.Name = "BookCodeForm"
+        Me.Text = "Managing Book Code"
         Me.SplitContainer.Panel1.ResumeLayout(False)
         Me.SplitContainer.Panel2.ResumeLayout(False)
         Me.SplitContainer.Panel2.PerformLayout()
         CType(Me.SplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer.ResumeLayout(False)
         CType(Me.grdNavi, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtForwardAmount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuTS.ResumeLayout(False)
         Me.menuTS.PerformLayout()
         Me.ResumeLayout(False)
@@ -316,24 +418,32 @@ Partial Class EducationCodeForm
     Friend WithEvents SplitContainer As SplitContainer
     Friend WithEvents grdNavi As DataGridView
     Friend WithEvents menuTS As ToolStrip
-    Friend WithEvents newTSB As ToolStripButton
     Friend WithEvents deleteTSB As ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents firstTSB As ToolStripButton
-    Friend WithEvents previousTSB As ToolStripButton
-    Friend WithEvents nextTSB As ToolStripButton
-    Friend WithEvents lastTSB As ToolStripButton
-    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
-    Friend WithEvents refreshTSB As ToolStripButton
-    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
-    Friend WithEvents closeTSB As ToolStripButton
-    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
-    Friend WithEvents saveTSB As ToolStripButton
-    Friend WithEvents txtName As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents txtCode As MaskedTextBox
     Friend WithEvents formTT As ToolTip
-    Friend WithEvents CodeCol As DataGridViewTextBoxColumn
-    Friend WithEvents NameCol As DataGridViewTextBoxColumn
+    Friend WithEvents postalAreaLL As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label4 As Label
+    Private WithEvents txtBookNameKr As TextBox
+    Private WithEvents txtBookName As TextBox
+    Private WithEvents txtBookCode As MaskedTextBox
+    Private WithEvents txtBookYear As MaskedTextBox
+    Friend WithEvents Label2 As Label
+    Private WithEvents cboYear As ToolStripComboBox
+    Private WithEvents newTSB As ToolStripButton
+    Private WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Private WithEvents firstTSB As ToolStripButton
+    Private WithEvents previousTSB As ToolStripButton
+    Private WithEvents nextTSB As ToolStripButton
+    Private WithEvents lastTSB As ToolStripButton
+    Private WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Private WithEvents refreshTSB As ToolStripButton
+    Private WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Private WithEvents closeTSB As ToolStripButton
+    Private WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Private WithEvents saveTSB As ToolStripButton
+    Friend WithEvents BookCode As DataGridViewTextBoxColumn
+    Friend WithEvents BookName As DataGridViewTextBoxColumn
+    Private WithEvents txtForwardAmount As NumericUpDown
 End Class

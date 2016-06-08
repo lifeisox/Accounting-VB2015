@@ -27,11 +27,11 @@ Partial Class DutyCodeForm
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DutyCodeForm))
         Me.SplitContainer = New System.Windows.Forms.SplitContainer()
-        Me.naviDGV = New System.Windows.Forms.DataGridView()
+        Me.grdNavi = New System.Windows.Forms.DataGridView()
         Me.CodeCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NameCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nameTB = New System.Windows.Forms.TextBox()
-        Me.codeTB = New System.Windows.Forms.MaskedTextBox()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.txtCode = New System.Windows.Forms.MaskedTextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.menuTS = New System.Windows.Forms.ToolStrip()
@@ -53,7 +53,7 @@ Partial Class DutyCodeForm
         Me.SplitContainer.Panel1.SuspendLayout()
         Me.SplitContainer.Panel2.SuspendLayout()
         Me.SplitContainer.SuspendLayout()
-        CType(Me.naviDGV, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdNavi, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuTS.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -68,13 +68,13 @@ Partial Class DutyCodeForm
         '
         'SplitContainer.Panel1
         '
-        Me.SplitContainer.Panel1.Controls.Add(Me.naviDGV)
+        Me.SplitContainer.Panel1.Controls.Add(Me.grdNavi)
         '
         'SplitContainer.Panel2
         '
         Me.SplitContainer.Panel2.BackColor = System.Drawing.SystemColors.Window
-        Me.SplitContainer.Panel2.Controls.Add(Me.nameTB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.codeTB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtName)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtCode)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label2)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label1)
         Me.SplitContainer.Panel2.Controls.Add(Me.menuTS)
@@ -82,26 +82,26 @@ Partial Class DutyCodeForm
         Me.SplitContainer.SplitterDistance = 236
         Me.SplitContainer.TabIndex = 0
         '
-        'naviDGV
+        'grdNavi
         '
-        Me.naviDGV.AllowUserToAddRows = False
-        Me.naviDGV.AllowUserToDeleteRows = False
-        Me.naviDGV.AllowUserToResizeColumns = False
-        Me.naviDGV.AllowUserToResizeRows = False
-        Me.naviDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.naviDGV.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodeCol, Me.NameCol})
-        Me.naviDGV.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.naviDGV.Location = New System.Drawing.Point(0, 0)
-        Me.naviDGV.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
-        Me.naviDGV.MultiSelect = False
-        Me.naviDGV.Name = "naviDGV"
-        Me.naviDGV.ReadOnly = True
-        Me.naviDGV.RowHeadersVisible = False
-        Me.naviDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.naviDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.naviDGV.ShowEditingIcon = False
-        Me.naviDGV.Size = New System.Drawing.Size(236, 404)
-        Me.naviDGV.TabIndex = 3
+        Me.grdNavi.AllowUserToAddRows = False
+        Me.grdNavi.AllowUserToDeleteRows = False
+        Me.grdNavi.AllowUserToResizeColumns = False
+        Me.grdNavi.AllowUserToResizeRows = False
+        Me.grdNavi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdNavi.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodeCol, Me.NameCol})
+        Me.grdNavi.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grdNavi.Location = New System.Drawing.Point(0, 0)
+        Me.grdNavi.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.grdNavi.MultiSelect = False
+        Me.grdNavi.Name = "grdNavi"
+        Me.grdNavi.ReadOnly = True
+        Me.grdNavi.RowHeadersVisible = False
+        Me.grdNavi.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.grdNavi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdNavi.ShowEditingIcon = False
+        Me.grdNavi.Size = New System.Drawing.Size(236, 404)
+        Me.grdNavi.TabIndex = 3
         '
         'CodeCol
         '
@@ -126,27 +126,27 @@ Partial Class DutyCodeForm
         Me.NameCol.ReadOnly = True
         Me.NameCol.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
-        'nameTB
+        'txtName
         '
-        Me.nameTB.Location = New System.Drawing.Point(87, 100)
-        Me.nameTB.MaxLength = 30
-        Me.nameTB.Name = "nameTB"
-        Me.nameTB.Size = New System.Drawing.Size(259, 23)
-        Me.nameTB.TabIndex = 1
-        Me.nameTB.WordWrap = False
+        Me.txtName.Location = New System.Drawing.Point(87, 100)
+        Me.txtName.MaxLength = 30
+        Me.txtName.Name = "txtName"
+        Me.txtName.Size = New System.Drawing.Size(259, 23)
+        Me.txtName.TabIndex = 1
+        Me.txtName.WordWrap = False
         '
-        'codeTB
+        'txtCode
         '
-        Me.codeTB.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.codeTB.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
-        Me.codeTB.Location = New System.Drawing.Point(87, 59)
-        Me.codeTB.Mask = "00"
-        Me.codeTB.Name = "codeTB"
-        Me.codeTB.ResetOnSpace = False
-        Me.codeTB.Size = New System.Drawing.Size(31, 23)
-        Me.codeTB.TabIndex = 0
-        Me.codeTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.formTT.SetToolTip(Me.codeTB, "Only can use numeric two digits")
+        Me.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtCode.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
+        Me.txtCode.Location = New System.Drawing.Point(87, 59)
+        Me.txtCode.Mask = "00"
+        Me.txtCode.Name = "txtCode"
+        Me.txtCode.ResetOnSpace = False
+        Me.txtCode.Size = New System.Drawing.Size(31, 23)
+        Me.txtCode.TabIndex = 0
+        Me.txtCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.formTT.SetToolTip(Me.txtCode, "Only can use numeric two digits")
         '
         'Label2
         '
@@ -290,7 +290,7 @@ Partial Class DutyCodeForm
         Me.saveTSB.Text = "Save"
         Me.saveTSB.ToolTipText = "Save Current Record"
         '
-        'dutyCodeFM
+        'DutyCodeForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -299,14 +299,14 @@ Partial Class DutyCodeForm
         Me.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.Name = "dutyCodeFM"
+        Me.Name = "DutyCodeForm"
         Me.Text = "Managing Duty Code"
         Me.SplitContainer.Panel1.ResumeLayout(False)
         Me.SplitContainer.Panel2.ResumeLayout(False)
         Me.SplitContainer.Panel2.PerformLayout()
         CType(Me.SplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer.ResumeLayout(False)
-        CType(Me.naviDGV, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdNavi, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuTS.ResumeLayout(False)
         Me.menuTS.PerformLayout()
         Me.ResumeLayout(False)
@@ -314,7 +314,7 @@ Partial Class DutyCodeForm
     End Sub
 
     Friend WithEvents SplitContainer As SplitContainer
-    Friend WithEvents naviDGV As DataGridView
+    Friend WithEvents grdNavi As DataGridView
     Friend WithEvents menuTS As ToolStrip
     Friend WithEvents newTSB As ToolStripButton
     Friend WithEvents deleteTSB As ToolStripButton
@@ -329,11 +329,11 @@ Partial Class DutyCodeForm
     Friend WithEvents closeTSB As ToolStripButton
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents saveTSB As ToolStripButton
-    Friend WithEvents nameTB As TextBox
+    Friend WithEvents txtName As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents CodeCol As DataGridViewTextBoxColumn
     Friend WithEvents NameCol As DataGridViewTextBoxColumn
-    Friend WithEvents codeTB As MaskedTextBox
+    Friend WithEvents txtCode As MaskedTextBox
     Friend WithEvents formTT As ToolTip
 End Class

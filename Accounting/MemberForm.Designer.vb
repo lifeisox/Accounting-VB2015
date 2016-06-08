@@ -27,45 +27,45 @@ Partial Class MemberForm
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MemberForm))
         Me.SplitContainer = New System.Windows.Forms.SplitContainer()
-        Me.naviDGV = New System.Windows.Forms.DataGridView()
+        Me.grdNavi = New System.Windows.Forms.DataGridView()
         Me.CodeCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NameCol = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.postalAreaLL = New System.Windows.Forms.Label()
-        Me.postalCodeTB = New System.Windows.Forms.MaskedTextBox()
-        Me.memberCodeTB = New System.Windows.Forms.MaskedTextBox()
-        Me.isDeletedCB = New System.Windows.Forms.CheckBox()
+        Me.txtPostalCode = New System.Windows.Forms.MaskedTextBox()
+        Me.txtMemberCode = New System.Windows.Forms.MaskedTextBox()
+        Me.chkIsDeleted = New System.Windows.Forms.CheckBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.dutyCB = New System.Windows.Forms.ComboBox()
+        Me.cboDuty = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.provinceCB = New System.Windows.Forms.ComboBox()
+        Me.cboProvince = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.cityTB = New System.Windows.Forms.TextBox()
+        Me.txtCity = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.addressTB = New System.Windows.Forms.TextBox()
+        Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.remarkTB = New System.Windows.Forms.TextBox()
-        Me.emailTB = New System.Windows.Forms.TextBox()
+        Me.txtRemark = New System.Windows.Forms.TextBox()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.phone3NoTB = New System.Windows.Forms.TextBox()
-        Me.phone3KindCB = New System.Windows.Forms.ComboBox()
-        Me.phone2NoTB = New System.Windows.Forms.TextBox()
-        Me.phone2KindCB = New System.Windows.Forms.ComboBox()
-        Me.phone1NoTB = New System.Windows.Forms.TextBox()
-        Me.phone1KindCB = New System.Windows.Forms.ComboBox()
-        Me.findBN = New System.Windows.Forms.Button()
-        Me.houseHolderNameLL = New System.Windows.Forms.Label()
-        Me.houseHolderCodeTB = New System.Windows.Forms.TextBox()
+        Me.txtPhone3No = New System.Windows.Forms.TextBox()
+        Me.cboPhone3Kind = New System.Windows.Forms.ComboBox()
+        Me.txtPhone2No = New System.Windows.Forms.TextBox()
+        Me.cboPhone2Kind = New System.Windows.Forms.ComboBox()
+        Me.txtPhone1No = New System.Windows.Forms.TextBox()
+        Me.cboPhone1Kind = New System.Windows.Forms.ComboBox()
+        Me.btnFindHouseHolder = New System.Windows.Forms.Button()
+        Me.lblHouseHolderName = New System.Windows.Forms.Label()
+        Me.txtHouseHolderCode = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.educationCB = New System.Windows.Forms.ComboBox()
+        Me.cboEducation = New System.Windows.Forms.ComboBox()
         Me.sexGB = New System.Windows.Forms.GroupBox()
-        Me.femaleRB = New System.Windows.Forms.RadioButton()
-        Me.maleRB = New System.Windows.Forms.RadioButton()
+        Me.rdoFemale = New System.Windows.Forms.RadioButton()
+        Me.rdoMale = New System.Windows.Forms.RadioButton()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.englishNameTB = New System.Windows.Forms.TextBox()
+        Me.txtEnglishName = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.koreanNameTB = New System.Windows.Forms.TextBox()
+        Me.txtKoreanName = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.menuTS = New System.Windows.Forms.ToolStrip()
@@ -88,7 +88,7 @@ Partial Class MemberForm
         Me.SplitContainer.Panel1.SuspendLayout()
         Me.SplitContainer.Panel2.SuspendLayout()
         Me.SplitContainer.SuspendLayout()
-        CType(Me.naviDGV, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdNavi, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.sexGB.SuspendLayout()
         Me.menuTS.SuspendLayout()
         Me.SuspendLayout()
@@ -104,45 +104,45 @@ Partial Class MemberForm
         '
         'SplitContainer.Panel1
         '
-        Me.SplitContainer.Panel1.Controls.Add(Me.naviDGV)
+        Me.SplitContainer.Panel1.Controls.Add(Me.grdNavi)
         '
         'SplitContainer.Panel2
         '
         Me.SplitContainer.Panel2.BackColor = System.Drawing.SystemColors.Window
         Me.SplitContainer.Panel2.Controls.Add(Me.postalAreaLL)
-        Me.SplitContainer.Panel2.Controls.Add(Me.postalCodeTB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.memberCodeTB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.isDeletedCB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtPostalCode)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtMemberCode)
+        Me.SplitContainer.Panel2.Controls.Add(Me.chkIsDeleted)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label13)
-        Me.SplitContainer.Panel2.Controls.Add(Me.dutyCB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.cboDuty)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label12)
-        Me.SplitContainer.Panel2.Controls.Add(Me.provinceCB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.cboProvince)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label11)
-        Me.SplitContainer.Panel2.Controls.Add(Me.cityTB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtCity)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label10)
-        Me.SplitContainer.Panel2.Controls.Add(Me.addressTB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtAddress)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label9)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label8)
-        Me.SplitContainer.Panel2.Controls.Add(Me.remarkTB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.emailTB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtRemark)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtEmail)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label7)
-        Me.SplitContainer.Panel2.Controls.Add(Me.phone3NoTB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.phone3KindCB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.phone2NoTB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.phone2KindCB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.phone1NoTB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.phone1KindCB)
-        Me.SplitContainer.Panel2.Controls.Add(Me.findBN)
-        Me.SplitContainer.Panel2.Controls.Add(Me.houseHolderNameLL)
-        Me.SplitContainer.Panel2.Controls.Add(Me.houseHolderCodeTB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtPhone3No)
+        Me.SplitContainer.Panel2.Controls.Add(Me.cboPhone3Kind)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtPhone2No)
+        Me.SplitContainer.Panel2.Controls.Add(Me.cboPhone2Kind)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtPhone1No)
+        Me.SplitContainer.Panel2.Controls.Add(Me.cboPhone1Kind)
+        Me.SplitContainer.Panel2.Controls.Add(Me.btnFindHouseHolder)
+        Me.SplitContainer.Panel2.Controls.Add(Me.lblHouseHolderName)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtHouseHolderCode)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label6)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label5)
-        Me.SplitContainer.Panel2.Controls.Add(Me.educationCB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.cboEducation)
         Me.SplitContainer.Panel2.Controls.Add(Me.sexGB)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label4)
-        Me.SplitContainer.Panel2.Controls.Add(Me.englishNameTB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtEnglishName)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label3)
-        Me.SplitContainer.Panel2.Controls.Add(Me.koreanNameTB)
+        Me.SplitContainer.Panel2.Controls.Add(Me.txtKoreanName)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label2)
         Me.SplitContainer.Panel2.Controls.Add(Me.Label1)
         Me.SplitContainer.Panel2.Controls.Add(Me.menuTS)
@@ -150,26 +150,26 @@ Partial Class MemberForm
         Me.SplitContainer.SplitterDistance = 236
         Me.SplitContainer.TabIndex = 0
         '
-        'naviDGV
+        'grdNavi
         '
-        Me.naviDGV.AllowUserToAddRows = False
-        Me.naviDGV.AllowUserToDeleteRows = False
-        Me.naviDGV.AllowUserToResizeColumns = False
-        Me.naviDGV.AllowUserToResizeRows = False
-        Me.naviDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.naviDGV.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodeCol, Me.NameCol})
-        Me.naviDGV.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.naviDGV.Location = New System.Drawing.Point(0, 0)
-        Me.naviDGV.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
-        Me.naviDGV.MultiSelect = False
-        Me.naviDGV.Name = "naviDGV"
-        Me.naviDGV.ReadOnly = True
-        Me.naviDGV.RowHeadersVisible = False
-        Me.naviDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.naviDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.naviDGV.ShowEditingIcon = False
-        Me.naviDGV.Size = New System.Drawing.Size(236, 404)
-        Me.naviDGV.TabIndex = 3
+        Me.grdNavi.AllowUserToAddRows = False
+        Me.grdNavi.AllowUserToDeleteRows = False
+        Me.grdNavi.AllowUserToResizeColumns = False
+        Me.grdNavi.AllowUserToResizeRows = False
+        Me.grdNavi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdNavi.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodeCol, Me.NameCol})
+        Me.grdNavi.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grdNavi.Location = New System.Drawing.Point(0, 0)
+        Me.grdNavi.Margin = New System.Windows.Forms.Padding(4, 2, 4, 2)
+        Me.grdNavi.MultiSelect = False
+        Me.grdNavi.Name = "grdNavi"
+        Me.grdNavi.ReadOnly = True
+        Me.grdNavi.RowHeadersVisible = False
+        Me.grdNavi.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.grdNavi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdNavi.ShowEditingIcon = False
+        Me.grdNavi.Size = New System.Drawing.Size(236, 404)
+        Me.grdNavi.TabIndex = 3
         '
         'CodeCol
         '
@@ -205,38 +205,38 @@ Partial Class MemberForm
         Me.postalAreaLL.TabIndex = 99
         Me.postalAreaLL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'postalCodeTB
+        'txtPostalCode
         '
-        Me.postalCodeTB.ImeMode = System.Windows.Forms.ImeMode.Alpha
-        Me.postalCodeTB.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
-        Me.postalCodeTB.Location = New System.Drawing.Point(392, 62)
-        Me.postalCodeTB.Mask = ">A0A0A0"
-        Me.postalCodeTB.Name = "postalCodeTB"
-        Me.postalCodeTB.ResetOnSpace = False
-        Me.postalCodeTB.Size = New System.Drawing.Size(59, 23)
-        Me.postalCodeTB.TabIndex = 14
-        Me.postalCodeTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtPostalCode.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtPostalCode.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
+        Me.txtPostalCode.Location = New System.Drawing.Point(392, 62)
+        Me.txtPostalCode.Mask = ">A0A0A0"
+        Me.txtPostalCode.Name = "txtPostalCode"
+        Me.txtPostalCode.ResetOnSpace = False
+        Me.txtPostalCode.Size = New System.Drawing.Size(59, 23)
+        Me.txtPostalCode.TabIndex = 14
+        Me.txtPostalCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'memberCodeTB
+        'txtMemberCode
         '
-        Me.memberCodeTB.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
-        Me.memberCodeTB.Location = New System.Drawing.Point(111, 45)
-        Me.memberCodeTB.Mask = "00000"
-        Me.memberCodeTB.Name = "memberCodeTB"
-        Me.memberCodeTB.ResetOnSpace = False
-        Me.memberCodeTB.Size = New System.Drawing.Size(54, 23)
-        Me.memberCodeTB.TabIndex = 0
-        Me.memberCodeTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtMemberCode.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
+        Me.txtMemberCode.Location = New System.Drawing.Point(111, 45)
+        Me.txtMemberCode.Mask = "00000"
+        Me.txtMemberCode.Name = "txtMemberCode"
+        Me.txtMemberCode.ResetOnSpace = False
+        Me.txtMemberCode.Size = New System.Drawing.Size(54, 23)
+        Me.txtMemberCode.TabIndex = 0
+        Me.txtMemberCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'isDeletedCB
+        'chkIsDeleted
         '
-        Me.isDeletedCB.AutoSize = True
-        Me.isDeletedCB.Location = New System.Drawing.Point(392, 332)
-        Me.isDeletedCB.Name = "isDeletedCB"
-        Me.isDeletedCB.Size = New System.Drawing.Size(124, 19)
-        Me.isDeletedCB.TabIndex = 20
-        Me.isDeletedCB.Text = "Deleted Member"
-        Me.isDeletedCB.UseVisualStyleBackColor = True
+        Me.chkIsDeleted.AutoSize = True
+        Me.chkIsDeleted.Location = New System.Drawing.Point(392, 332)
+        Me.chkIsDeleted.Name = "chkIsDeleted"
+        Me.chkIsDeleted.Size = New System.Drawing.Size(124, 19)
+        Me.chkIsDeleted.TabIndex = 20
+        Me.chkIsDeleted.Text = "Deleted Member"
+        Me.chkIsDeleted.UseVisualStyleBackColor = True
         '
         'Label13
         '
@@ -249,13 +249,13 @@ Partial Class MemberForm
         Me.Label13.Text = "Duty:"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'dutyCB
+        'cboDuty
         '
-        Me.dutyCB.FormattingEnabled = True
-        Me.dutyCB.Location = New System.Drawing.Point(392, 210)
-        Me.dutyCB.Name = "dutyCB"
-        Me.dutyCB.Size = New System.Drawing.Size(181, 23)
-        Me.dutyCB.TabIndex = 18
+        Me.cboDuty.FormattingEnabled = True
+        Me.cboDuty.Location = New System.Drawing.Point(392, 210)
+        Me.cboDuty.Name = "cboDuty"
+        Me.cboDuty.Size = New System.Drawing.Size(181, 23)
+        Me.cboDuty.TabIndex = 18
         '
         'Label12
         '
@@ -268,13 +268,13 @@ Partial Class MemberForm
         Me.Label12.Text = "Province:"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'provinceCB
+        'cboProvince
         '
-        Me.provinceCB.FormattingEnabled = True
-        Me.provinceCB.Location = New System.Drawing.Point(392, 174)
-        Me.provinceCB.Name = "provinceCB"
-        Me.provinceCB.Size = New System.Drawing.Size(181, 23)
-        Me.provinceCB.TabIndex = 17
+        Me.cboProvince.FormattingEnabled = True
+        Me.cboProvince.Location = New System.Drawing.Point(392, 174)
+        Me.cboProvince.Name = "cboProvince"
+        Me.cboProvince.Size = New System.Drawing.Size(181, 23)
+        Me.cboProvince.TabIndex = 17
         '
         'Label11
         '
@@ -287,15 +287,15 @@ Partial Class MemberForm
         Me.Label11.Text = "City:"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'cityTB
+        'txtCity
         '
-        Me.cityTB.ImeMode = System.Windows.Forms.ImeMode.Alpha
-        Me.cityTB.Location = New System.Drawing.Point(392, 145)
-        Me.cityTB.MaxLength = 30
-        Me.cityTB.Name = "cityTB"
-        Me.cityTB.Size = New System.Drawing.Size(237, 23)
-        Me.cityTB.TabIndex = 16
-        Me.cityTB.WordWrap = False
+        Me.txtCity.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtCity.Location = New System.Drawing.Point(392, 145)
+        Me.txtCity.MaxLength = 30
+        Me.txtCity.Name = "txtCity"
+        Me.txtCity.Size = New System.Drawing.Size(237, 23)
+        Me.txtCity.TabIndex = 16
+        Me.txtCity.WordWrap = False
         '
         'Label10
         '
@@ -308,15 +308,15 @@ Partial Class MemberForm
         Me.Label10.Text = "Address:"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'addressTB
+        'txtAddress
         '
-        Me.addressTB.ImeMode = System.Windows.Forms.ImeMode.Alpha
-        Me.addressTB.Location = New System.Drawing.Point(392, 94)
-        Me.addressTB.MaxLength = 70
-        Me.addressTB.Multiline = True
-        Me.addressTB.Name = "addressTB"
-        Me.addressTB.Size = New System.Drawing.Size(237, 45)
-        Me.addressTB.TabIndex = 15
+        Me.txtAddress.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtAddress.Location = New System.Drawing.Point(392, 94)
+        Me.txtAddress.MaxLength = 70
+        Me.txtAddress.Multiline = True
+        Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.Size = New System.Drawing.Size(237, 45)
+        Me.txtAddress.TabIndex = 15
         '
         'Label9
         '
@@ -340,25 +340,25 @@ Partial Class MemberForm
         Me.Label8.Text = "Remark:"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'remarkTB
+        'txtRemark
         '
-        Me.remarkTB.ImeMode = System.Windows.Forms.ImeMode.Alpha
-        Me.remarkTB.Location = New System.Drawing.Point(392, 245)
-        Me.remarkTB.MaxLength = 70
-        Me.remarkTB.Multiline = True
-        Me.remarkTB.Name = "remarkTB"
-        Me.remarkTB.Size = New System.Drawing.Size(237, 76)
-        Me.remarkTB.TabIndex = 19
+        Me.txtRemark.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtRemark.Location = New System.Drawing.Point(392, 245)
+        Me.txtRemark.MaxLength = 70
+        Me.txtRemark.Multiline = True
+        Me.txtRemark.Name = "txtRemark"
+        Me.txtRemark.Size = New System.Drawing.Size(237, 76)
+        Me.txtRemark.TabIndex = 19
         '
-        'emailTB
+        'txtEmail
         '
-        Me.emailTB.ImeMode = System.Windows.Forms.ImeMode.Alpha
-        Me.emailTB.Location = New System.Drawing.Point(111, 362)
-        Me.emailTB.MaxLength = 70
-        Me.emailTB.Multiline = True
-        Me.emailTB.Name = "emailTB"
-        Me.emailTB.Size = New System.Drawing.Size(518, 23)
-        Me.emailTB.TabIndex = 13
+        Me.txtEmail.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtEmail.Location = New System.Drawing.Point(111, 362)
+        Me.txtEmail.MaxLength = 70
+        Me.txtEmail.Multiline = True
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(518, 23)
+        Me.txtEmail.TabIndex = 13
         '
         'Label7
         '
@@ -371,93 +371,93 @@ Partial Class MemberForm
         Me.Label7.Text = "Email:"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'phone3NoTB
+        'txtPhone3No
         '
-        Me.phone3NoTB.ImeMode = System.Windows.Forms.ImeMode.Alpha
-        Me.phone3NoTB.Location = New System.Drawing.Point(111, 327)
-        Me.phone3NoTB.MaxLength = 20
-        Me.phone3NoTB.Name = "phone3NoTB"
-        Me.phone3NoTB.Size = New System.Drawing.Size(181, 23)
-        Me.phone3NoTB.TabIndex = 12
-        Me.phone3NoTB.WordWrap = False
+        Me.txtPhone3No.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtPhone3No.Location = New System.Drawing.Point(111, 327)
+        Me.txtPhone3No.MaxLength = 20
+        Me.txtPhone3No.Name = "txtPhone3No"
+        Me.txtPhone3No.Size = New System.Drawing.Size(181, 23)
+        Me.txtPhone3No.TabIndex = 12
+        Me.txtPhone3No.WordWrap = False
         '
-        'phone3KindCB
+        'cboPhone3Kind
         '
-        Me.phone3KindCB.FormattingEnabled = True
-        Me.phone3KindCB.Location = New System.Drawing.Point(16, 327)
-        Me.phone3KindCB.Name = "phone3KindCB"
-        Me.phone3KindCB.Size = New System.Drawing.Size(89, 23)
-        Me.phone3KindCB.TabIndex = 11
+        Me.cboPhone3Kind.FormattingEnabled = True
+        Me.cboPhone3Kind.Location = New System.Drawing.Point(16, 327)
+        Me.cboPhone3Kind.Name = "cboPhone3Kind"
+        Me.cboPhone3Kind.Size = New System.Drawing.Size(89, 23)
+        Me.cboPhone3Kind.TabIndex = 11
         '
-        'phone2NoTB
+        'txtPhone2No
         '
-        Me.phone2NoTB.ImeMode = System.Windows.Forms.ImeMode.Alpha
-        Me.phone2NoTB.Location = New System.Drawing.Point(111, 298)
-        Me.phone2NoTB.MaxLength = 20
-        Me.phone2NoTB.Name = "phone2NoTB"
-        Me.phone2NoTB.Size = New System.Drawing.Size(181, 23)
-        Me.phone2NoTB.TabIndex = 10
-        Me.phone2NoTB.WordWrap = False
+        Me.txtPhone2No.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtPhone2No.Location = New System.Drawing.Point(111, 298)
+        Me.txtPhone2No.MaxLength = 20
+        Me.txtPhone2No.Name = "txtPhone2No"
+        Me.txtPhone2No.Size = New System.Drawing.Size(181, 23)
+        Me.txtPhone2No.TabIndex = 10
+        Me.txtPhone2No.WordWrap = False
         '
-        'phone2KindCB
+        'cboPhone2Kind
         '
-        Me.phone2KindCB.FormattingEnabled = True
-        Me.phone2KindCB.Location = New System.Drawing.Point(16, 298)
-        Me.phone2KindCB.Name = "phone2KindCB"
-        Me.phone2KindCB.Size = New System.Drawing.Size(89, 23)
-        Me.phone2KindCB.TabIndex = 9
+        Me.cboPhone2Kind.FormattingEnabled = True
+        Me.cboPhone2Kind.Location = New System.Drawing.Point(16, 298)
+        Me.cboPhone2Kind.Name = "cboPhone2Kind"
+        Me.cboPhone2Kind.Size = New System.Drawing.Size(89, 23)
+        Me.cboPhone2Kind.TabIndex = 9
         '
-        'phone1NoTB
+        'txtPhone1No
         '
-        Me.phone1NoTB.ImeMode = System.Windows.Forms.ImeMode.Alpha
-        Me.phone1NoTB.Location = New System.Drawing.Point(111, 269)
-        Me.phone1NoTB.MaxLength = 20
-        Me.phone1NoTB.Name = "phone1NoTB"
-        Me.phone1NoTB.Size = New System.Drawing.Size(181, 23)
-        Me.phone1NoTB.TabIndex = 8
-        Me.phone1NoTB.WordWrap = False
+        Me.txtPhone1No.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtPhone1No.Location = New System.Drawing.Point(111, 269)
+        Me.txtPhone1No.MaxLength = 20
+        Me.txtPhone1No.Name = "txtPhone1No"
+        Me.txtPhone1No.Size = New System.Drawing.Size(181, 23)
+        Me.txtPhone1No.TabIndex = 8
+        Me.txtPhone1No.WordWrap = False
         '
-        'phone1KindCB
+        'cboPhone1Kind
         '
-        Me.phone1KindCB.FormattingEnabled = True
-        Me.phone1KindCB.Location = New System.Drawing.Point(16, 269)
-        Me.phone1KindCB.Name = "phone1KindCB"
-        Me.phone1KindCB.Size = New System.Drawing.Size(89, 23)
-        Me.phone1KindCB.TabIndex = 7
+        Me.cboPhone1Kind.FormattingEnabled = True
+        Me.cboPhone1Kind.Location = New System.Drawing.Point(16, 269)
+        Me.cboPhone1Kind.Name = "cboPhone1Kind"
+        Me.cboPhone1Kind.Size = New System.Drawing.Size(89, 23)
+        Me.cboPhone1Kind.TabIndex = 7
         '
-        'findBN
+        'btnFindHouseHolder
         '
-        Me.findBN.Location = New System.Drawing.Point(176, 219)
-        Me.findBN.Name = "findBN"
-        Me.findBN.Size = New System.Drawing.Size(64, 23)
-        Me.findBN.TabIndex = 6
-        Me.findBN.Text = "Find"
-        Me.findBN.UseVisualStyleBackColor = True
+        Me.btnFindHouseHolder.Location = New System.Drawing.Point(176, 219)
+        Me.btnFindHouseHolder.Name = "btnFindHouseHolder"
+        Me.btnFindHouseHolder.Size = New System.Drawing.Size(64, 23)
+        Me.btnFindHouseHolder.TabIndex = 6
+        Me.btnFindHouseHolder.Text = "Find"
+        Me.btnFindHouseHolder.UseVisualStyleBackColor = True
         '
-        'houseHolderNameLL
+        'lblHouseHolderName
         '
-        Me.houseHolderNameLL.AutoSize = True
-        Me.houseHolderNameLL.Location = New System.Drawing.Point(114, 245)
-        Me.houseHolderNameLL.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.houseHolderNameLL.Name = "houseHolderNameLL"
-        Me.houseHolderNameLL.Size = New System.Drawing.Size(126, 15)
-        Me.houseHolderNameLL.TabIndex = 57
-        Me.houseHolderNameLL.Text = "House Holder Name"
-        Me.houseHolderNameLL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblHouseHolderName.AutoSize = True
+        Me.lblHouseHolderName.Location = New System.Drawing.Point(114, 245)
+        Me.lblHouseHolderName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblHouseHolderName.Name = "lblHouseHolderName"
+        Me.lblHouseHolderName.Size = New System.Drawing.Size(126, 15)
+        Me.lblHouseHolderName.TabIndex = 57
+        Me.lblHouseHolderName.Text = "House Holder Name"
+        Me.lblHouseHolderName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'houseHolderCodeTB
+        'txtHouseHolderCode
         '
-        Me.houseHolderCodeTB.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.houseHolderCodeTB.Location = New System.Drawing.Point(111, 219)
-        Me.houseHolderCodeTB.MaxLength = 5
-        Me.houseHolderCodeTB.Name = "houseHolderCodeTB"
-        Me.houseHolderCodeTB.ReadOnly = True
-        Me.houseHolderCodeTB.Size = New System.Drawing.Size(54, 23)
-        Me.houseHolderCodeTB.TabIndex = 98
-        Me.houseHolderCodeTB.TabStop = False
-        Me.houseHolderCodeTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.formTT.SetToolTip(Me.houseHolderCodeTB, "Member ID will automatically be created. ")
-        Me.houseHolderCodeTB.WordWrap = False
+        Me.txtHouseHolderCode.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtHouseHolderCode.Location = New System.Drawing.Point(111, 219)
+        Me.txtHouseHolderCode.MaxLength = 5
+        Me.txtHouseHolderCode.Name = "txtHouseHolderCode"
+        Me.txtHouseHolderCode.ReadOnly = True
+        Me.txtHouseHolderCode.Size = New System.Drawing.Size(54, 23)
+        Me.txtHouseHolderCode.TabIndex = 98
+        Me.txtHouseHolderCode.TabStop = False
+        Me.txtHouseHolderCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.formTT.SetToolTip(Me.txtHouseHolderCode, "Member ID will automatically be created. ")
+        Me.txtHouseHolderCode.WordWrap = False
         '
         'Label6
         '
@@ -481,44 +481,44 @@ Partial Class MemberForm
         Me.Label5.Text = "Education:"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'educationCB
+        'cboEducation
         '
-        Me.educationCB.Location = New System.Drawing.Point(111, 183)
-        Me.educationCB.Name = "educationCB"
-        Me.educationCB.Size = New System.Drawing.Size(181, 23)
-        Me.educationCB.TabIndex = 5
+        Me.cboEducation.Location = New System.Drawing.Point(111, 183)
+        Me.cboEducation.Name = "cboEducation"
+        Me.cboEducation.Size = New System.Drawing.Size(181, 23)
+        Me.cboEducation.TabIndex = 5
         '
         'sexGB
         '
-        Me.sexGB.Controls.Add(Me.femaleRB)
-        Me.sexGB.Controls.Add(Me.maleRB)
+        Me.sexGB.Controls.Add(Me.rdoFemale)
+        Me.sexGB.Controls.Add(Me.rdoMale)
         Me.sexGB.Location = New System.Drawing.Point(111, 136)
         Me.sexGB.Name = "sexGB"
         Me.sexGB.Size = New System.Drawing.Size(134, 40)
         Me.sexGB.TabIndex = 98
         Me.sexGB.TabStop = False
         '
-        'femaleRB
+        'rdoFemale
         '
-        Me.femaleRB.AutoSize = True
-        Me.femaleRB.Location = New System.Drawing.Point(65, 15)
-        Me.femaleRB.Name = "femaleRB"
-        Me.femaleRB.Size = New System.Drawing.Size(67, 19)
-        Me.femaleRB.TabIndex = 4
-        Me.femaleRB.TabStop = True
-        Me.femaleRB.Text = "Female"
-        Me.femaleRB.UseVisualStyleBackColor = True
+        Me.rdoFemale.AutoSize = True
+        Me.rdoFemale.Location = New System.Drawing.Point(65, 15)
+        Me.rdoFemale.Name = "rdoFemale"
+        Me.rdoFemale.Size = New System.Drawing.Size(67, 19)
+        Me.rdoFemale.TabIndex = 4
+        Me.rdoFemale.TabStop = True
+        Me.rdoFemale.Text = "Female"
+        Me.rdoFemale.UseVisualStyleBackColor = True
         '
-        'maleRB
+        'rdoMale
         '
-        Me.maleRB.AutoSize = True
-        Me.maleRB.Location = New System.Drawing.Point(6, 15)
-        Me.maleRB.Name = "maleRB"
-        Me.maleRB.Size = New System.Drawing.Size(53, 19)
-        Me.maleRB.TabIndex = 3
-        Me.maleRB.TabStop = True
-        Me.maleRB.Text = "Male"
-        Me.maleRB.UseVisualStyleBackColor = True
+        Me.rdoMale.AutoSize = True
+        Me.rdoMale.Location = New System.Drawing.Point(6, 15)
+        Me.rdoMale.Name = "rdoMale"
+        Me.rdoMale.Size = New System.Drawing.Size(53, 19)
+        Me.rdoMale.TabIndex = 3
+        Me.rdoMale.TabStop = True
+        Me.rdoMale.Text = "Male"
+        Me.rdoMale.UseVisualStyleBackColor = True
         '
         'Label4
         '
@@ -531,15 +531,15 @@ Partial Class MemberForm
         Me.Label4.Text = "Sex:"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'englishNameTB
+        'txtEnglishName
         '
-        Me.englishNameTB.ImeMode = System.Windows.Forms.ImeMode.Alpha
-        Me.englishNameTB.Location = New System.Drawing.Point(111, 110)
-        Me.englishNameTB.MaxLength = 40
-        Me.englishNameTB.Name = "englishNameTB"
-        Me.englishNameTB.Size = New System.Drawing.Size(181, 23)
-        Me.englishNameTB.TabIndex = 2
-        Me.englishNameTB.WordWrap = False
+        Me.txtEnglishName.ImeMode = System.Windows.Forms.ImeMode.Alpha
+        Me.txtEnglishName.Location = New System.Drawing.Point(111, 110)
+        Me.txtEnglishName.MaxLength = 40
+        Me.txtEnglishName.Name = "txtEnglishName"
+        Me.txtEnglishName.Size = New System.Drawing.Size(181, 23)
+        Me.txtEnglishName.TabIndex = 2
+        Me.txtEnglishName.WordWrap = False
         '
         'Label3
         '
@@ -552,15 +552,15 @@ Partial Class MemberForm
         Me.Label3.Text = "English Name:"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'koreanNameTB
+        'txtKoreanName
         '
-        Me.koreanNameTB.ImeMode = System.Windows.Forms.ImeMode.Hangul
-        Me.koreanNameTB.Location = New System.Drawing.Point(111, 80)
-        Me.koreanNameTB.MaxLength = 20
-        Me.koreanNameTB.Name = "koreanNameTB"
-        Me.koreanNameTB.Size = New System.Drawing.Size(92, 23)
-        Me.koreanNameTB.TabIndex = 1
-        Me.koreanNameTB.WordWrap = False
+        Me.txtKoreanName.ImeMode = System.Windows.Forms.ImeMode.Hangul
+        Me.txtKoreanName.Location = New System.Drawing.Point(111, 80)
+        Me.txtKoreanName.MaxLength = 20
+        Me.txtKoreanName.Name = "txtKoreanName"
+        Me.txtKoreanName.Size = New System.Drawing.Size(92, 23)
+        Me.txtKoreanName.TabIndex = 1
+        Me.txtKoreanName.WordWrap = False
         '
         'Label2
         '
@@ -731,7 +731,7 @@ Partial Class MemberForm
         Me.SplitContainer.Panel2.PerformLayout()
         CType(Me.SplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer.ResumeLayout(False)
-        CType(Me.naviDGV, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdNavi, System.ComponentModel.ISupportInitialize).EndInit()
         Me.sexGB.ResumeLayout(False)
         Me.sexGB.PerformLayout()
         Me.menuTS.ResumeLayout(False)
@@ -741,7 +741,7 @@ Partial Class MemberForm
     End Sub
 
     Friend WithEvents SplitContainer As SplitContainer
-    Friend WithEvents naviDGV As DataGridView
+    Friend WithEvents grdNavi As DataGridView
     Friend WithEvents menuTS As ToolStrip
     Friend WithEvents newTSB As ToolStripButton
     Friend WithEvents deleteTSB As ToolStripButton
@@ -756,46 +756,46 @@ Partial Class MemberForm
     Friend WithEvents closeTSB As ToolStripButton
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents saveTSB As ToolStripButton
-    Friend WithEvents koreanNameTB As TextBox
+    Friend WithEvents txtKoreanName As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents formTT As ToolTip
     Friend WithEvents searchTSB As ToolStripButton
-    Friend WithEvents educationCB As ComboBox
+    Friend WithEvents cboEducation As ComboBox
     Friend WithEvents sexGB As GroupBox
-    Friend WithEvents femaleRB As RadioButton
-    Friend WithEvents maleRB As RadioButton
+    Friend WithEvents rdoFemale As RadioButton
+    Friend WithEvents rdoMale As RadioButton
     Friend WithEvents Label4 As Label
-    Friend WithEvents englishNameTB As TextBox
+    Friend WithEvents txtEnglishName As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents phone1NoTB As TextBox
-    Friend WithEvents phone1KindCB As ComboBox
-    Friend WithEvents findBN As Button
-    Friend WithEvents houseHolderNameLL As Label
-    Friend WithEvents houseHolderCodeTB As TextBox
+    Friend WithEvents txtPhone1No As TextBox
+    Friend WithEvents cboPhone1Kind As ComboBox
+    Friend WithEvents btnFindHouseHolder As Button
+    Friend WithEvents lblHouseHolderName As Label
+    Friend WithEvents txtHouseHolderCode As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents remarkTB As TextBox
-    Friend WithEvents emailTB As TextBox
+    Friend WithEvents txtRemark As TextBox
+    Friend WithEvents txtEmail As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents phone3NoTB As TextBox
-    Friend WithEvents phone3KindCB As ComboBox
-    Friend WithEvents phone2NoTB As TextBox
-    Friend WithEvents phone2KindCB As ComboBox
-    Friend WithEvents isDeletedCB As CheckBox
+    Friend WithEvents txtPhone3No As TextBox
+    Friend WithEvents cboPhone3Kind As ComboBox
+    Friend WithEvents txtPhone2No As TextBox
+    Friend WithEvents cboPhone2Kind As ComboBox
+    Friend WithEvents chkIsDeleted As CheckBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents dutyCB As ComboBox
+    Friend WithEvents cboDuty As ComboBox
     Friend WithEvents Label12 As Label
-    Friend WithEvents provinceCB As ComboBox
+    Friend WithEvents cboProvince As ComboBox
     Friend WithEvents Label11 As Label
-    Friend WithEvents cityTB As TextBox
+    Friend WithEvents txtCity As TextBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents addressTB As TextBox
-    Friend WithEvents memberCodeTB As MaskedTextBox
+    Friend WithEvents txtAddress As TextBox
+    Friend WithEvents txtMemberCode As MaskedTextBox
     Friend WithEvents CodeCol As DataGridViewTextBoxColumn
     Friend WithEvents NameCol As DataGridViewTextBoxColumn
-    Friend WithEvents postalCodeTB As MaskedTextBox
+    Friend WithEvents txtPostalCode As MaskedTextBox
     Friend WithEvents postalAreaLL As Label
 End Class

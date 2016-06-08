@@ -78,10 +78,35 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChurchDataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ChurchDataSet.xsd</DependentUpon>
+    <Compile Include="AccountForm.Designer.vb">
+      <DependentUpon>AccountForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AccountForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookCodeForm.Designer.vb">
+      <DependentUpon>BookCodeForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BookCodeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BudgetEntryForm.Designer.vb">
+      <DependentUpon>BudgetEntryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BudgetEntryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComposeBookForm.Designer.vb">
+      <DependentUpon>ComposeBookForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ComposeBookForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyAccountCodeForm.Designer.vb">
+      <DependentUpon>CopyAccountCodeForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CopyAccountCodeForm.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="CopyDedicatorForm.Designer.vb">
       <DependentUpon>CopyDedicatorForm.vb</DependentUpon>
@@ -105,6 +130,12 @@
       <DependentUpon>EducationCodeForm.vb</DependentUpon>
     </Compile>
     <Compile Include="EducationCodeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindAccountForm.Designer.vb">
+      <DependentUpon>FindAccountForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FindAccountForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FindMemberForm.Designer.vb">
@@ -144,6 +175,21 @@
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AccountForm.resx">
+      <DependentUpon>AccountForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookCodeForm.resx">
+      <DependentUpon>BookCodeForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BudgetEntryForm.resx">
+      <DependentUpon>BudgetEntryForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComposeBookForm.resx">
+      <DependentUpon>ComposeBookForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyAccountCodeForm.resx">
+      <DependentUpon>CopyAccountCodeForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CopyDedicatorForm.resx">
       <DependentUpon>CopyDedicatorForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -155,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EducationCodeForm.resx">
       <DependentUpon>EducationCodeForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindAccountForm.resx">
+      <DependentUpon>FindAccountForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FindMemberForm.resx">
       <DependentUpon>FindMemberForm.vb</DependentUpon>
@@ -173,17 +222,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ChurchDataSet.xsc">
-      <DependentUpon>ChurchDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ChurchDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ChurchDataSet.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ChurchDataSet.xss">
-      <DependentUpon>ChurchDataSet.xsd</DependentUpon>
-    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

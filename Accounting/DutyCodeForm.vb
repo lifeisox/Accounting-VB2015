@@ -2,7 +2,7 @@
 
 Public Class DutyCodeForm
 
-    Private ivMaxQueryCount As Integer = 5
+    Private MaxQueryCount As Integer = 5
     Private Enum queryENUM
         READ_ALL
         READ
@@ -10,45 +10,45 @@ Public Class DutyCodeForm
         UPDATE
         DELETE
     End Enum
-    Private ivSQL(ivMaxQueryCount) As String
+    Private _SQL(MaxQueryCount) As String
 
-    Private ivFirstSW As Boolean = True
-    Private ivAddSW As Boolean = False
-    Private ivUpdateSW As Boolean = False
-    Private ivChangedSW As Boolean = False
+    Private _FirstSW As Boolean = True
+    Private _AddSW As Boolean = False
+    Private _UpdateSW As Boolean = False
+    Private _ChangedSW As Boolean = False
 
-    Private ivConnection As SqlConnection = Nothing
+    Private _Conn As SqlConnection = Nothing
 
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Assign queries to use in this class
-        ivSQL(queryENUM.READ_ALL) = "SELECT DutyCode, DutyName FROM Tbl_Duty"
-        ivSQL(queryENUM.READ) = "SELECT DutyCode, DutyName FROM Tbl_Duty WHERE DutyCode = @Code"
-        ivSQL(queryENUM.INSERT) = "INSERT INTO Tbl_Duty ( DutyCode, DutyName ) VALUES ( @Code, @Name )"
-        ivSQL(queryENUM.UPDATE) = "UPDATE Tbl_Duty SET DutyName = @Name WHERE DutyCode = @Code"
-        ivSQL(queryENUM.DELETE) = "DELETE FROM Tbl_Duty WHERE DutyCode = @Code"
+        _SQL(queryENUM.READ_ALL) = "SELECT DutyCode, DutyName FROM Tbl_Duty"
+        _SQL(queryENUM.READ) = "SELECT DutyCode, DutyName FROM Tbl_Duty WHERE DutyCode = @Code"
+        _SQL(queryENUM.INSERT) = "INSERT INTO Tbl_Duty ( DutyCode, DutyName ) VALUES ( @Code, @Name )"
+        _SQL(queryENUM.UPDATE) = "UPDATE Tbl_Duty SET DutyName = @Name WHERE DutyCode = @Code"
+        _SQL(queryENUM.DELETE) = "DELETE FROM Tbl_Duty WHERE DutyCode = @Code"
 
         ' Add any initialization after the InitializeComponent() call.
-        ivConnection = New SqlConnection(My.Settings.DbConn)
-        ivConnection.Open()
+        _Conn = New SqlConnection(My.Settings.DbConn)
+        _Conn.Open()
 
     End Sub
 
     Protected Overrides Sub Finalize()
-        ivConnection.Close()
+        _Conn.Close()
         MyBase.Finalize()
     End Sub
 
-    Private Sub dutyCodeFM_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub DutyCodeForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         checkChangedField()
     End Sub
 
-    Private Sub dutyCodeFM_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-        If ivFirstSW = True Then
+    Private Sub DutyCodeForm_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        If _FirstSW = True Then
             fillGrid()
-            ivFirstSW = False
+            _FirstSW = False
         End If
     End Sub
 
@@ -66,17 +66,17 @@ Public Class DutyCodeForm
             Case "deleteTSB"
                 deleteCurrentRecord()
             Case "firstTSB"
-                naviDGV.CurrentCell = naviDGV(0, 0)
+                grdNavi.CurrentCell = grdNavi(0, 0)
             Case "previousTSB"
-                If naviDGV.CurrentRow.Index > 0 Then
-                    naviDGV.CurrentCell = naviDGV(0, naviDGV.CurrentRow.Index - 1)
+                If grdNavi.CurrentRow.Index > 0 Then
+                    grdNavi.CurrentCell = grdNavi(0, grdNavi.CurrentRow.Index - 1)
                 End If
             Case "nextTSB"
-                If naviDGV.CurrentRow.Index < naviDGV.RowCount - 1 Then
-                    naviDGV.CurrentCell = naviDGV(0, naviDGV.CurrentRow.Index + 1)
+                If grdNavi.CurrentRow.Index < grdNavi.RowCount - 1 Then
+                    grdNavi.CurrentCell = grdNavi(0, grdNavi.CurrentRow.Index + 1)
                 End If
             Case "lastTSB"
-                naviDGV.CurrentCell = naviDGV(0, naviDGV.RowCount - 1)
+                grdNavi.CurrentCell = grdNavi(0, grdNavi.RowCount - 1)
             Case "refreshTSB"
                 fillGrid()
             Case "saveTSB"
@@ -86,75 +86,75 @@ Public Class DutyCodeForm
         End Select
     End Sub
 
-    Private Sub naviDGV_CurrentCellChanged(sender As Object, e As EventArgs) Handles naviDGV.CurrentCellChanged
+    Private Sub grdNavi_CurrentCellChanged(sender As Object, e As EventArgs) Handles grdNavi.CurrentCellChanged, grdNavi.CurrentCellChanged
         checkChangedField()
-        If naviDGV.SelectedRows.Count <> 1 Then Return
+        If grdNavi.SelectedRows.Count <> 1 Then Return
 
-        Dim index As Integer = naviDGV.SelectedRows(0).Index
-        If naviDGV.SelectedRows.Count = 1 And index <= naviDGV.Rows.Count - 1 And ivFirstSW = False Then
-            fillData(naviDGV.Rows(index).Cells("CodeCol").Value)
+        Dim index As Integer = grdNavi.SelectedRows(0).Index
+        If grdNavi.SelectedRows.Count = 1 And index <= grdNavi.Rows.Count - 1 And _FirstSW = False Then
+            fillData(grdNavi.Rows(index).Cells("CodeCol").Value)
         End If
     End Sub
 
-    Private Sub codeTB_GotFocus(sender As Object, e As EventArgs) Handles codeTB.GotFocus
-        codeTB.Select(0, 0)
+    Private Sub txtCode_GotFocus(sender As Object, e As EventArgs) Handles txtCode.GotFocus
+        txtCode.Select(0, 0)
     End Sub
 
-    Private Sub nameTB_GotFocus(sender As Object, e As EventArgs) Handles nameTB.GotFocus
-        nameTB.SelectAll()
+    Private Sub txtName_GotFocus(sender As Object, e As EventArgs) Handles txtName.GotFocus
+        txtName.SelectAll()
     End Sub
 
-    Private Sub control_Changed(sender As Object, e As EventArgs) Handles codeTB.TextChanged, nameTB.TextChanged
-        If ivAddSW = True Or ivUpdateSW = True Then
-            ivChangedSW = True
+    Private Sub control_Changed(sender As Object, e As EventArgs) Handles txtCode.TextChanged, txtName.TextChanged
+        If _AddSW = True Or _UpdateSW = True Then
+            _ChangedSW = True
             saveTSB.Enabled = True
         End If
     End Sub
 
-    Private Sub control_KeyDown(sender As Object, e As KeyEventArgs) Handles codeTB.KeyDown, nameTB.KeyDown
+    Private Sub control_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCode.KeyDown, txtName.KeyDown
         If e.KeyCode = Keys.Enter Then
             e.SuppressKeyPress = True   'This will prevent ding sound.
             If sender.Name = "codeTB" Then
-                nameTB.Focus()
+                txtName.Focus()
             ElseIf sender.Name = "nameTB" Then
                 menuTS.Focus()
             End If
         End If
     End Sub
 
-    Private Sub codeTB_Validating(sender As Object, e As CancelEventArgs) Handles codeTB.Validating
-        If ivAddSW = False Then Exit Sub
+    Private Sub txtCode_Validating(sender As Object, e As CancelEventArgs) Handles txtCode.Validating
+        If _AddSW = False Then Exit Sub
 
-        If codeTB.Text.Length = 2 Then
-            Dim command As New SqlCommand(ivSQL(queryENUM.READ), ivConnection)
+        If txtCode.Text.Length = 2 Then
+            Dim command As New SqlCommand(_SQL(queryENUM.READ), _Conn)
             command.Parameters.Add("@Code", SqlDbType.Char)
-            command.Parameters("@Code").Value = codeTB.Text
+            command.Parameters("@Code").Value = txtCode.Text
             Dim reader As SqlDataReader = command.ExecuteReader()
             If reader.HasRows Then
                 MessageBox.Show("The code has already used. Use an another code!",
                 "Duplicated code", MessageBoxButtons.OK)
-                codeTB.Focus()
+                txtCode.Focus()
                 e.Cancel = True
             End If
             reader.Close()
         Else
             MessageBox.Show("The length of the code should be 2. Re-enter!",
                 "Wrong code", MessageBoxButtons.OK)
-            codeTB.Focus()
+            txtCode.Focus()
             e.Cancel = True
         End If
     End Sub
 
     Private Sub checkChangedField()
-        If (ivAddSW = True Or ivUpdateSW = True) And ivChangedSW = True Then
+        If (_AddSW = True Or _UpdateSW = True) And _ChangedSW = True Then
             Dim result As DialogResult = MessageBox.Show("There are some changed data. Save it?",
                 "Confirmation to save", MessageBoxButtons.YesNo)
             If result = vbYes Then
                 saveCurrentRecord()
             Else
-                ivAddSW = False
-                ivUpdateSW = False
-                ivChangedSW = False
+                _AddSW = False
+                _UpdateSW = False
+                _ChangedSW = False
             End If
         End If
     End Sub
@@ -168,20 +168,20 @@ Public Class DutyCodeForm
     End Sub
 
     Private Sub fillGrid()
-        Dim command As New SqlCommand(ivSQL(queryENUM.READ_ALL), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.READ_ALL), _Conn)
 
         Me.Cursor = Cursors.WaitCursor
 
-        naviDGV.RowCount = 0
+        grdNavi.RowCount = 0
 
         Dim reader As SqlDataReader = command.ExecuteReader()
         If reader.HasRows Then
             While reader.Read()
-                naviDGV.Rows.Add(reader("DutyCode"), reader("DutyName"))
+                grdNavi.Rows.Add(reader("DutyCode"), reader("DutyName"))
             End While
             reader.Close()
-            naviDGV.CurrentCell = naviDGV(0, naviDGV.Rows.Count - 1)
-            fillData(naviDGV.CurrentCell.Value)
+            grdNavi.CurrentCell = grdNavi(0, grdNavi.Rows.Count - 1)
+            fillData(grdNavi.CurrentCell.Value)
             enableAllToolStripButton(True)
             saveTSB.Enabled = False
         Else
@@ -194,7 +194,7 @@ Public Class DutyCodeForm
     End Sub
 
     Private Sub fillData(ByVal code As String)
-        Dim command As New SqlCommand(ivSQL(queryENUM.READ), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.READ), _Conn)
         command.Parameters.Add("@Code", SqlDbType.Char)
         command.Parameters("@Code").Value = code
         Dim reader As SqlDataReader = command.ExecuteReader()
@@ -202,66 +202,66 @@ Public Class DutyCodeForm
         If reader.HasRows Then
             reader.Read()
             With reader
-                codeTB.Text = .Item("DutyCode")
-                codeTB.ReadOnly = True
-                nameTB.Text = .Item("DutyName")
+                txtCode.Text = .Item("DutyCode")
+                txtCode.ReadOnly = True
+                txtName.Text = .Item("DutyName")
             End With
         End If
 
         reader.Close()
 
-        ivUpdateSW = True
-        ivChangedSW = False
-        ivAddSW = False
+        _UpdateSW = True
+        _ChangedSW = False
+        _AddSW = False
 
         newTSB.Enabled = True
         saveTSB.Enabled = False
         deleteTSB.Enabled = True
 
-        nameTB.Focus()
+        txtName.Focus()
 
     End Sub
 
     Private Sub clearAllFields()
-        codeTB.Text = ""                                    'Code
-        codeTB.ReadOnly = False
+        txtCode.Text = ""                                    'Code
+        txtCode.ReadOnly = False
 
-        nameTB.Text = ""                                    'Name
+        txtName.Text = ""                                    'Name
 
-        ivAddSW = True
-        ivChangedSW = False
+        _AddSW = True
+        _ChangedSW = False
 
         newTSB.Enabled = False
         saveTSB.Enabled = False
         deleteTSB.Enabled = False
 
-        codeTB.Focus()
+        txtCode.Focus()
     End Sub
 
     Private Sub saveCurrentRecord()
-        If ivAddSW = True Then
-            Dim command As New SqlCommand(ivSQL(queryENUM.INSERT), ivConnection)
+        If _AddSW = True Then
+            Dim command As New SqlCommand(_SQL(queryENUM.INSERT), _Conn)
             parameterMove(command)
-            ivAddSW = False
-            ivChangedSW = False
+            _AddSW = False
+            _ChangedSW = False
 
             newTSB.Enabled = True
             deleteTSB.Enabled = True
             saveTSB.Enabled = False
 
-            naviDGV.Rows.Add(codeTB.Text, nameTB.Text)
-            naviDGV.CurrentCell = naviDGV(0, naviDGV.Rows.Count - 1)
+            grdNavi.Rows.Add(txtCode.Text, txtName.Text)
+            grdNavi.CurrentCell = grdNavi(0, grdNavi.Rows.Count - 1)
         Else
-            Dim command As New SqlCommand(ivSQL(queryENUM.UPDATE), ivConnection)
+            Dim command As New SqlCommand(_SQL(queryENUM.UPDATE), _Conn)
             parameterMove(command)
-            ivUpdateSW = True
-            ivChangedSW = False
+            _UpdateSW = True
+            _ChangedSW = False
 
             newTSB.Enabled = True
             deleteTSB.Enabled = True
             saveTSB.Enabled = False
 
-            naviDGV(1, naviDGV.CurrentRow.Index).Value = nameTB.Text
+            grdNavi(1, grdNavi.CurrentRow.Index).Value = txtName.Text
         End If
     End Sub
 
@@ -269,8 +269,8 @@ Public Class DutyCodeForm
         command.Parameters.Add("@Code", SqlDbType.Char)
         command.Parameters.Add("@Name", SqlDbType.VarChar)
 
-        command.Parameters("@Code").Value = codeTB.Text
-        command.Parameters("@Name").Value = nameTB.Text
+        command.Parameters("@Code").Value = txtCode.Text
+        command.Parameters("@Name").Value = txtName.Text
 
         command.ExecuteNonQuery()
     End Sub
@@ -280,28 +280,28 @@ Public Class DutyCodeForm
                 "Confirmation to delete", MessageBoxButtons.YesNo)
         If result = vbNo Then Exit Sub
 
-        Dim command As New SqlCommand(ivSQL(queryENUM.DELETE), ivConnection)
+        Dim command As New SqlCommand(_SQL(queryENUM.DELETE), _Conn)
 
         command.Parameters.Add("@Code", SqlDbType.Char)
 
-        command.Parameters("@Code").Value = codeTB.Text
+        command.Parameters("@Code").Value = txtCode.Text
 
         command.ExecuteNonQuery()
 
-        Dim saveCurrentRow = naviDGV.CurrentRow.Index
-        naviDGV.Rows.RemoveAt(saveCurrentRow)
-        If naviDGV.RowCount < 1 Then
+        Dim saveCurrentRow = grdNavi.CurrentRow.Index
+        grdNavi.Rows.RemoveAt(saveCurrentRow)
+        If grdNavi.RowCount < 1 Then
             clearAllFields()
-            ivAddSW = False
-            ivUpdateSW = False
+            _AddSW = False
+            _UpdateSW = False
             enableAllToolStripButton(False)
             newTSB.Enabled = True
-        ElseIf saveCurrentRow > naviDGV.RowCount - 1 Then
-            naviDGV.CurrentCell = naviDGV(0, naviDGV.RowCount - 1)
-            fillData(naviDGV.CurrentCell.Value)
+        ElseIf saveCurrentRow > grdNavi.RowCount - 1 Then
+            grdNavi.CurrentCell = grdNavi(0, grdNavi.RowCount - 1)
+            fillData(grdNavi.CurrentCell.Value)
         Else
-            naviDGV.CurrentCell = naviDGV(0, saveCurrentRow)
-            fillData(naviDGV.CurrentCell.Value)
+            grdNavi.CurrentCell = grdNavi(0, saveCurrentRow)
+            fillData(grdNavi.CurrentCell.Value)
         End If
 
     End Sub
