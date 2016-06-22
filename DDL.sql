@@ -1,9 +1,14 @@
 ﻿-- Create Database -----------------------------------------------------------------
-IF NOT EXISTS ( SELECT * FROM sys.databases WHERE name = 'Church' )		CREATE DATABASE Church
-	COLLATE Korean_Wansung_CI_AS
+IF NOT EXISTS ( SELECT * FROM sys.databases WHERE name = 'Church' )		
+	CREATE DATABASE Church
+		COLLATE Korean_Wansung_CI_AS
 GO
 
 USE Church;
+GO
+
+ALTER DATABASE Church
+   SET RECURSIVE_TRIGGERS OFF;
 GO
 
 -- Drop Tables ---------------------------------------------------------------------
@@ -110,7 +115,7 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Education' )	C
 	EducationCode		Char(2)			NOT NULL UNIQUE,
     EducationName		Varchar(50)		NOT NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-    CONSTRAINT			PK_Education	PRIMARY KEY		( EducationCode )
+    CONSTRAINT			PK_Education	PRIMARY KEY CLUSTERED ( EducationCode )
 )
 GO
 
@@ -151,7 +156,7 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Member' )	CREA
     IsDeleted			Char(1)			NOT NULL DEFAULT 'N',	-- Y: Deleted
     Remark				Varchar(255)	NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT 	PK_Member 		PRIMARY KEY ( MemberCode ),
+	CONSTRAINT 	PK_Member 		PRIMARY KEY CLUSTERED ( MemberCode ),
     CONSTRAINT	FK_Education	FOREIGN KEY	( EducationCode )	REFERENCES	Tbl_Education ( EducationCode ),
     CONSTRAINT	FK_HouseHolder	FOREIGN	KEY	( HouseHolderCode )		REFERENCES	Tbl_Member ( MemberCode ),
     CONSTRAINT	FK_Province		FOREIGN KEY	( ProvinceCode )	REFERENCES	Tbl_Province ( ProvinceCode ),
@@ -175,8 +180,8 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Dedicator' )	C
 	DedicatorCode		Char(3)			NOT NULL,
 	MemberCode 			Char(5)			NOT NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT 	PK_Dedicator	PRIMARY KEY ( DedicatorYear, DedicatorCode ),
-    CONSTRAINT	FK_MemberDedi	FOREIGN KEY ( MemberCode )		REFERENCES	Tbl_Member ( MemberCode )
+	CONSTRAINT 	PK_Dedicator	PRIMARY KEY CLUSTERED ( DedicatorYear, DedicatorCode ),
+    CONSTRAINT	FK_MemberDedi	FOREIGN KEY ( MemberCode )	REFERENCES	Tbl_Member ( MemberCode )
 )
 GO
 
@@ -196,7 +201,7 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Book' )	CREATE
     BookNameKr			Varchar(50)		NOT NULL,
     ForwardAmount		Decimal(12, 2)	NOT NULL DEFAULT 0,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT 	PK_Book			PRIMARY KEY ( BookYear, BookCode )
+	CONSTRAINT 	PK_Book			PRIMARY KEY CLUSTERED ( BookYear, BookCode )
 )
 GO
 
@@ -226,87 +231,100 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Account' )	CRE
     BookCode			Char(4)			NULL,	-- If this field no exist, there is not Book
     Remark				Varchar(80)		NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT 	PK_Account	PRIMARY KEY ( AccountYear, AccountCode ),
+	CONSTRAINT 	PK_Account	PRIMARY KEY CLUSTERED ( AccountYear, AccountCode ),
     CONSTRAINT	FK_Book		FOREIGN KEY ( AccountYear, BookCode )	REFERENCES	Tbl_Book ( BookYear, BookCode )
 )
 GO
 
-CREATE TRIGGER Tg_Account_All ON Tbl_Account
-AFTER INSERT, UPDATE, DELETE
+CREATE TRIGGER Tg_Account_Delete ON Tbl_Account
+AFTER DELETE
 AS
 BEGIN
 	DECLARE @accountYear Char(4), @accountCode Char(4), @parentCode Char(4) 
 	DECLARE @budget Decimal(12, 2), @amount Decimal(12, 2)
 	SET NOCOUNT ON;
-	IF EXISTS(SELECT * FROM DELETED)
+	-- Step 1
+	SELECT @accountYear = d.AccountYear, @accountCode = d.AccountCode, @parentCode = IIF(d.ParentCode IS NULL, '', d.ParentCode)
+		FROM DELETED d;
+	IF @parentCode <> ''
 	BEGIN
-		SELECT @accountYear = d.AccountYear, @accountCode = d.AccountCode, @parentCode = d.ParentCode
-			FROM DELETED d;
-		IF @parentCode IS NOT NULL  AND @parentCode <> ''
+		SELECT @budget = SUM(Budget), @amount = SUM(Amount)
+			FROM Tbl_Account WHERE AccountYear = @accountYear AND ParentCode = @parentCode;
+		UPDATE Tbl_Account SET Budget = @budget, Amount = @amount, LastUpdate = GETDATE()
+			WHERE AccountYear = @accountYear AND AccountCode = @parentCode;
+		-- Step 2
+		SELECT @accountYear = AccountYear, @accountCode = AccountCode, @parentCode = IIF(ParentCode IS NULL, '', ParentCode)
+		FROM Tbl_Account WHERE AccountYear = @accountYear AND AccountCode = @parentCode;
+		IF @parentCode <> ''
 		BEGIN
 			SELECT @budget = SUM(Budget), @amount = SUM(Amount)
 				FROM Tbl_Account WHERE AccountYear = @accountYear AND ParentCode = @parentCode;
-			UPDATE Tbl_Account SET Budget = @budget, Amount = @amount
-			WHERE Tbl_Account.AccountYear = @accountYear AND Tbl_Account.AccountCode = @accountCode;
-		END
-	END
-
-	IF EXISTS(SELECT * FROM INSERTED)
-	BEGIN
-		SELECT @accountYear = i.AccountYear, @accountCode = i.AccountCode, @parentCode = i.ParentCode
-			FROM INSERTED i;
-		IF @parentCode IS NOT NULL AND @parentCode <> ''
-		BEGIN
-			SELECT @budget = SUM(Budget), @amount = SUM(Amount)
-				FROM Tbl_Account WHERE AccountYear = @accountYear AND ParentCode = @parentCode;
-			UPDATE Tbl_Account SET Budget = @budget, Amount = @amount
-			WHERE Tbl_Account.AccountYear = @accountYear AND Tbl_Account.AccountCode = @accountCode;
+			UPDATE Tbl_Account SET Budget = @budget, Amount = @amount, LastUpdate = GETDATE()
+				WHERE AccountYear = @accountYear AND AccountCode = @parentCode;
 		END
 	END
 END
 GO
 
-CREATE TRIGGER Tg_Account_UpdateLastUpdate ON Tbl_Account
-AFTER UPDATE 
+CREATE TRIGGER Tg_Account_Insert_Update ON Tbl_Account
+AFTER INSERT, UPDATE
 AS
-  UPDATE Tbl_Account SET LastUpdate = GETDATE()
-	FROM Inserted i
-	WHERE Tbl_Account.AccountYear = i.AccountYear AND Tbl_Account.AccountCode = i.AccountCode
+BEGIN
+	DECLARE @accountYear Char(4), @accountCode Char(4), @parentCode Char(4) 
+	DECLARE @budget Decimal(12, 2), @amount Decimal(12, 2)
+	SET NOCOUNT ON;
+
+	-- Step 1
+	SELECT @accountYear = i.AccountYear, @accountCode = i.AccountCode, @parentCode = IIF(i.ParentCode IS NULL, '', i.ParentCode)
+			FROM INSERTED i;
+	IF EXISTS(SELECT * FROM DELETED) -- If Update?
+	BEGIN
+		UPDATE Tbl_Account SET LastUpdate = GETDATE()
+			WHERE AccountYear = @accountYear AND AccountCode = @accountCode;
+	END
+
+	IF @parentCode <> ''
+	BEGIN
+		SELECT @budget = SUM(Budget), @amount = SUM(Amount)
+			FROM Tbl_Account WHERE AccountYear = @accountYear AND ParentCode = @parentCode;
+		UPDATE Tbl_Account SET Budget = @budget, Amount = @amount, LastUpdate = GETDATE()
+			WHERE AccountYear = @accountYear AND AccountCode = @parentCode;
+		-- Step 2
+		SELECT @accountYear = AccountYear, @accountCode = AccountCode, @parentCode = IIF(ParentCode IS NULL, '', ParentCode)
+		FROM Tbl_Account WHERE AccountYear = @accountYear AND AccountCode = @parentCode;
+		IF @parentCode <> ''
+		BEGIN
+			SELECT @budget = SUM(Budget), @amount = SUM(Amount)
+				FROM Tbl_Account WHERE AccountYear = @accountYear AND ParentCode = @parentCode;
+			UPDATE Tbl_Account SET Budget = @budget, Amount = @amount, LastUpdate = GETDATE()
+				WHERE AccountYear = @accountYear AND AccountCode = @parentCode;
+		END
+	END
+END
 GO
 
 -- Create Tbl_Total Table --------------------------------------------------------------
 IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Total' )	CREATE TABLE Tbl_Total (
 	AccountYear			Char(4)			NOT NULL,
+	AccountMonth		Char(2)			NOT NULL,
     AccountCode			Char(4)			NOT NULL,
-    AccountMonth		Char(2)			NOT NULL,
     MemberCode			Char(5)			NOT NULL,
-	CheckAmount			Decimal(12, 2)	NOT NULL DEFAULT 0,
-    CashAmount			Decimal(12, 2)	NOT NULL DEFAULT 0,
+	Amount				Decimal(12, 2)	NOT NULL DEFAULT 0,
+    HST					Decimal(12, 2)	NOT NULL DEFAULT 0,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT 	PK_Total	PRIMARY KEY ( AccountYear, AccountCode, AccountMonth, MemberCode ),
+	CONSTRAINT 	PK_Total	PRIMARY KEY CLUSTERED ( AccountYear, AccountCode, AccountMonth, MemberCode ),
     CONSTRAINT	FK_Account	FOREIGN KEY ( AccountYear, AccountCode )	
 							REFERENCES	Tbl_Account ( AccountYear, AccountCode ),
 	CONSTRAINT	FK_MemTotal	FOREIGN KEY ( MemberCode )	REFERENCES	Tbl_Member ( MemberCode ),
-    INDEX 		IX_MemTotal ( AccountYear, MemberCode, AccountCode, AccountMonth )
+    INDEX 		IX_MemTotal ( AccountYear, AccountMonth, MemberCode, AccountCode )
 )
-GO
-
-CREATE TRIGGER Tg_Total_Update ON Tbl_Total
-AFTER UPDATE 
-AS
-  UPDATE Tbl_Total SET LastUpdate = GETDATE()
-	FROM Inserted i
-	WHERE Tbl_Total.AccountYear = i.AccountYear AND Tbl_Total.AccountCode = i.AccountCode
-		 AND Tbl_Total.AccountMonth = i.AccountMonth AND Tbl_Total.MemberCode = i.MemberCode
 GO
 
 -- Create Tbl_Slip Table ----------------------------------------------------------------
 IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Slip' )	CREATE TABLE Tbl_Slip (
-	SlipYear			Char(4)			NOT NULL,
-    SlipMonth			Char(2)			NOT NULL,
-    SlipDay				Char(2)			NOT NULL,
-    SlipNo				Int				NOT NULL DEFAULT 1,
-    MemberCode			Char(5)				NOT NULL,
+	SlipNo				Int				NOT NULL IDENTITY(1, 1),
+	SlipDate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
+    MemberCode			Char(5)			NOT NULL,
     Division			Char(1)			NOT NULL DEFAULT 'E',	-- [E]xpenditure, [I]ncome
     CheckNo				Int				NULL,
     CheckImage			VarBinary(MAX)	NULL,
@@ -315,8 +333,9 @@ IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_Slip' )	CREATE
     CashAmount			Decimal(12, 2)	NOT NULL DEFAULT 0,
     Remark				Varchar(100)	NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT 	PK_Slip		PRIMARY KEY ( SlipYear, SlipMonth, SlipDay, SlipNo ),
-    CONSTRAINT	FK_Member	FOREIGN KEY ( MemberCode )	REFERENCES	Tbl_Member ( MemberCode )
+	CONSTRAINT 	PK_Slip		PRIMARY KEY CLUSTERED ( SlipNo ),
+    CONSTRAINT	FK_Member	FOREIGN KEY ( MemberCode )	REFERENCES	Tbl_Member ( MemberCode ),
+	INDEX 		IX_Date		( SlipDate, SlipNo )
 )
 GO
 
@@ -325,27 +344,20 @@ AFTER UPDATE
 AS
   UPDATE Tbl_Slip SET LastUpdate = GETDATE()
 	FROM Inserted i
-	WHERE Tbl_Slip.SlipYear = i.SlipYear AND Tbl_Slip.SlipMonth = i.SlipMonth
-		 AND Tbl_Slip.SlipDay = i.SlipDay AND Tbl_Slip.SlipNo = i.SlipNo 
+	WHERE Tbl_Slip.SlipNo = i.SlipNo 
 GO
 
 -- Create Tbl_SlipItem Table ------------------------------------------------------------
 IF NOT EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Tbl_SlipItem' )	CREATE TABLE Tbl_SlipItem (
-	SlipYear			Char(4)			NOT NULL,
-    SlipMonth			Char(2)			NOT NULL,
-    SlipDay				Char(2)			NOT NULL,
     SlipNo				Int				NOT NULL,
-    SlipSeq				Int				NOT NULL DEFAULT 1,
+    SlipSeq				SmallInt		NOT NULL DEFAULT 1,
     AccountCode			Char(4)			NOT NULL,
-    MemberCode			Char(5)			NOT NULL,
     Amount				Decimal(12, 2)	NOT NULL DEFAULT 0,
+	HST					Decimal(12, 2)	NOT NULL DEFAULT 0,
     Remark				Varchar(70)		NULL,
     LastUpdate			SmallDateTime	NOT NULL DEFAULT GETDATE(),
-	CONSTRAINT 	PK_SlipItem	PRIMARY KEY ( SlipYear, SlipMonth, SlipDay, SlipNo, SlipSeq ),
-    CONSTRAINT	FK_Slip		FOREIGN KEY ( SlipYear, SlipMonth, SlipDay, SlipNo )	
-							REFERENCES	Tbl_Slip ( SlipYear, SlipMonth, SlipDay, SlipNo ),
-    CONSTRAINT	FK_Total	FOREIGN KEY ( SlipYear, AccountCode, SlipMonth, MemberCode )	
-							REFERENCES	Tbl_Total ( AccountYear, AccountCode, AccountMonth, MemberCode )
+	CONSTRAINT 	PK_SlipItem	PRIMARY KEY CLUSTERED ( SlipNo, SlipSeq ),
+    CONSTRAINT	FK_Slip		FOREIGN KEY ( SlipNo )	REFERENCES	Tbl_Slip ( SlipNo ) ON DELETE CASCADE
 )
 GO
 
@@ -354,6 +366,50 @@ AFTER UPDATE
 AS
   UPDATE Tbl_SlipItem SET LastUpdate = GETDATE()
 	FROM Inserted i
-	WHERE Tbl_SlipItem.SlipYear = i.SlipYear AND Tbl_SlipItem.SlipMonth = i.SlipMonth
-		 AND Tbl_SlipItem.SlipDay = i.SlipDay AND Tbl_SlipItem.SlipNo = i.SlipNo 
-		 AND Tbl_SlipItem.SlipSeq = i.SlipSeq
+	WHERE Tbl_SlipItem.SlipNo = i.SlipNo AND Tbl_SlipItem.SlipSeq = i.SlipSeq
+GO
+
+CREATE TRIGGER Tg_SlipItem_Delete ON Tbl_SlipItem
+AFTER DELETE
+AS
+BEGIN
+	DECLARE @accountYear Char(4), @accountMonth Char(2), @accountCode Char(4), @parentCode Char(4)
+	DECLARE @memberCode Char(5), @amount Decimal(12, 2), @hst Decimal(12, 2)
+	SET NOCOUNT ON;
+	
+	SELECT @accountYear = YEAR(s.SlipDate), @accountMonth = RIGHT('00' + CAST(DATEPART(mm, s.SlipDate) AS VarChar(2)), 2),
+			@accountCode = d.AccountCode, @memberCode = s.MemberCode, @amount = d.Amount, @hst = d.HST
+		FROM DELETED d, Tbl_Slip s
+		WHERE s.SlipNo = d.SlipNo;
+
+	UPDATE Tbl_Total SET Amount = Amount - @amount, HST = HST - @hst, LastUpdate = GETDATE()
+		WHERE AccountYear = @accountYear AND AccountMonth = @accountMonth AND AccountCode = @accountCode AND
+			MemberCode = @memberCode;
+END
+GO
+
+CREATE TRIGGER Tg_SlipItem_Insert ON Tbl_SlipItem
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @accountYear Char(4), @accountMonth Char(2), @accountCode Char(4), @parentCode Char(4)
+	DECLARE @memberCode Char(5), @amount Decimal(12, 2), @hst Decimal(12, 2)
+	SET NOCOUNT ON;
+
+	SELECT @accountYear = YEAR(s.SlipDate), @accountMonth = RIGHT('00' + CAST(DATEPART(mm, s.SlipDate) AS VarChar(2)), 2),
+			@accountCode = i.AccountCode, @memberCode = s.MemberCode, @amount = i.Amount, @hst = i.HST
+		FROM INSERTED i, Tbl_Slip s
+		WHERE s.SlipNo = i.SlipNo;
+
+	IF NOT EXISTS ( SELECT Amount FROM Tbl_Total WHERE AccountYear = @accountYear AND AccountMonth = @accountMonth 
+		AND AccountCode = @accountCode AND MemberCode = @memberCode ) BEGIN
+		INSERT INTO Tbl_Total ( AccountYear, AccountMonth, AccountCode, MemberCode, Amount, HST ) VALUES
+			( @accountYear, @accountMonth, @accountCode, @memberCode, @amount, @hst )
+		
+	END ELSE BEGIN
+		UPDATE Tbl_Total SET Amount = Amount + @amount, HST = HST + @hst, LastUpdate = GETDATE()
+		WHERE AccountYear = @accountYear AND AccountMonth = @accountMonth AND AccountCode = @accountCode AND
+			MemberCode = @memberCode;
+	END
+END
+GO

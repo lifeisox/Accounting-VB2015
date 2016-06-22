@@ -27,7 +27,7 @@ Public Class BudgetEntryForm
             WHERE AccountYear = @AccountYear AND IsComputed = 'N' ORDER BY AccountCode
             "
         _SQL(queryENUM.UPDATE) = "
-            UPDATE Tbl_Account Set [BookCode] = @BookCode
+            UPDATE Tbl_Account Set [Budget] = @Budget
             WHERE AccountYear = @AccountYear AND AccountCode = @AccountCode
             "
         ' Add any initialization after the InitializeComponent() call.
@@ -57,7 +57,6 @@ Public Class BudgetEntryForm
     End Sub
 
     Private Sub menuButtons_Click(sender As Object, e As EventArgs) Handles saveTSB.Click, closeTSB.Click
-
         If sender.Name <> "saveTSB" Then
             checkChangedField()
         End If
@@ -130,7 +129,18 @@ Public Class BudgetEntryForm
     End Sub
 
     Private Sub saveCurrentRecord()
-
+        Dim cmd As New SqlCommand(_SQL(queryENUM.UPDATE), _Conn1)
+        cmd.Parameters.Add("@AccountYear", SqlDbType.Char)
+        cmd.Parameters.Add("@AccountCode", SqlDbType.Char)
+        cmd.Parameters.Add("@Budget", SqlDbType.Decimal)
+        cmd.Parameters("@AccountYear").Value = cboYear.SelectedItem
+        For index As Integer = 0 To grdNavi.RowCount - 1
+            cmd.Parameters("@AccountCode").Value = grdNavi("AccountCode", index).Value
+            cmd.Parameters("@Budget").Value = grdNavi("Budget", index).Value
+            cmd.ExecuteNonQuery()
+        Next
+        fillGrid()
+        _ChangedSW = False
     End Sub
 
     Private Sub grdNavi_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles grdNavi.CellValidating

@@ -131,4 +131,27 @@
         End Try
     End Sub
 
+    Private Sub mnuOfferings_Click(sender As Object, e As EventArgs) Handles mnuOfferings.Click
+        Dim frmCollection = System.Windows.Forms.Application.OpenForms
+
+        If frmCollection.OfType(Of IncomeForm).Any Then
+            frmCollection.Item("IncomeForm").Activate()
+        Else
+            Dim iForm = New IncomeForm()
+            iForm.MdiParent = Me
+            iForm.Show()
+        End If
+    End Sub
+
+    Private Sub mnuExpenses_Click(sender As Object, e As EventArgs) Handles mnuExpenses.Click
+        Dim frmCollection = System.Windows.Forms.Application.OpenForms
+
+        If frmCollection.OfType(Of ExpenseForm).Any Then
+            frmCollection.Item("ExpenseForm").Activate()
+        Else
+            Dim iForm = New ExpenseForm()
+            iForm.MdiParent = Me
+            iForm.Show()
+        End If
+    End Sub
 End Class

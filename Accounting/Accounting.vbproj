@@ -132,6 +132,12 @@
     <Compile Include="EducationCodeForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ExpenseForm.Designer.vb">
+      <DependentUpon>ExpenseForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ExpenseForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FindAccountForm.Designer.vb">
       <DependentUpon>FindAccountForm.vb</DependentUpon>
     </Compile>
@@ -142,6 +148,12 @@
       <DependentUpon>FindMemberForm.vb</DependentUpon>
     </Compile>
     <Compile Include="FindMemberForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Income.Designer.vb">
+      <DependentUpon>Income.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Income.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.vb">
@@ -207,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FindMemberForm.resx">
       <DependentUpon>FindMemberForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Income.resx">
+      <DependentUpon>Income.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>

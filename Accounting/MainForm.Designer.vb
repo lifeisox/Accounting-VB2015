@@ -171,24 +171,24 @@ Partial Class MainForm
         'mnuOfferings
         '
         Me.mnuOfferings.Name = "mnuOfferings"
-        Me.mnuOfferings.Size = New System.Drawing.Size(181, 22)
-        Me.mnuOfferings.Text = "Offerings"
+        Me.mnuOfferings.Size = New System.Drawing.Size(215, 22)
+        Me.mnuOfferings.Text = "Offering and other Income"
         '
         'mnuExpenses
         '
         Me.mnuExpenses.Name = "mnuExpenses"
-        Me.mnuExpenses.Size = New System.Drawing.Size(181, 22)
+        Me.mnuExpenses.Size = New System.Drawing.Size(215, 22)
         Me.mnuExpenses.Text = "Expenses"
         '
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(178, 6)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(212, 6)
         '
         'mnuBankDepositReport
         '
         Me.mnuBankDepositReport.Name = "mnuBankDepositReport"
-        Me.mnuBankDepositReport.Size = New System.Drawing.Size(181, 22)
+        Me.mnuBankDepositReport.Size = New System.Drawing.Size(215, 22)
         Me.mnuBankDepositReport.Text = "Bank Deposit Report"
         '
         'mnuReports

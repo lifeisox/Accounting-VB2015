@@ -165,8 +165,7 @@ Public Class MemberForm
 
         If txtMemberCode.Text.Length = 5 Then
             Dim command As New SqlCommand(_SQL(queryENUM.READ), _Conn)
-            command.Parameters.Add("@MemberCode", SqlDbType.Char)
-            command.Parameters("@MemberCode").Value = txtMemberCode.Text
+            command.Parameters.Add("@MemberCode", SqlDbType.Char).Value = txtMemberCode.Text
             Dim reader As SqlDataReader = command.ExecuteReader()
             If reader.HasRows Then
                 MessageBox.Show("The code has already used. Use an another code!",
@@ -191,8 +190,7 @@ Public Class MemberForm
         If txtPostalCode.Text.Length = 6 Then
             Dim areaCode As String = txtPostalCode.Text.Substring(0, 3)
             Dim command As New SqlCommand(_SQL(queryENUM.READ_POSTAL_CODE), _Conn)
-            command.Parameters.Add("@PostalAreaCode", SqlDbType.Char)
-            command.Parameters("@PostalAreaCode").Value = areaCode
+            command.Parameters.Add("@PostalAreaCode", SqlDbType.Char).Value = areaCode
             Dim reader As SqlDataReader = command.ExecuteReader()
             If reader.HasRows And reader.Read() = True Then
                 postalAreaLL.Text = reader("PlaceName")
@@ -309,8 +307,7 @@ Public Class MemberForm
 
     Private Sub fillData(ByVal code As String)
         Dim command As New SqlCommand(_SQL(queryENUM.READ), _Conn)
-        command.Parameters.Add("@MemberCode", SqlDbType.Char)
-        command.Parameters("@MemberCode").Value = code
+        command.Parameters.Add("@MemberCode", SqlDbType.Char).Value = code
         Dim reader As SqlDataReader = command.ExecuteReader()
 
         If reader.HasRows Then
@@ -437,47 +434,26 @@ Public Class MemberForm
     End Sub
 
     Private Sub parameterMove(ByVal command As SqlCommand)
-        command.Parameters.Add("@MemberCode", SqlDbType.Char)
-        command.Parameters.Add("@KoreanName", SqlDbType.VarChar)
-        command.Parameters.Add("@EnglishName", SqlDbType.VarChar)
-        command.Parameters.Add("@Sex", SqlDbType.Char)
-        command.Parameters.Add("@EducationCode", SqlDbType.Char)
-        command.Parameters.Add("@HouseHolderCode", SqlDbType.Char)
-        command.Parameters.Add("@Phone1Kind", SqlDbType.VarChar)
-        command.Parameters.Add("@Phone1No", SqlDbType.VarChar)
-        command.Parameters.Add("@Phone2Kind", SqlDbType.VarChar)
-        command.Parameters.Add("@Phone2No", SqlDbType.VarChar)
-        command.Parameters.Add("@Phone3Kind", SqlDbType.VarChar)
-        command.Parameters.Add("@Phone3No", SqlDbType.VarChar)
-        command.Parameters.Add("@Email", SqlDbType.VarChar)
-        command.Parameters.Add("@PostalCode", SqlDbType.Char)
-        command.Parameters.Add("@Address", SqlDbType.VarChar)
-        command.Parameters.Add("@City", SqlDbType.VarChar)
-        command.Parameters.Add("@ProvinceCode", SqlDbType.Char)
-        command.Parameters.Add("@DutyCode", SqlDbType.Char)
-        command.Parameters.Add("@Remark", SqlDbType.VarChar)
-        command.Parameters.Add("@IsDeleted", SqlDbType.Char)
-
-        command.Parameters("@MemberCode").Value = txtMemberCode.Text
-        command.Parameters("@KoreanName").Value = txtKoreanName.Text
-        command.Parameters("@EnglishName").Value = txtEnglishName.Text
-        command.Parameters("@Sex").Value = IIf(rdoFemale.Checked = True, "F", "M")
-        command.Parameters("@EducationCode").Value = cboEducation.SelectedValue
-        command.Parameters("@HouseHolderCode").Value = txtHouseHolderCode.Text
-        command.Parameters("@Phone1Kind").Value = cboPhone1Kind.Text
-        command.Parameters("@Phone1No").Value = txtPhone1No.Text
-        command.Parameters("@Phone2Kind").Value = cboPhone2Kind.Text
-        command.Parameters("@Phone2No").Value = txtPhone2No.Text
-        command.Parameters("@Phone3Kind").Value = cboPhone3Kind.Text
-        command.Parameters("@Phone3No").Value = txtPhone3No.Text
-        command.Parameters("@Email").Value = txtEmail.Text
-        command.Parameters("@PostalCode").Value = txtPostalCode.Text
-        command.Parameters("@Address").Value = txtAddress.Text
-        command.Parameters("@City").Value = txtCity.Text
-        command.Parameters("@ProvinceCode").Value = cboProvince.SelectedValue
-        command.Parameters("@DutyCode").Value = cboDuty.SelectedValue
-        command.Parameters("@Remark").Value = txtRemark.Text
-        command.Parameters("@IsDeleted").Value = IIf(chkIsDeleted.Checked = True, "Y", "N")
+        command.Parameters.Add("@MemberCode", SqlDbType.Char).Value = txtMemberCode.Text
+        command.Parameters.Add("@KoreanName", SqlDbType.VarChar).Value = txtKoreanName.Text
+        command.Parameters.Add("@EnglishName", SqlDbType.VarChar).Value = txtEnglishName.Text
+        command.Parameters.Add("@Sex", SqlDbType.Char).Value = IIf(rdoFemale.Checked = True, "F", "M")
+        command.Parameters.Add("@EducationCode", SqlDbType.Char).Value = cboEducation.SelectedValue
+        command.Parameters.Add("@HouseHolderCode", SqlDbType.Char).Value = txtHouseHolderCode.Text
+        command.Parameters.Add("@Phone1Kind", SqlDbType.VarChar).Value = cboPhone1Kind.Text
+        command.Parameters.Add("@Phone1No", SqlDbType.VarChar).Value = txtPhone1No.Text
+        command.Parameters.Add("@Phone2Kind", SqlDbType.VarChar).Value = cboPhone2Kind.Text
+        command.Parameters.Add("@Phone2No", SqlDbType.VarChar).Value = txtPhone2No.Text
+        command.Parameters.Add("@Phone3Kind", SqlDbType.VarChar).Value = cboPhone3Kind.Text
+        command.Parameters.Add("@Phone3No", SqlDbType.VarChar).Value = txtPhone3No.Text
+        command.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text
+        command.Parameters.Add("@PostalCode", SqlDbType.Char).Value = txtPostalCode.Text
+        command.Parameters.Add("@Address", SqlDbType.VarChar).Value = txtAddress.Text
+        command.Parameters.Add("@City", SqlDbType.VarChar).Value = txtCity.Text
+        command.Parameters.Add("@ProvinceCode", SqlDbType.Char).Value = cboProvince.SelectedValue
+        command.Parameters.Add("@DutyCode", SqlDbType.Char).Value = cboDuty.SelectedValue
+        command.Parameters.Add("@Remark", SqlDbType.VarChar).Value = txtRemark.Text
+        command.Parameters.Add("@IsDeleted", SqlDbType.Char).Value = IIf(chkIsDeleted.Checked = True, "Y", "N")
 
         command.ExecuteNonQuery()
     End Sub
@@ -488,8 +464,7 @@ Public Class MemberForm
         If result = vbNo Then Exit Sub
 
         Dim command As New SqlCommand(_SQL(queryENUM.DELETE), _Conn)
-        command.Parameters.Add("@MemberCode", SqlDbType.Char)
-        command.Parameters("@MemberCode").Value = txtMemberCode.Text
+        command.Parameters.Add("@MemberCode", SqlDbType.Char).Value = txtMemberCode.Text
 
         command.ExecuteNonQuery()
 
@@ -515,8 +490,7 @@ Public Class MemberForm
         If memberCode = txtMemberCode.Text Then Return "Principal"
 
         Dim command As New SqlCommand(_SQL(queryENUM.READ), _Conn)
-        command.Parameters.Add("@MemberCode", SqlDbType.Char)
-        command.Parameters("@MemberCode").Value = memberCode
+        command.Parameters.Add("@MemberCode", SqlDbType.Char).Value = memberCode
         Dim rd As SqlDataReader = command.ExecuteReader()
 
         If rd.HasRows Then
@@ -538,8 +512,7 @@ Public Class MemberForm
         If postalCode.Length = 6 Then
             Dim areaCode As String = postalCode.Substring(0, 3)
             Dim command As New SqlCommand(_SQL(queryENUM.READ_POSTAL_CODE), _Conn)
-            command.Parameters.Add("@PostalAreaCode", SqlDbType.Char)
-            command.Parameters("@PostalAreaCode").Value = areaCode
+            command.Parameters.Add("@PostalAreaCode", SqlDbType.Char).Value = areaCode
             Dim reader As SqlDataReader = command.ExecuteReader()
             If reader.HasRows And reader.Read() = True Then
                 areaName = reader("PlaceName")

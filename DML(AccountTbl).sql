@@ -3,6 +3,28 @@ GO
 
 INSERT INTO Tbl_Account ( AccountYear, AccountCode, LastYearCode, Division, AccountName, AccountNameKr, 
 	IsComputed, ParentCode, Remark ) VALUES 
+( '2016', '0000', '0000', 'I', 'Offering', '헌금', 'Y', '', 'Offering Total' ),
+( '2016', '0010', '0010', 'I', 'General Offering', '일반헌금', 'Y', '0000', '' ),
+( '2016', '0011', '0011', 'I', 'Weekly', '주일헌금', 'N', '0010', '' ),
+( '2016', '0012', '0012', 'I', 'Tithes', '십일조', 'N', '0010', '' ),
+( '2016', '0013', '0013', 'I', 'Thanksgiving', '감사헌금', 'N', '0010', '' ),
+( '2016', '0019', '0019', 'I', 'Other', '기타헌금', 'N', '0010', '' ),
+
+( '2016', '0020', '0020', 'I', 'Special Offering', '특별헌금', 'Y', '0000', '' ),
+( '2016', '0021', '0021', 'I', 'Mission', '선교헌금', 'N', '0020', '' ),
+( '2016', '0022', '0022', 'I', 'Building Fund', '건축헌금', 'N', '0020', '' ),
+
+( '2016', '0030', '0030', 'I', 'Seasonal Offering', '절기헌금', 'Y', '0000', '' ),
+( '2016', '0031', '0031', 'I', 'New Year', '신년감사', 'N', '0030', '' ),
+( '2016', '0032', '0032', 'I', 'Easter', '부활절', 'N', '0030', '' ),
+( '2016', '0033', '0033', 'I', 'Thanksgiving', '추수감사절', 'N', '0030', '' ),
+( '2016', '0034', '0034', 'I', 'Anniversary', '창립기념', 'N', '0030', '' ),
+( '2016', '0035', '0035', 'I', 'Christmas', '성탄절', 'N', '0030', '' ),
+
+( '2016', '0100', '0100', 'I', 'Other Incomes', '기타수입', 'Y', '', '' ),
+( '2016', '0101', '0101', 'I', 'Interest', '은행이자', 'N', '0100', '' ),
+( '2016', '0111', '0111', 'I', 'Parking Fee', '주차비', 'N', '0100', '' ),
+
 ( '2016', '1000', '1000', 'E', 'Remuneration', '교역자 및 직원 급여', 'Y', '', '' ),
 ( '2016', '1010', '1010', 'E', 'Senior Pastor', '담임목사', 'Y', '1000', '' ),
 ( '2016', '1011', '1011', 'E', 'Stipend', '사례비', 'N', '1010', '' ),
@@ -211,7 +233,8 @@ INSERT INTO Tbl_Member ([MemberCode],[KoreanName],[EnglishName],[Sex],[Education
 	'sean@beginanew.life', 'K2E5S9', '54E Chesterton Dr.', 'Nepean', 'ON', '21', 'N', ''),
 ('00014', '김미영', 'Meeyoung Kim', 'F', '01', '00013', 'Mobile', '613-422-2622', 'Home', '', 'Work', '', 
 	'grace2ivy@gmail.com', 'K2E5S9', '54E Chesterton Dr.', 'Nepean', 'ON', '99', 'N', '')
-
 GO
 
-
+INSERT INTO Tbl_Dedicator ( [DedicatorYear], [DedicatorCode], [MemberCode] ) VALUES
+( '2016', '001', '00001' ), ( '2016', '002', '00002' ), ( '2016', '003', '00003' ), ( '2016', '004', '00010' ), 
+( '2016', '005', '00011' ), ( '2016', '006', '00012' ), ( '2016', '007', '00013' ), ( '2016', '008', '00014' )

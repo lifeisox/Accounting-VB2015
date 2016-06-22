@@ -34,8 +34,8 @@ Partial Class BudgetEntryForm
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cboYear = New System.Windows.Forms.ToolStripComboBox()
         Me.grdNavi = New System.Windows.Forms.DataGridView()
-        Me.BookCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BookName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AccountCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AccountName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Budget = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.menuTS.SuspendLayout()
         CType(Me.grdNavi, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -98,7 +98,7 @@ Partial Class BudgetEntryForm
         Me.grdNavi.AllowUserToResizeColumns = False
         Me.grdNavi.AllowUserToResizeRows = False
         Me.grdNavi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdNavi.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.BookCode, Me.BookName, Me.Budget})
+        Me.grdNavi.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.AccountCode, Me.AccountName, Me.Budget})
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -120,31 +120,31 @@ Partial Class BudgetEntryForm
         Me.grdNavi.Size = New System.Drawing.Size(347, 421)
         Me.grdNavi.TabIndex = 0
         '
-        'BookCode
+        'AccountCode
         '
-        Me.BookCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.AccountCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BookCode.DefaultCellStyle = DataGridViewCellStyle1
-        Me.BookCode.HeaderText = "Code"
-        Me.BookCode.MaxInputLength = 4
-        Me.BookCode.Name = "BookCode"
-        Me.BookCode.ReadOnly = True
-        Me.BookCode.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.BookCode.Width = 45
+        Me.AccountCode.DefaultCellStyle = DataGridViewCellStyle1
+        Me.AccountCode.HeaderText = "Code"
+        Me.AccountCode.MaxInputLength = 4
+        Me.AccountCode.Name = "AccountCode"
+        Me.AccountCode.ReadOnly = True
+        Me.AccountCode.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.AccountCode.Width = 45
         '
-        'BookName
+        'AccountName
         '
-        Me.BookName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.AccountName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(2, 0, 0, 0)
-        Me.BookName.DefaultCellStyle = DataGridViewCellStyle2
-        Me.BookName.HeaderText = "Name"
-        Me.BookName.MaxInputLength = 50
-        Me.BookName.Name = "BookName"
-        Me.BookName.ReadOnly = True
-        Me.BookName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.AccountName.DefaultCellStyle = DataGridViewCellStyle2
+        Me.AccountName.HeaderText = "Name"
+        Me.AccountName.MaxInputLength = 50
+        Me.AccountName.Name = "AccountName"
+        Me.AccountName.ReadOnly = True
+        Me.AccountName.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Budget
         '
@@ -182,7 +182,7 @@ Partial Class BudgetEntryForm
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Private WithEvents cboYear As ToolStripComboBox
     Friend WithEvents grdNavi As DataGridView
-    Friend WithEvents BookCode As DataGridViewTextBoxColumn
-    Friend WithEvents BookName As DataGridViewTextBoxColumn
+    Friend WithEvents AccountCode As DataGridViewTextBoxColumn
+    Friend WithEvents AccountName As DataGridViewTextBoxColumn
     Friend WithEvents Budget As DataGridViewTextBoxColumn
 End Class
